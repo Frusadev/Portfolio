@@ -1,0 +1,21 @@
+.name_text {
+  color: #DCDCDC;
+}
+
+.info {
+  margin-left: 7rem;
+}
+
+.tof {
+  height: 100vh;
+  align-self: flex-end;
+  justify-self: end;
+  /*box-shadow: #EBD368 0 0 20rem;*/
+  filter: drop-shadow(#EBD368 0 0 20rem);
+}
+
+.contact_btn {
+  border-radius: 3rem;
+  background-color: #DCDCDC;
+  color: #242424;
+}

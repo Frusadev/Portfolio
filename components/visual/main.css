@@ -1,0 +1,47 @@
+/*.bubbles {*/
+/**/
+/*}*/
+
+.bubbles {
+  animation: animate 15s linear infinite;
+  animation-duration: calc(10s / var(--i));
+  background: linear-gradient(34deg, #953ba5, #39254408, #00000000, #97a53b23, #20344932, #212049, #5e1739);
+  background-size: 400% 400%;
+  animation: animate 15s ease infinite;
+  z-index: -1;
+}
+
+.bubbles :nth-child(even) {}
+
+@keyframes animate {
+  0% {
+    background-position: 0 50%;
+  }
+
+  13% {
+    background-position: 13% 50%;
+  }
+
+  25% {
+    background-position: 25% 50%;
+  }
+
+  27% {
+    background-position: 27% 50%;
+  }
+
+  45% {
+    background-position: 45% 50%;
+  }
+
+  56% {
+    background-position: 56% 50%;
+  }
+
+  90% {
+    background-position: 90% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
