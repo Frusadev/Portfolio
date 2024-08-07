@@ -5,7 +5,7 @@ import Photo from "./Photo";
 
 export const AboutMe = () => {
 	return (
-		<div className="flex font-bold items-center w-screen flex-grow info">
+		<div className="flex flex-col md:flex-col font-bold items-start sm:items-start w-screen info sm:m-0">
 			<div className="flex flex-col justify-center gap-10 content-between info h-screen">
 				<div className="name_text">
 					<h1 className="text-6xl">Hi,</h1>
