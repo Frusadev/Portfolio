@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frusadev's Portfolio
+
+So this is my personal portfolio, So you probably don't want to deploy it as is.
+
+At least you need to be a little original right? LOL
+
+## About Me
+
+So If you don't Know me yet, I'm **Daniel**, a software developer from **Togo** (You probably don't know where that is, but it's in West Africa, near Ghana and Benin). 
+
+I'm a **Creative Developer & Entrepreneur** who loves building beautiful experiences.
+
+If you've liked my work, you can reach out to me at this email address: frusadev@gmail.com
+
+## Customization Guide
+
+Want to make this portfolio your own? Here's what you need to do:
+
+### Replace Images
+In the `public/` folder, you'll find:
+- `logo.png` - Replace with your own logo
+- `daniel.png` - Replace with your profile picture
+
+> **Pro tip:** If you want to change the filenames, just update the references in the code!
+
+### Update Content
+1. Edit `src/app/page.tsx` to change personal information
+2. Update the skills array with your own technologies
+3. Modify social media links to point to your profiles
+4. Change the email address in the contact section
+
+### Styling
+- Global styles are in `src/app/globals.css`
+- The project uses **Tailwind CSS** with shadcn/ui
+- Dark/light mode support is built-in via the theme provider, but i prefer the site to be in dark mode. Who the hell uses light mode anyway?
 
 ## Getting Started
 
-First, run the development server:
+This is a **Next.js** project built with modern tools:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Install dependencies
+bun install
+
+# Start development server
 bun dev
+
+# Build for production
+bun build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Built With
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 15** - React framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **shadcn/ui** - UI components
+- **Bun** - Package manager & runtime
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+You can deploy this portfolio on:
+- **Vercel** (recommended for Next.js)
+- **Netlify**
+- **Railway**
+- Or any other hosting service that supports Next.js
 
-To learn more about Next.js, take a look at the following resources:
+For deployment guides, check the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Get in Touch
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If you've liked my work, you can reach out to me:
 
-## Deploy on Vercel
+- Email: [frusadev@gmail.com](mailto:frusadev@gmail.com)
+- GitHub: [Frusadev](https://github.com/Frusadev)
+- LinkedIn: [frusadev](https://linkedin.com/in/frusadev)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<div align="center">
+  <p><strong>Building beautiful experiences, for prettier lives.</strong></p>
+</div>
