@@ -75,7 +75,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm">
             <Link
-              href="mailto:frusadev@gmail.com"
+              href="mailto:daniel@ametsowou.me"
               className="flex-1 text-center px-6 py-3 bg-amber-400 hover:bg-amber-500 text-amber-950 font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
             >
               Get in Touch
