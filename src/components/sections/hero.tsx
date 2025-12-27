@@ -1,124 +1,158 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Poppins } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import Image from "next/image";
-import { buttonVariants } from "../ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
-import { useState } from "react";
-import TicTacToe from "../ui/tic-tac-toe";
-import DraggableStickers from "../ui/draggable-stickers";
-import { motion, AnimatePresence } from "framer-motion";
-import { Gamepad2, User } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Terminal, Code2, Cpu, Coffee } from "lucide-react";
 
-const poppins = Poppins({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-poppins",
+  variable: "--font-jetbrains-mono",
   display: "swap",
+  weight: ["400", "700"],
 });
 
 export default function Hero() {
-  const [showGame, setShowGame] = useState(false);
+  const [text, setText] = useState("");
+  const fullText = "Full Stack Developer & Entrepreneur";
+
+  useEffect(() => {
+    let i = 0;
+    const timer = setInterval(() => {
+      setText(fullText.slice(0, i));
+      i++;
+      if (i > fullText.length) clearInterval(timer);
+    }, 50);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div
-      className={cn(
-        "w-11/12 min-h-[500px] h-auto bg-foreground rounded-3xl grid grid-cols-1 md:grid-cols-2 md:grid-rows-[1fr_auto] text-background gap-8",
-        poppins.className,
-        "p-5",
-      )}
-    >
-      <div className="flex flex-col gap-8 order-1 md:h-full">
-        <div className="flex flex-col gap-3">
-          <h1 className="font-semibold text-4xl">Hi, I&apos;m Daniel Ametsowou</h1>
-          <p className="font-medium text-2xl">
-            Full Stack developer &amp; Hopefully entrepreneur
-          </p>
+    <section className="w-full min-h-screen flex items-center justify-center py-20 px-4 md:px-16 overflow-hidden">
+      <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left Column: Terminal/Code Style Intro */}
+        <div className="space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            <div className="absolute -left-4 -top-4 w-12 h-12 border-t-2 border-l-2 border-primary/30 rounded-tl-xl" />
+            <div className="absolute -right-4 -bottom-4 w-12 h-12 border-b-2 border-r-2 border-primary/30 rounded-br-xl" />
+
+            <h1
+              className={cn(
+                "text-5xl md:text-7xl font-bold tracking-tight mb-4",
+                jetBrainsMono.className,
+              )}
+            >
+              <span className="text-primary">&lt;</span>
+              Daniel
+              <br />
+              Ametsowou
+              <span className="text-primary">/&gt;</span>
+            </h1>
+          </motion.div>
+
+          <div
+            className={cn(
+              "h-8 text-xl md:text-2xl text-muted-foreground",
+              jetBrainsMono.className,
+            )}
+          >
+            <span className="text-green-500">$</span> {text}
+            <span className="animate-pulse">_</span>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            className="flex flex-wrap gap-4"
+          >
+            <Link href="#contact">
+              <Button
+                size="lg"
+                className="rounded-none border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+              >
+                <Terminal className="mr-2 h-5 w-5" />
+                Contact_Me.sh
+              </Button>
+            </Link>
+            <Link href="#projects">
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-none border-2"
+              >
+                <Code2 className="mr-2 h-5 w-5" />
+                View_Projects.exe
+              </Button>
+            </Link>
+          </motion.div>
+
+          {/* System Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.5 }}
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-8 border-t border-border/50"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-md">
+                <Cpu className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">System Status</p>
+                <p className="font-bold text-sm">Online</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-md">
+                <Coffee className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">Caffeine Level</p>
+                <p className="font-bold text-sm">98%</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
-        <DraggableStickers />
-      </div>
+        {/* Right Column: Geeky Visual */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative block mt-10 lg:mt-0"
+        >
+          <div className="relative w-64 h-64 md:w-96 md:h-96 mx-auto">
+            {/* Abstract Tech Circle Background */}
+            <div className="absolute inset-0 rounded-full border border-primary/20 animate-[spin_10s_linear_infinite]" />
+            <div className="absolute inset-4 rounded-full border border-dashed border-primary/30 animate-[spin_15s_linear_infinite_reverse]" />
 
-      <div className="w-full h-[300px] md:h-auto relative overflow-hidden rounded-2xl order-2 md:col-start-2 md:row-span-2">
-        <AnimatePresence mode="wait">
-          {!showGame ? (
-            <motion.div
-              key="photo"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="w-full h-full"
-            >
+            {/* Main Image Container */}
+            <div className="absolute inset-10 rounded-full overflow-hidden border-4 border-background shadow-2xl bg-muted">
               <Image
-                src={"/daniel.jpg"}
+                src="/daniel.jpg"
                 alt="Daniel Ametsowou"
-                width={1000}
-                height={1000}
-                className="flex-1 w-full h-full rounded-2xl object-cover"
+                fill
+                className="object-cover hover:scale-110 transition-transform duration-500"
               />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="game"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="w-full h-full"
-            >
-              <TicTacToe />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 order-3 md:col-start-1 md:self-end">
-        <div className="flex flex-row gap-3 w-full md:w-auto">
-          <Link
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector("#contact")?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "bg-background text-foreground hover:bg-background/90 py-4 px-6 md:py-8 md:px-10 rounded-4xl flex-1 md:flex-none text-center",
-            )}
-          >
-            Contact Me
-          </Link>
-          <Link
-            href="https://blog.ametsowou.me"
-            target="_blank"
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "bg-background/50 text-foreground hover:bg-background/90 py-4 px-6 md:py-8 md:px-10 rounded-4xl flex-1 md:flex-none text-center",
-            )}
-          >
-            Visit My Blog
-          </Link>
-        </div>
-        <div className="hidden md:flex">
-          <button
-            onClick={() => setShowGame(!showGame)}
-            className="flex items-center gap-2 text-sm text-background/70 hover:text-background transition-colors"
-          >
-            {showGame ? (
-              <>
-                <User size={16} /> Show Photo
-              </>
-            ) : (
-              <>
-                <Gamepad2 size={16} /> Play Mini Game
-              </>
-            )}
-          </button>
-        </div>
+            <motion.div className="absolute bottom-10 left-0 bg-background border border-border p-3 rounded-lg shadow-lg">
+              <div className="text-xs font-mono">
+                git commit -m &quot;feat: success&quot;
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
