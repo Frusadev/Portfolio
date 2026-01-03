@@ -48,11 +48,11 @@ export default function Navbar() {
     },
     {
       label: "./about",
-      href: "#about",
+      href: "/#about",
     },
     {
       label: "./contact",
-      href: "#contact",
+      href: "/#contact",
     },
     {
       label: "/blog",
@@ -62,19 +62,24 @@ export default function Navbar() {
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setIsOpen(false);
-    if (href.startsWith("#") || href === "/") {
-      if (href === "/") {
-         if (typeof window !== 'undefined' && window.location.pathname === "/") {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-         }
-      } else {
+    
+    if (href.includes("#")) {
+      const [path, hash] = href.split("#");
+      // If we are on the same page (ignoring query params etc for simplicity, or just checking pathname)
+      // path is usually "/" for these links.
+      if (pathname === path || (path === "" && pathname === "/")) {
         e.preventDefault();
-        const element = document.querySelector(href);
+        const element = document.querySelector(`#${hash}`);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
       }
+      // If not on same page, let the Link component handle navigation to /#hash
+    } else if (href === "/") {
+       if (pathname === "/") {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+       }
     }
   };
 

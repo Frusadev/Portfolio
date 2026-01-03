@@ -85,8 +85,8 @@ export default function BlogList({ posts }: BlogListProps) {
                 </div>
 
                 {/* File Name / Title */}
-                <div className="col-span-12 md:col-span-4 flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
-                  <div className="flex items-center gap-2">
+                <div className="col-span-12 md:col-span-4 flex flex-col md:flex-row md:items-center gap-1 md:gap-2 min-w-0">
+                  <div className="flex items-center gap-2 min-w-0">
                     <FileText className="w-4 h-4 text-gray-500 group-hover:text-yellow-400 transition-colors shrink-0" />
                     <span className="text-gray-300 group-hover:text-green-400 transition-colors truncate font-bold md:font-normal">
                       {post.title.toLowerCase().replace(/\s+/g, '-')}.md

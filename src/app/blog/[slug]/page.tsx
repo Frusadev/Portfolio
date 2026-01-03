@@ -17,9 +17,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <article className="container mx-auto py-12 px-4 max-w-3xl">
+    <article className="container mx-auto pt-32 pb-20 px-4 max-w-3xl">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+        <h1 className="text-4xl font-bold mb-4 break-words">{post.title}</h1>
         <div className="text-muted-foreground mb-4">
           {new Date(post.createdAt).toLocaleDateString()}
         </div>
