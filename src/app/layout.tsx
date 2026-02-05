@@ -4,17 +4,14 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "sonner";
+import { metadata as sharedMetadata } from "./shared-metadata";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
   variable: "--font-quicksand",
 });
 
-export const metadata: Metadata = {
-  title: "Daniel AMETSOWOU",
-  description: "Full Stack Developer & Entrepreneur",
-  icons: "/logo.png",
-};
+export const metadata = sharedMetadata;
 
 export default function RootLayout({
   children,
