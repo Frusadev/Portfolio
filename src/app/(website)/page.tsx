@@ -13,26 +13,9 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import { 
   MinecraftBlock, 
-  DriftingDot, 
   DayProgressBar, 
   IrregularClock, 
-  RotatingSquare, 
-  GrowingLine, 
-  TerminalCaret, 
-  Metronome, 
-  HoverRipple,
-  InfiniteSpinner,
-  DodgingButton,
-  BreathingCircle,
-  HueShifter,
-  NoiseField,
-  MinimalWave,
-  PixelTraveller,
-  CornerMorph,
-  CircleFill,
-  DiagonalSweep,
-  WarpBox,
-  DotGrid
+  DodgingButton 
 } from "@/components/creative";
 
 export default function Home() {
@@ -246,72 +229,13 @@ export default function Home() {
           <MinecraftBlock />
         </div>
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-           <DriftingDot />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
            <DayProgressBar />
         </div>
-
-        {/* Col 8 */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
            <IrregularClock />
         </div>
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-           <RotatingSquare />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-           <GrowingLine />
-        </div>
-
-        {/* Col 9 */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <TerminalCaret />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <Metronome />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <HoverRipple />
-        </div>
-
-        {/* Col 10 */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <InfiniteSpinner />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
              <DodgingButton />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <BreathingCircle />
-        </div>
-
-        {/* New Set - More Fills/Textures */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <HueShifter />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <NoiseField />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <MinimalWave />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <PixelTraveller />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <CornerMorph />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <CircleFill />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <DiagonalSweep />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <WarpBox />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
-             <DotGrid />
         </div>
       </div>
     </div>
