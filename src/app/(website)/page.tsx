@@ -11,6 +11,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { FaWhatsapp } from "react-icons/fa";
+import { 
+  MinecraftBlock, 
+  DriftingDot, 
+  DayProgressBar, 
+  IrregularClock, 
+  RotatingSquare, 
+  GrowingLine, 
+  TerminalCaret, 
+  Metronome, 
+  HoverRipple,
+  InfiniteSpinner,
+  DodgingButton,
+  BreathingCircle
+} from "@/components/creative";
 
 export default function Home() {
   return (
@@ -210,10 +224,56 @@ export default function Home() {
             FUELLED BY COFFEE
           </p>
         </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 p-4 md:p-6 flex items-center justify-center hover:bg-blue-400/20 transition-colors bg-background overflow-hidden">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 p-4 md:p-6 flex items-center justify-center hover:bg-blue-400/20 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
           <p className="font-bold text-red-950 -rotate-12 text-xs md:text-base">
             PIXEL PERFECT
           </p>
+        </div>
+
+        {/* Creative Elements */}
+        
+        {/* Col 7 */}
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+          <MinecraftBlock />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+           <DriftingDot />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+           <DayProgressBar />
+        </div>
+
+        {/* Col 8 */}
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+           <IrregularClock />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+           <RotatingSquare />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+           <GrowingLine />
+        </div>
+
+        {/* Col 9 */}
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+             <TerminalCaret />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+             <Metronome />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+             <HoverRipple />
+        </div>
+
+        {/* Col 10 */}
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+             <InfiniteSpinner />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+             <DodgingButton />
+        </div>
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
+             <BreathingCircle />
         </div>
       </div>
     </div>
