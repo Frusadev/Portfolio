@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Loader2, Github } from "lucide-react";
 
@@ -58,7 +55,7 @@ export default function LoginPage() {
             <div className="text-center space-y-6 animate-in fade-in zoom-in-95">
               <div className="bg-red-950/5 border-2 border-red-950 text-red-950 p-6">
                 <p className="font-bold text-lg mb-2">Check your email!</p>
-                <p className="opacity-80 text-sm">We've sent a magic link to your inbox.</p>
+                <p className="opacity-80 text-sm">We&apos;ve sent a magic link to your inbox.</p>
               </div>
               <button 
                 onClick={() => setSent(false)} 
