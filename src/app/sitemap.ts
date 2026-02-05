@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getPosts } from './actions/blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://daniel.ametsowou.me';
+  const baseUrl = 'https://ametsowou.me';
 
   // Static routes
   const routes = [

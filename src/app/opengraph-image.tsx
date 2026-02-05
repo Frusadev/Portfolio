@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'nodejs';
 export const alt = 'Daniel Ametsowou | Full Stack Developer';
 export const size = {
   width: 1200,
