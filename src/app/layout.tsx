@@ -1,5 +1,6 @@
 import { Quicksand } from "next/font/google";
 import "./globals.css";
+import "highlight.js/styles/atom-one-dark.css";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "sonner";
