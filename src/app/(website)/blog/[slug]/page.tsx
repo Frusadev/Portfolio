@@ -62,7 +62,7 @@ export default async function PostPage(props: PostPageProps) {
   });
 
   return (
-    <main className="flex-1 w-full min-h-screen md:h-full overflow-y-auto no-scrollbar bg-[#fbf5e9]">
+    <main className="flex-1 w-full min-h-screen bg-[#fbf5e9]">
         <div className="w-full max-w-4xl mx-auto p-6 md:p-12 pb-24 border-x-0 md:border-x-4 border-red-950 bg-background min-h-full shadow-[0px_0px_20px_rgba(0,0,0,0.05)]">
             <Link 
                 href="/blog" 

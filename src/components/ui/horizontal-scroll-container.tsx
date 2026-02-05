@@ -16,9 +16,9 @@ export default function HorizontalScrollContainer({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || isVertical) return;
+    if (!container) return;
 
-    let currentScroll = container.scrollLeft;
+    let currentScroll = isVertical ? container.scrollTop : container.scrollLeft;
     let targetScroll = currentScroll;
     let isAnimating = false;
     const ease = 0.05; // Lower for smoother/heavier feel
@@ -29,13 +29,21 @@ export default function HorizontalScrollContainer({
       
       if (Math.abs(diff) < 0.1) {
         currentScroll = targetScroll;
-        container.scrollLeft = currentScroll;
+        if (isVertical) {
+          container.scrollTop = currentScroll;
+        } else {
+          container.scrollLeft = currentScroll;
+        }
         isAnimating = false;
         return;
       }
 
       currentScroll += diff * ease;
-      container.scrollLeft = currentScroll;
+      if (isVertical) {
+        container.scrollTop = currentScroll;
+      } else {
+        container.scrollLeft = currentScroll;
+      }
       
       requestAnimationFrame(updateScroll);
     };
@@ -54,8 +62,10 @@ export default function HorizontalScrollContainer({
         targetScroll += delta * 2.5; 
         
         // Clamp to container bounds
-        // use container.scrollWidth instead of scrollWidth (local var vs property)
-        const maxScroll = container.scrollWidth - container.clientWidth;
+        const maxScroll = isVertical 
+            ? container.scrollHeight - container.clientHeight
+            : container.scrollWidth - container.clientWidth;
+
         targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
 
         if (!isAnimating) {
