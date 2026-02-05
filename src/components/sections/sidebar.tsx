@@ -24,6 +24,7 @@ export default function PortfolioSidebar() {
   const pathname = usePathname();
   const isContentPage = pathname?.startsWith("/projects") || pathname?.startsWith("/blog");
   const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog";
+  const isProjectPage = pathname?.startsWith("/projects/") && pathname !== "/projects";
 
   const socialLinks: SocialLink[] = [
     {
@@ -118,16 +119,18 @@ export default function PortfolioSidebar() {
   return (
     <>
       {/* Mobile Trigger */}
-      <button
-        className={cn(
-          "md:hidden fixed left-4 z-[100] p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all",
-          (isContentPage && !isBlogPost && pathname !== "/blog") ? "top-20" : "top-4", // Only lower for projects
-          (isBlogPost || pathname === "/blog") && "opacity-30 hover:opacity-100 mix-blend-multiply"
-        )}
-        onClick={() => setIsOpen(true)}
-      >
-        <Menu size={24} />
-      </button>
+      {!isOpen && !isBlogPost && !isProjectPage && (
+        <button
+          className={cn(
+            "md:hidden fixed left-4 z-[100] p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all",
+            "top-4",
+            (pathname === "/blog" || pathname === "/projects") && "opacity-30 hover:opacity-100 mix-blend-multiply"
+          )}
+          onClick={() => setIsOpen(true)}
+        >
+          <Menu size={24} />
+        </button>
+      )}
 
       {/* Mobile Full Screen Menu */}
       {isOpen && (
