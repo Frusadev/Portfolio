@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
 
@@ -118,9 +119,11 @@ export default function PortfolioSidebar() {
     <>
       {/* Mobile Trigger */}
       <button
-        className={`md:hidden fixed left-4 z-50 p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all ${
-          isContentPage && !isBlogPost ? "top-20" : "top-4"
-        } ${isBlogPost ? "opacity-60 hover:opacity-100" : ""}`}
+        className={cn(
+          "md:hidden fixed left-4 z-[100] p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all",
+          (isContentPage && !isBlogPost) ? "top-20" : "top-4",
+          isBlogPost && "opacity-60 hover:opacity-100"
+        )}
         onClick={() => setIsOpen(true)}
       >
         <Menu size={24} />
