@@ -83,7 +83,7 @@ export default function Home() {
         </div>
 
         {/* Philosophy - Made smaller on mobile if needed, but span-1 is fine */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 p-4 md:p-6 flex flex-col justify-center bg-red-950 text-[#e6dcc6] overflow-hidden min-h-[140px] md:min-h-0 hover:scale-[1.02] transition-transform duration-300">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-black p-4 md:p-6 flex flex-col justify-center bg-red-950 text-[#e6dcc6] overflow-hidden min-h-[140px] md:min-h-0 hover:scale-[1.02] transition-transform duration-300">
           <p className="text-xs md:text-2xl font-bold text-center leading-tight">
             &quot;Simplicity is the ultimate sophistication.&quot;
           </p>
@@ -141,7 +141,7 @@ export default function Home() {
         </div>
 
         {/* Marquee Banner */}
-        <div className="col-span-2 md:col-span-2 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 bg-red-950 text-[#e6dcc6] overflow-hidden flex items-center min-h-[80px] md:min-h-0">
+        <div className="col-span-2 md:col-span-2 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-black bg-red-950 text-[#e6dcc6] overflow-hidden flex items-center min-h-[80px] md:min-h-0">
           <TextMarquee
             baseVelocity={2}
             className="text-2xl md:text-4xl font-black uppercase tracking-widest py-4"
