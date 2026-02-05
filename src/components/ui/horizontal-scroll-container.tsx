@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function HorizontalScrollContainer({
   children,
@@ -10,10 +11,12 @@ export default function HorizontalScrollContainer({
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isVertical = pathname?.startsWith("/blog/") && pathname !== "/blog";
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || isVertical) return;
 
     let currentScroll = container.scrollLeft;
     let targetScroll = currentScroll;
@@ -67,12 +70,12 @@ export default function HorizontalScrollContainer({
     return () => {
       container.removeEventListener("wheel", handleWheel);
     };
-  }, []);
+  }, [isVertical]);
 
   return (
     <main
       ref={containerRef}
-      className={`flex-1 w-full h-full no-scrollbar relative flex flex-col md:flex-row overflow-y-auto overflow-x-hidden md:overflow-x-auto md:overflow-y-hidden ${
+      className={`flex-1 w-full h-full no-scrollbar relative flex flex-col ${isVertical ? "md:flex-col md:overflow-y-hidden" : "md:flex-row md:overflow-x-auto md:overflow-y-hidden"} overflow-y-auto overflow-x-hidden ${
         className || ""
       }`}
     >
