@@ -1,77 +1,25 @@
-import { getPosts, togglePublishPost, deletePost } from "@/app/actions/blog";
-import { Button } from "@/components/ui/button";
+import { getPosts } from "@/app/actions/blog";
 import Link from "next/link";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Edit, Trash, Eye, EyeOff } from "lucide-react";
+import { Plus } from "lucide-react";
+import { PostsTable } from "@/components/admin/posts-table";
 
 export default async function AdminBlogPage() {
   const posts = await getPosts(false);
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Blog Posts</h1>
-        <Link href="/admin/blog/new">
-          <Button>Create New Post</Button>
+      <div className="flex justify-between items-center pb-6 border-b-4 border-red-950">
+        <h2 className="text-3xl font-bold uppercase tracking-wider text-red-950">Blog Posts</h2>
+        <Link 
+          href="/admin/blog/new" 
+          className="flex items-center gap-2 px-4 py-2 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-red-900 transition-colors shadow-[4px_4px_0px_0px_rgba(69,10,10,1)]"
+        >
+          <Plus size={18} />
+          New Post
         </Link>
       </div>
 
-      <div className="border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {posts.map((post) => (
-              <TableRow key={post.id}>
-                <TableCell className="font-medium">{post.title}</TableCell>
-                <TableCell>
-                  <Badge variant={post.published ? "default" : "secondary"}>
-                    {post.published ? "Published" : "Draft"}
-                  </Badge>
-                </TableCell>
-                <TableCell>{new Date(post.createdAt).toLocaleDateString()}</TableCell>
-                <TableCell className="text-right space-x-2">
-                  <form action={async () => {
-                    "use server";
-                    await togglePublishPost(post.id, post.published);
-                  }} className="inline">
-                    <Button variant="ghost" size="icon" title={post.published ? "Unpublish" : "Publish"}>
-                        {post.published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </Button>
-                  </form>
-                  <Link href={`/admin/blog/${post.id}`}>
-                    <Button variant="ghost" size="icon">
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                   <form action={async () => {
-                    "use server";
-                    await deletePost(post.id);
-                  }} className="inline">
-                    <Button variant="ghost" size="icon" className="text-red-500 hover:text-red-600">
-                      <Trash className="h-4 w-4" />
-                    </Button>
-                  </form>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <PostsTable posts={posts} />
     </div>
   );
 }
