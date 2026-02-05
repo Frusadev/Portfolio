@@ -138,7 +138,7 @@ export default function PortfolioSidebar() {
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex relative flex-col justify-between border-r-4 border-r-red-950 w-64 h-full max-h-screen sticky top-0 bg-[#e6dcc6] text-red-950 font-bold overflow-y-auto no-scrollbar">
+      <div className="hidden md:flex shrink-0 relative flex-col justify-between border-r-4 border-r-red-950 w-64 h-full max-h-screen sticky top-0 bg-[#e6dcc6] text-red-950 font-bold overflow-y-auto no-scrollbar">
         <SidebarContent />
       </div>
     </>
