@@ -27,24 +27,6 @@ interface AutoBentoGridProps {
   className?: string;
 }
 
-// Deterministic pattern for "random" layout
-// grid-flow-col with grid-rows-3 on desktop
-// Mobile is grid-cols-2
-const PATTERNS = [
-  // Pattern 0: Large Item (2x2) + 2 Small
-  { desktop: "row-span-2 col-span-2", mobile: "col-span-2" },
-  { desktop: "row-span-1 col-span-1", mobile: "col-span-1" },
-  { desktop: "row-span-1 col-span-1", mobile: "col-span-1" },
-  // Pattern 1: Tall (1x2) + 2 Small
-  { desktop: "row-span-2 col-span-1", mobile: "col-span-1" },
-  { desktop: "row-span-1 col-span-1", mobile: "col-span-1" },
-  { desktop: "row-span-1 col-span-1", mobile: "col-span-1" },
-  // Pattern 2: Wide (2x1) + Standard
-  { desktop: "row-span-1 col-span-2", mobile: "col-span-2" },
-  { desktop: "row-span-1 col-span-1", mobile: "col-span-1" },
-  { desktop: "row-span-1 col-span-1", mobile: "col-span-1" },
-];
-
 function getLayoutClasses(index: number, total: number) {
   // Special cases for small numbers of items to fill viewport
   if (total === 1) {

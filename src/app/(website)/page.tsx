@@ -155,7 +155,7 @@ export default function Home() {
         <div className="col-span-2 md:col-span-2 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 p-4 md:p-6 flex items-center justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[120px] md:min-h-0">
           <div>
             <h3 className="text-lg md:text-2xl font-bold text-red-950">
-              Let's work together
+              Let&apos;s work together
             </h3>
             <p className="opacity-80 text-xs md:text-base">
               Have a project in mind?

@@ -6,11 +6,9 @@ import { Skull, RotateCcw } from "lucide-react";
 
 export default function DoNotPress() {
   const [status, setStatus] = useState<"idle" | "lost">("idle");
-  const [pressCount, setPressCount] = useState(0);
 
   const handlePress = () => {
     setStatus("lost");
-    setPressCount(c => c + 1);
   };
 
   const handleReset = () => {
