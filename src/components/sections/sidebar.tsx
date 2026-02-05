@@ -117,16 +117,14 @@ export default function PortfolioSidebar() {
   return (
     <>
       {/* Mobile Trigger */}
-      {!isBlogPost && (
-        <button
-          className={`md:hidden fixed left-4 z-50 p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all ${
-            isContentPage ? "top-20" : "top-4"
-          }`}
-          onClick={() => setIsOpen(true)}
-        >
-          <Menu size={24} />
-        </button>
-      )}
+      <button
+        className={`md:hidden fixed left-4 z-50 p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all ${
+          isContentPage && !isBlogPost ? "top-20" : "top-4"
+        } ${isBlogPost ? "opacity-50 hover:opacity-100" : ""}`}
+        onClick={() => setIsOpen(true)}
+      >
+        <Menu size={24} />
+      </button>
 
       {/* Mobile Full Screen Menu */}
       {isOpen && (
