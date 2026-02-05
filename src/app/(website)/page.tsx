@@ -16,7 +16,8 @@ import {
   DayProgressBar, 
   IrregularClock, 
   DodgingButton,
-  TimeSky
+  TimeSky,
+  GridPattern
 } from "@/components/creative";
 
 export default function Home() {
@@ -242,6 +243,11 @@ export default function Home() {
         </div>
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
              <DodgingButton />
+        </div>
+        
+        {/* Filler Grid Pattern */}
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
+             <GridPattern />
         </div>
       </div>
     </div>

@@ -5,6 +5,10 @@ import { motion, useAnimation, useMotionValue, useSpring, useTransform } from "f
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+import { GridPattern } from "./grid-pattern";
+
+export { GridPattern };
+
 // 1. Minecraft Block
 export const MinecraftBlock = () => {
   return (
