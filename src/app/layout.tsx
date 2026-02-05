@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import NextTopLoader from "nextjs-toploader";
-import Navbar from "@/components/navigation/navbar";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Toaster } from "sonner";
+import { metadata as sharedMetadata } from "./shared-metadata";
 
-export const metadata: Metadata = {
-  title: "Daniel AMETSOWOU",
-  description: "Full Stack Developer & Entrepreneur",
-  icons: "/logo.png",
-};
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+});
+
+export const metadata = sharedMetadata;
 
 export default function RootLayout({
   children,
@@ -16,14 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <ThemeProvider attribute={"class"} defaultTheme="dark">
-        <body>
-          <NextTopLoader color="#2299DD" />
-          <Navbar />
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${quicksand.variable} font-sans antialiased light`}
+      >
+        <ThemeProvider attribute={"class"} defaultTheme="light" forcedTheme="light">
+          <NextTopLoader color="#300000" />
           {children}
-        </body>
-      </ThemeProvider>
+          <Toaster />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

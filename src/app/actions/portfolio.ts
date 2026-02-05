@@ -61,24 +61,39 @@ export async function getExperienceById(id: string) {
 
 export async function createExperience(data: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
   await requireAdmin();
-  await db.insert(experience).values({ id: nanoid(), ...data });
-  revalidatePath("/");
-  revalidatePath("/admin/experience");
-  return { success: true };
+  try {
+    await db.insert(experience).values({ id: nanoid(), ...data });
+    revalidatePath("/");
+    revalidatePath("/admin/experience");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to create experience:", error);
+    return { success: false, error: "Failed to create experience" };
+  }
 }
 
 export async function updateExperience(id: string, data: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
   await requireAdmin();
-  await db.update(experience).set({ ...data, updatedAt: new Date() }).where(eq(experience.id, id));
-  revalidatePath("/");
-  revalidatePath("/admin/experience");
-  return { success: true };
+  try {
+    await db.update(experience).set({ ...data, updatedAt: new Date() }).where(eq(experience.id, id));
+    revalidatePath("/");
+    revalidatePath("/admin/experience");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to update experience:", error);
+    return { success: false, error: "Failed to update experience" };
+  }
 }
 
 export async function deleteExperience(id: string) {
   await requireAdmin();
-  await db.delete(experience).where(eq(experience.id, id));
-  revalidatePath("/");
-  revalidatePath("/admin/experience");
-  return { success: true };
+  try {
+    await db.delete(experience).where(eq(experience.id, id));
+    revalidatePath("/");
+    revalidatePath("/admin/experience");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to delete experience:", error);
+    return { success: false, error: "Failed to delete experience" };
+  }
 }
