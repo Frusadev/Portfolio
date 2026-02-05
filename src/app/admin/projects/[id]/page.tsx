@@ -1,6 +1,8 @@
-import { getProject } from "@/app/actions/portfolio";
-import ProjectForm from "@/components/admin/project-form";
 import { notFound } from "next/navigation";
+import { db } from "@/core/db/setup";
+import { projects } from "@/core/db/schemas/portfolio/schemas";
+import { eq } from "drizzle-orm";
+import { ProjectForm } from "@/components/admin/project-form";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -8,7 +10,10 @@ interface PageProps {
 
 export default async function EditProjectPage({ params }: PageProps) {
   const { id } = await params;
-  const project = await getProject(id);
+
+  const project = await db.query.projects.findFirst({
+    where: eq(projects.id, id),
+  });
 
   if (!project) {
     notFound();
@@ -16,8 +21,10 @@ export default async function EditProjectPage({ params }: PageProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Edit Project</h1>
-      <ProjectForm project={project} />
+      <h1 className="text-3xl font-black uppercase tracking-tighter text-red-950">
+        Edit Project
+      </h1>
+      <ProjectForm initialData={project} />
     </div>
   );
 }
