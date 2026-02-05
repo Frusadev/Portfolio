@@ -14,7 +14,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="min-h-screen bg-[#e6dcc6]">
       <AdminSidebar />
-      <main className="ml-64 p-8 min-h-screen">
+      <main className="md:ml-64 p-4 md:p-8 min-h-screen pt-20 md:pt-8 w-full md:w-auto">
         {children}
       </main>
     </div>
