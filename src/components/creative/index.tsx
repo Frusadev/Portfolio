@@ -312,8 +312,16 @@ export const TimeSky = () => {
            "h-1/3 w-full relative transition-colors duration-1000 flex items-end justify-center pb-4", 
            isDay ? "bg-[#6cc349]" : "bg-[#503120]" 
        )}>
+           {/* Tiny Yellow Dots */}
+           <div className="absolute top-3 left-6 w-1 h-1 bg-[#FFD700] rounded-full opacity-80" />
+           <div className="absolute top-5 right-12 w-1.5 h-1.5 bg-[#FFD700] rounded-full opacity-60" />
+           <div className="absolute bottom-6 left-1/4 w-1 h-1 bg-[#FFD700] rounded-full opacity-70" />
+           <div className="absolute top-1/2 right-1/3 w-1 h-1 bg-[#FFD700] rounded-full opacity-90" />
+           <div className="absolute bottom-4 right-8 w-1.5 h-1.5 bg-[#FFD700] rounded-full opacity-50" />
+           <div className="absolute top-4 left-1/2 w-1 h-1 bg-[#FFD700] rounded-full opacity-75" />
+           
            {/* Text Label */}
-           <div className="bg-[#e6dcc6] px-3 py-1 border-2 border-red-950 text-red-950 font-bold text-xs uppercase shadow-[2px_2px_0px_0px_rgba(69,10,10,1)]">
+           <div className="bg-[#e6dcc6] px-3 py-1 border-2 border-red-950 text-red-950 font-bold text-xs uppercase shadow-[2px_2px_0px_0px_rgba(69,10,10,1)] z-10">
               {isDay ? "06:00 - 18:00" : "18:00 - 06:00"}
            </div>
        </div>
