@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, FileText, Briefcase, FolderOpen, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, Briefcase, FolderOpen, LogOut, Globe } from "lucide-react";
 import { signOut } from "@/lib/auth-client";
 
 export function AdminSidebar() {
@@ -45,7 +45,14 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t-4 border-red-950">
+      <div className="p-4 border-t-4 border-red-950 space-y-2">
+        <Link
+          href="/"
+          className="flex items-center gap-3 px-4 py-3 w-full font-bold uppercase tracking-wider text-sm border-2 border-transparent text-red-950 hover:border-red-950 hover:bg-white/50 transition-all"
+        >
+          <Globe size={18} />
+          View Website
+        </Link>
         <button
           onClick={() => signOut()}
           className="flex items-center gap-3 px-4 py-3 w-full font-bold uppercase tracking-wider text-sm border-2 border-transparent text-red-950 hover:border-red-950 hover:bg-red-500/10 transition-all"
