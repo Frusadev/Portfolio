@@ -37,7 +37,7 @@ export default function PortfolioSidebar() {
     },
     {
       name: "Twitter",
-      url: "https://twitter.com/frusadev",
+      url: "https://twitter.com/Frusasoft_FD",
       icon: <FaTwitter />,
     },
   ];

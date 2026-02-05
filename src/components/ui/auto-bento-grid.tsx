@@ -132,12 +132,12 @@ export default function AutoBentoGrid({ items, className }: AutoBentoGridProps) 
             key={item.id}
             href={item.href || "#"}
             className={cn(
-              "group relative flex flex-col overflow-hidden border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 transition-colors duration-300",
+              "group relative flex flex-col overflow-hidden border-r-2 border-b-2 md:border-r-4 md:border-b-4 transition-colors duration-300",
               layout.mobile,
               `md:${layout.desktop}`,
               bgType === "dark" 
-                ? "bg-red-950 text-[#e6dcc6] hover:bg-red-900" 
-                : "bg-background text-red-950 hover:bg-red-950/5",
+                ? "bg-red-950 text-[#e6dcc6] hover:bg-red-900 border-black" 
+                : "bg-background text-red-950 hover:bg-red-950/5 border-red-950",
               item.className
             )}
           >
