@@ -265,3 +265,159 @@ export const BreathingCircle = () => {
     );
 };
 
+// 13. Hue Shift Gradient
+export const HueShifter = () => {
+    return (
+        <div className="w-full h-full relative overflow-hidden">
+             <motion.div 
+                animate={{ filter: ["hue-rotate(0deg)", "hue-rotate(90deg)", "hue-rotate(0deg)"] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-br from-[#e6dcc6] via-[#dccfac] to-[#cbb88a]"
+             />
+             <div className="relative z-10 flex items-center justify-center h-full font-bold text-red-950 mix-blend-overlay">
+                COLOR_SHIFT
+             </div>
+        </div>
+    );
+};
+
+// 14. Subtle Noise Texture
+export const NoiseField = () => {
+    return (
+        <div className="w-full h-full relative overflow-hidden bg-[#e6dcc6]">
+            <div className="absolute inset-0 opacity-20 pointer-events-none"
+             style={{
+                 backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+             }} 
+            />
+            <div className="flex items-center justify-center h-full text-red-950/40 text-xs font-mono">
+                STATIC_NOISE
+            </div>
+        </div>
+    );
+};
+
+// 15. Minimal Wave
+export const MinimalWave = () => {
+    return (
+        <div className="w-full h-full flex items-center justify-center overflow-hidden">
+             <div className="flex gap-1 items-end h-20">
+                 {[...Array(5)].map((_, i) => (
+                     <motion.div
+                        key={i}
+                        animate={{ height: ["20%", "80%", "20%"] }}
+                        transition={{ 
+                            duration: 1.5, 
+                            repeat: Infinity, 
+                            ease: "easeInOut",
+                            delay: i * 0.2
+                        }}
+                        className="w-4 bg-red-950"
+                     />
+                 ))}
+             </div>
+        </div>
+    );
+};
+
+// 16. Pixel Traveller
+export const PixelTraveller = () => {
+    return (
+        <div className="w-full h-full relative p-4">
+            <motion.div
+                animate={{ 
+                    x: [0, 200, 200, 0, 0],
+                    y: [0, 0, 100, 100, 0],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="w-2 h-2 bg-red-950 absolute top-4 left-4"
+            />
+            <div className="absolute bottom-4 right-4 text-xs opacity-50">TRAVELLER</div>
+        </div>
+    );
+};
+
+// 17. Corner Morph
+export const CornerMorph = () => {
+    return (
+        <div className="w-full h-full flex items-center justify-center p-8">
+            <motion.div
+                animate={{ 
+                    borderRadius: ["0%", "50%", "0%", "25%", "0%"],
+                    rotate: [0, 180, 0]
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="w-full h-full bg-red-950"
+            />
+        </div>
+    );
+};
+
+// 18. Circle Fill
+export const CircleFill = () => {
+    return (
+        <div className="w-full h-full flex items-center justify-center">
+            <div className="relative w-24 h-24 rounded-full border-2 border-red-950 overflow-hidden">
+                <motion.div
+                    animate={{ height: ["0%", "100%", "0%"] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-0 left-0 w-full bg-red-950"
+                />
+            </div>
+        </div>
+    );
+};
+
+// 19. Diagonal Sweep
+export const DiagonalSweep = () => {
+    return (
+        <div className="w-full h-full relative overflow-hidden bg-red-950/5">
+             <motion.div
+                animate={{ left: ["-100%", "200%"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-red-950/20 to-transparent -skew-x-12"
+             />
+        </div>
+    );
+};
+
+// 20. Warp Box
+export const WarpBox = () => {
+    return (
+        <div className="w-full h-full flex items-center justify-center">
+            <motion.div
+                 whileHover={{ 
+                     borderRadius: ["20%", "10%", "50%", "10%"],
+                     scale: 0.9,
+                     rotate: 15
+                 }}
+                 className="w-24 h-24 bg-red-950 cursor-pointer"
+            />
+        </div>
+    );
+};
+
+// 21. Dot Grid
+export const DotGrid = () => {
+    return (
+        <div className="w-full h-full flex items-center justify-center">
+            <div className="grid grid-cols-5 gap-2">
+                {[...Array(25)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        animate={{ opacity: [0.2, 1, 0.2] }}
+                        transition={{ 
+                            duration: 2, 
+                            repeat: Infinity, 
+                            delay: Math.random() * 2,
+                            ease: "easeInOut" 
+                        }}
+                        className="w-1.5 h-1.5 bg-red-950 rounded-full"
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+
