@@ -252,6 +252,75 @@ export const DodgingButton = () => {
     );
 };
 
+// 22. Time Sky (Vertical)
+export const TimeSky = () => {
+  const [isDay, setIsDay] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const updateTime = () => {
+        const hour = new Date().getHours();
+        setIsDay(hour >= 6 && hour < 18);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!mounted) return <div className="w-full h-full bg-[#e6dcc6]" />;
+
+  return (
+    <div className="w-full h-full relative flex flex-col border-none">
+       {/* Sky */}
+       <div className={cn(
+           "flex-1 relative transition-colors duration-1000 border-b-4 border-red-950 overflow-hidden", 
+           isDay ? "bg-[#87CEEB]" : "bg-[#1a1a2e]"
+       )}>
+          {/* Celestial Body */}
+          <motion.div
+             initial={{ y: 50, opacity: 0 }}
+             animate={{ y: 0, opacity: 1 }}
+             transition={{ duration: 1.5, type: "spring" }}
+             className={cn(
+               "absolute top-8 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full border-4 border-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] z-10",
+               isDay ? "bg-[#FFD700]" : "bg-[#F4F6F0]"
+             )}
+          />
+          
+          {/* Clouds or Stars */}
+          {isDay ? (
+             <>
+                <motion.div 
+                    animate={{ x: [0, 100, 0] }} 
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-4 left-4 w-12 h-8 bg-white/80 rounded-full blur-sm" 
+                />
+             </>
+          ) : (
+             <>
+                 <div className="absolute top-4 left-10 w-1 h-1 bg-white rounded-full animate-pulse" />
+                 <div className="absolute top-10 right-10 w-1 h-1 bg-white rounded-full animate-pulse delay-75" />
+                 <div className="absolute top-20 left-1/2 w-1.5 h-1.5 bg-white rounded-full animate-pulse delay-150" />
+             </>
+          )}
+
+       </div>
+       
+       {/* Ground */}
+       <div className={cn(
+           "h-1/3 w-full relative transition-colors duration-1000 flex items-end justify-center pb-4", 
+           isDay ? "bg-[#6cc349]" : "bg-[#503120]" 
+       )}>
+           {/* Text Label */}
+           <div className="bg-[#e6dcc6] px-3 py-1 border-2 border-red-950 text-red-950 font-bold text-xs uppercase shadow-[2px_2px_0px_0px_rgba(69,10,10,1)]">
+              {isDay ? "06:00 - 18:00" : "18:00 - 06:00"}
+           </div>
+       </div>
+    </div>
+  );
+};
+
 // 12. Breathing Circle
 export const BreathingCircle = () => {
     return (

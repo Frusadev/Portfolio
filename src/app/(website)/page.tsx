@@ -15,7 +15,8 @@ import {
   MinecraftBlock, 
   DayProgressBar, 
   IrregularClock, 
-  DodgingButton 
+  DodgingButton,
+  TimeSky
 } from "@/components/creative";
 
 export default function Home() {
@@ -224,7 +225,12 @@ export default function Home() {
 
         {/* Creative Elements */}
         
-        {/* Col 7 */}
+        {/* Time Sky - Vertical strip on Desktop, big block on mobile */}
+        <div className="col-span-1 md:col-span-1 md:row-span-3 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:opacity-95 transition-opacity bg-background overflow-hidden min-h-[360px] md:min-h-0">
+             <TimeSky />
+        </div>
+
+        {/* 2 Cols of 1x1 items */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
           <MinecraftBlock />
         </div>
