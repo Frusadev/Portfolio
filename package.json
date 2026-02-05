@@ -34,6 +34,7 @@
     "framer-motion": "^12.23.25",
     "highlight.js": "^11.11.1",
     "lucide-react": "^0.562.0",
+    "marked": "^17.0.1",
     "motion": "^12.23.25",
     "nanoid": "^5.1.6",
     "next": "15.4.8",
