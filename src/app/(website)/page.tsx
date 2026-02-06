@@ -24,7 +24,7 @@ export default function Home() {
     <div className="w-full min-h-full md:h-full md:inline-block md:min-w-full bg-background">
       <div className="grid grid-cols-2 md:grid-cols-none md:grid-rows-3 md:grid-flow-col md:auto-cols-[max(300px,22vw)] w-full min-h-full md:h-full border-l-4 md:border-l-[0.3vw] border-t-4 md:border-t-[0.3vw] border-red-950 bg-background md:w-fit">
         {/* Hero / Intro Card - Large */}
-        <div className="col-span-2 md:col-span-2 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-6 md:p-[2vw] flex flex-col justify-center bg-background min-h-[340px] md:min-h-0">
+        <div className="col-span-2 md:col-span-2 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-6 md:p-[2vw] flex flex-col justify-center items-center text-center md:items-start md:text-left bg-background min-h-[340px] md:min-h-0">
           <h1 className="text-4xl md:text-[4vw] leading-tight font-bold text-red-950 mb-4">
             Hi, I&apos;m Daniel.
           </h1>
@@ -36,7 +36,7 @@ export default function Home() {
         </div>
 
         {/* Current Status */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
+        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
           <h3 className="text-base md:text-[1.3vw] font-bold text-red-950">
             Current Focus
           </h3>
@@ -47,7 +47,7 @@ export default function Home() {
         </div>
 
         {/* Location / Time */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center text-center hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
+        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center text-center hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
           <div className="text-xl md:text-[2.5vw] mb-1 md:mb-2">
             <Earth />
           </div>
@@ -60,37 +60,37 @@ export default function Home() {
         </div>
 
         {/* Experience / Tech Stack */}
-        <div className="col-span-1 row-span-2 md:col-span-1 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[240px] md:min-h-0">
+        <div className="col-span-2 row-span-1 md:col-span-1 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[240px] md:min-h-0">
           <h3 className="text-lg md:text-[1.3vw] font-bold text-red-950 mb-2 md:mb-[1vw]">
             Tech Arsenal
           </h3>
-          <ul className="space-y-1 md:space-y-2 text-red-900/90 font-medium text-xs md:text-[0.9vw]">
-            <li className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-950 rounded-full" /> React &
+          <ul className="space-y-1 md:space-y-[0.5vw] text-red-900/90 font-medium text-xs md:text-[0.9vw]">
+            <li className="flex items-center gap-2 md:gap-[0.5vw]">
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> React &
               Next.js
             </li>
-            <li className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-950 rounded-full" /> TypeScript
+            <li className="flex items-center gap-2 md:gap-[0.5vw]">
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> TypeScript
             </li>
-            <li className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-950 rounded-full" /> Node.js &
+            <li className="flex items-center gap-2 md:gap-[0.5vw]">
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Node.js &
               Bun
             </li>
-            <li className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-950 rounded-full" /> Tailwind
+            <li className="flex items-center gap-2 md:gap-[0.5vw]">
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Tailwind
               CSS
             </li>
-            <li className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-950 rounded-full" /> PostgreSQL
+            <li className="flex items-center gap-2 md:gap-[0.5vw]">
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> PostgreSQL
             </li>
-            <li className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-950 rounded-full" /> Docker
+            <li className="flex items-center gap-2 md:gap-[0.5vw]">
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Docker
             </li>
           </ul>
         </div>
 
         {/* Philosophy - Made smaller on mobile if needed, but span-1 is fine */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center bg-red-950 text-[#e6dcc6] overflow-hidden min-h-[160px] md:min-h-0 hover:scale-[1.02] transition-transform duration-300">
+        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center bg-red-950 text-[#e6dcc6] overflow-hidden min-h-[160px] md:min-h-0 hover:scale-[1.02] transition-transform duration-300">
           <p className="text-sm md:text-[1.5vw] font-bold text-center leading-tight">
             &quot;Simplicity is the ultimate sophistication.&quot;
           </p>
@@ -107,7 +107,7 @@ export default function Home() {
         </div>
 
         {/* Stats / Grid Item - REORDERED: Above Game */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center hover:bg-red-950 text-red-950 hover:text-[#e6dcc6] transition-colors min-h-[180px] md:min-h-0 group cursor-default">
+        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center hover:bg-red-950 text-red-950 hover:text-[#e6dcc6] transition-colors min-h-[180px] md:min-h-0 group cursor-default">
           <Code className="w-8 h-8 md:w-[3vw] md:h-[3vw] mb-2 group-hover:scale-110 transition-transform" />
           <p className="text-3xl md:text-[2.5vw] font-black">99%</p>
           <p className="text-xs md:text-[0.7vw] font-bold uppercase tracking-widest opacity-80">
@@ -218,7 +218,7 @@ export default function Home() {
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
            <DayProgressBar />
         </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
+        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
              <DodgingButton />
         </div>
         
