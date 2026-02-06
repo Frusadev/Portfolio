@@ -201,7 +201,7 @@ export default function Home() {
             FUELLED BY COFFEE
           </p>
         </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-blue-400/10 hover:bg-blue-400/20 transition-colors overflow-hidden min-h-[180px] md:min-h-0 text-red-950">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-orange-400/10 hover:bg-orange-400/20 transition-colors overflow-hidden min-h-[180px] md:min-h-0 text-red-950">
           <p className="font-bold text-red-950 -rotate-12 text-sm md:text-[1vw]">
             PIXEL PERFECT
           </p>
