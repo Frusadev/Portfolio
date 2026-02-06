@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useAnimation, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -228,16 +228,20 @@ export const DodgingButton = () => {
     const x = useSpring(0, { stiffness: 400, damping: 15 });
     const y = useSpring(0, { stiffness: 400, damping: 15 });
 
-    const dodge = (e: React.MouseEvent | React.TouchEvent | any) => {
+    const dodge = (e: React.MouseEvent | React.TouchEvent | unknown) => {
         // Calculate interaction position relative to viewport or element
         // Since button moves, we use client coordinates
         let clientX, clientY;
-        if (e.type === 'touchstart') {
-           clientX = e.touches[0].clientX;
-           clientY = e.touches[0].clientY;
+        const event = e as React.MouseEvent | React.TouchEvent; // Cast for access
+        
+        if ('touches' in event) {
+           clientX = event.touches[0].clientX;
+           clientY = event.touches[0].clientY;
+        } else if ('clientX' in event) {
+           clientX = event.clientX;
+           clientY = event.clientY;
         } else {
-           clientX = e.clientX;
-           clientY = e.clientY;
+            return;
         }
 
         // Current button position (approximate since we don't have ref rect easily every frame, 
