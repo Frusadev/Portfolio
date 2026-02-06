@@ -1,4 +1,4 @@
-import { Earth, Mail, Phone, Music, Code } from "lucide-react";
+import { Earth, Mail, Phone, Code } from "lucide-react";
 import SpriteAnimation from "@/components/ui/sprite-animation";
 import DoNotPress from "@/components/ui/dont-press";
 import { TextMarquee } from "@/components/ui/text-marque";
@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import { FaWhatsapp } from "react-icons/fa";
 import { 
-  MinecraftBlock, 
   DayProgressBar, 
   IrregularClock, 
   DodgingButton,
   TimeSky,
   GridPattern
 } from "@/components/creative";
+import { MusicPlayer } from "@/components/music-player";
 
 export default function Home() {
   return (
@@ -104,23 +104,7 @@ export default function Home() {
 
         {/* Now Playing / Music Vibe - REORDERED: Above Game */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 p-4 flex flex-col justify-between bg-red-950/5 hover:bg-red-950/10 transition-colors min-h-[180px] md:min-h-0 group">
-          <div className="flex justify-between items-start">
-            <Music className="text-red-950 w-6 h-6 animate-pulse" />
-            <div className="flex space-x-1 items-end h-6">
-              <span className="w-1 h-2 bg-red-950 animate-[bounce_1s_infinite]" />
-              <span className="w-1 h-4 bg-red-950 animate-[bounce_1.2s_infinite]" />
-              <span className="w-1 h-3 bg-red-950 animate-[bounce_0.8s_infinite]" />
-            </div>
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-wider font-bold text-red-950/60">
-              On Repeat
-            </p>
-            <p className="font-bold text-red-950 text-base md:text-base leading-tight truncate">
-              Raindance
-            </p>
-            <p className="text-sm text-red-950/80 truncate">Spotify</p>
-          </div>
+          <MusicPlayer />
         </div>
 
         {/* Stats / Grid Item - REORDERED: Above Game */}
@@ -233,20 +217,17 @@ export default function Home() {
 
         {/* 2 Cols of 1x1 items */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
-          <MinecraftBlock />
+           <IrregularClock />
         </div>
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
            <DayProgressBar />
-        </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
-           <IrregularClock />
         </div>
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
              <DodgingButton />
         </div>
         
         {/* Filler Grid Pattern */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
+        <div className="col-span-2 md:col-span-1 md:row-span-3 border-r-2 border-b-2 md:border-r-4 md:border-b-4 border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
              <GridPattern />
         </div>
       </div>

@@ -222,35 +222,74 @@ export const InfiniteSpinner = () => {
     );
 };
 
-// 11. Dodging Button (Once)
+// 11. Dodging Button (Uncatchable)
 export const DodgingButton = () => {
-    const [dodged, setDodged] = useState(false);
-    const x = useSpring(0);
-    const y = useSpring(0);
+    const [text, setText] = useState("CLICK_ME");
+    const x = useSpring(0, { stiffness: 400, damping: 15 });
+    const y = useSpring(0, { stiffness: 400, damping: 15 });
 
-    const handleHover = () => {
-        if (!dodged) {
-            const randomX = (Math.random() - 0.5) * 100;
-            const randomY = (Math.random() - 0.5) * 100;
-            x.set(randomX);
-            y.set(randomY);
-            setDodged(true);
-            setTimeout(() => {
-                x.set(0);
-                y.set(0);
-                setDodged(false); // Reset after 2s for replayability
-            }, 2000);
+    const dodge = (e: React.MouseEvent | React.TouchEvent | any) => {
+        // Calculate interaction position relative to viewport or element
+        // Since button moves, we use client coordinates
+        let clientX, clientY;
+        if (e.type === 'touchstart') {
+           clientX = e.touches[0].clientX;
+           clientY = e.touches[0].clientY;
+        } else {
+           clientX = e.clientX;
+           clientY = e.clientY;
         }
+
+        // Current button position (approximate since we don't have ref rect easily every frame, 
+        // but we assume it's roughly near its original center + offset)
+        // A simpler "run away" strategy:
+        // Use a large random jump but biased by the quadrant of the interaction
+        
+        // If we don't have rect refs, purely random "far" jump is safer than calculating vectors 
+        // that might result in 0 movement if not careful.
+        // But user asked for "far away enough from cursor".
+        
+        // Let's maximize the jump distance.
+        // Range: X: -70 to 70, Y: -50 to 50 (approx based on previous 140/100)
+        
+        const currentX = x.get();
+        const currentY = y.get();
+
+        // Calculate a new position that is far from the current one
+        // We pick 4 candidates and choose the furthest from current
+        
+        let bestX = 0;
+        let bestY = 0;
+        let maxDist = 0;
+        
+        for (let i = 0; i < 4; i++) {
+             const randX = (Math.random() - 0.5) * 200; // Increased range
+             const randY = (Math.random() - 0.5) * 150;
+             const dist = Math.sqrt(Math.pow(randX - currentX, 2) + Math.pow(randY - currentY, 2));
+             if (dist > maxDist) {
+                 maxDist = dist;
+                 bestX = randX;
+                 bestY = randY;
+             }
+        }
+        
+        // Ensure it moves
+        x.set(bestX);
+        y.set(bestY);
+        
+        const taunts = ["NOPE!", "TOO_SLOW!", "TRY_AGAIN", "MISSED!", "TOO_FAST!"];
+        setText(taunts[Math.floor(Math.random() * taunts.length)]);
     };
 
     return (
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center relative overflow-visible z-30">
             <motion.button
                 style={{ x, y }}
-                onMouseEnter={handleHover}
-                className="bg-red-950 text-[#e6dcc6] px-4 py-2 font-bold text-xs uppercase shadow-[4px_4px_0px_0px_rgba(69,10,10,0.5)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-shadow"
+                onMouseEnter={dodge}
+                onTouchStart={dodge}
+                className="bg-red-950 text-[#e6dcc6] px-4 py-2 font-bold text-xs uppercase shadow-[4px_4px_0px_0px_rgba(69,10,10,0.5)] z-20 whitespace-nowrap"
             >
-                {dodged ? "MISSED!" : "CLICK_ME"}
+                {text}
             </motion.button>
         </div>
     );
