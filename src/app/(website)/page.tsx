@@ -24,7 +24,7 @@ export default function Home() {
     <div className="w-full min-h-full md:h-full md:inline-block md:min-w-full bg-background">
       <div className="grid grid-cols-2 md:grid-cols-none md:grid-rows-3 md:grid-flow-col md:auto-cols-[max(300px,22vw)] w-full min-h-full md:h-full border-l-4 md:border-l-[0.3vw] border-t-4 md:border-t-[0.3vw] border-red-950 bg-background md:w-fit">
         {/* Hero / Intro Card - Large */}
-        <div className="col-span-2 md:col-span-2 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-6 md:p-[2vw] flex flex-col justify-center items-start text-left md:items-start md:text-left bg-background min-h-[200px] md:min-h-0">
+        <div className="col-span-2 md:col-span-2 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-6 pt-20 md:p-[2vw] flex flex-col justify-center items-start text-left md:items-start md:text-left bg-background min-h-[200px] md:min-h-0">
           <h1 className="text-4xl md:text-[4vw] leading-tight font-bold text-red-950 mb-4">
             Hi, I&apos;m Daniel.
           </h1>
@@ -36,7 +36,7 @@ export default function Home() {
         </div>
 
         {/* Current Status */}
-        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
           <h3 className="text-base md:text-[1.3vw] font-bold text-red-950">
             Current Focus
           </h3>
@@ -47,7 +47,7 @@ export default function Home() {
         </div>
 
         {/* Location / Time */}
-        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center text-center hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center text-center hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
           <div className="text-xl md:text-[2.5vw] mb-1 md:mb-2">
             <Earth />
           </div>
