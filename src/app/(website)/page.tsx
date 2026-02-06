@@ -36,8 +36,8 @@ export default function Home() {
         </div>
 
         {/* Current Status */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[200px] md:min-h-0">
-          <h3 className="text-base md:text-[1.3vw] font-bold text-red-950">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between hover:bg-red-950/5 transition-colors bg-red-950 md:bg-background overflow-hidden min-h-[200px] md:min-h-0 text-[#e6dcc6] md:text-red-950">
+          <h3 className="text-base md:text-[1.3vw] font-bold text-[#e6dcc6] md:text-red-950">
             Current Focus
           </h3>
           <p className="text-sm md:text-[1.1vw] leading-tight">
@@ -60,31 +60,31 @@ export default function Home() {
         </div>
 
         {/* Experience / Tech Stack */}
-        <div className="col-span-2 row-span-1 md:col-span-1 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[240px] md:min-h-0">
-          <h3 className="text-lg md:text-[1.3vw] font-bold text-red-950 mb-2 md:mb-[1vw]">
+        <div className="col-span-2 row-span-1 md:col-span-1 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col hover:bg-red-950/5 transition-colors bg-red-950 md:bg-background overflow-hidden min-h-[240px] md:min-h-0">
+          <h3 className="text-lg md:text-[1.3vw] font-bold text-[#e6dcc6] md:text-red-950 mb-2 md:mb-[1vw]">
             Tech Arsenal
           </h3>
-          <ul className="space-y-1 md:space-y-[0.5vw] text-red-900/90 font-medium text-xs md:text-[0.9vw]">
+          <ul className="space-y-1 md:space-y-[0.5vw] text-[#e6dcc6]/90 md:text-red-900/90 font-medium text-xs md:text-[0.9vw]">
             <li className="flex items-center gap-2 md:gap-[0.5vw]">
-              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> React &
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-[#e6dcc6] md:bg-red-950 rounded-full" /> React &
               Next.js
             </li>
             <li className="flex items-center gap-2 md:gap-[0.5vw]">
-              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> TypeScript
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-[#e6dcc6] md:bg-red-950 rounded-full" /> TypeScript
             </li>
             <li className="flex items-center gap-2 md:gap-[0.5vw]">
-              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Node.js &
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-[#e6dcc6] md:bg-red-950 rounded-full" /> Node.js &
               Bun
             </li>
             <li className="flex items-center gap-2 md:gap-[0.5vw]">
-              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Tailwind
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-[#e6dcc6] md:bg-red-950 rounded-full" /> Tailwind
               CSS
             </li>
             <li className="flex items-center gap-2 md:gap-[0.5vw]">
-              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> PostgreSQL
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-[#e6dcc6] md:bg-red-950 rounded-full" /> PostgreSQL
             </li>
             <li className="flex items-center gap-2 md:gap-[0.5vw]">
-              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Docker
+              <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-[#e6dcc6] md:bg-red-950 rounded-full" /> Docker
             </li>
           </ul>
         </div>
