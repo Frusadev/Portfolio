@@ -24,11 +24,11 @@ export default function Home() {
     <div className="w-full min-h-full md:h-full md:inline-block md:min-w-full bg-background">
       <div className="grid grid-cols-2 md:grid-cols-none md:grid-rows-3 md:grid-flow-col md:auto-cols-[max(300px,22vw)] w-full min-h-full md:h-full border-l-4 md:border-l-[0.3vw] border-t-4 md:border-t-[0.3vw] border-red-950 bg-background md:w-fit">
         {/* Hero / Intro Card - Large */}
-        <div className="col-span-2 md:col-span-2 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-6 md:p-[2vw] flex flex-col justify-center items-center text-center md:items-start md:text-left bg-background min-h-[340px] md:min-h-0">
+        <div className="col-span-2 md:col-span-2 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-6 md:p-[2vw] flex flex-col justify-center items-start text-left md:items-start md:text-left bg-background min-h-[200px] md:min-h-0">
           <h1 className="text-4xl md:text-[4vw] leading-tight font-bold text-red-950 mb-4">
             Hi, I&apos;m Daniel.
           </h1>
-          <p className="text-base md:text-[1.25vw] text-red-900/80 max-w-[30vw] leading-relaxed">
+          <p className="text-base md:text-[1.25vw] text-red-900/80 md:max-w-[30vw] leading-relaxed">
             I build accessible, pixel-perfect, secure, and performant web
             applications. I enjoy creating things that live on the internet,
             from simple websites to complex web applications.
