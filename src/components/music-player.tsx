@@ -111,21 +111,21 @@ export function MusicPlayer() {
        return (
             <div className="flex flex-col justify-between h-full w-full"> 
                 <div className="flex justify-between items-start">
-                    <Music className="text-red-950 w-6 h-6" />
-                    <div className="flex space-x-1 items-end h-6">
-                        <span className="w-1 h-2 bg-red-950" />
-                        <span className="w-1 h-4 bg-red-950" />
-                        <span className="w-1 h-3 bg-red-950" />
+                    <Music className="text-red-950 w-6 h-6 md:w-[1.5vw] md:h-[1.5vw]" />
+                    <div className="flex space-x-1 items-end h-6 md:h-[1.5vw]">
+                        <span className="w-1 h-2 bg-red-950 md:w-[0.25vw] md:h-[0.5vw]" />
+                        <span className="w-1 h-4 bg-red-950 md:w-[0.25vw] md:h-[1vw]" />
+                        <span className="w-1 h-3 bg-red-950 md:w-[0.25vw] md:h-[0.75vw]" />
                     </div>
                 </div>
                 <div>
-                    <p className="text-xs uppercase tracking-wider font-bold text-red-950/60">
+                    <p className="text-xs md:text-[0.8vw] uppercase tracking-wider font-bold text-red-950/60">
                     On Repeat
                     </p>
-                    <p className="font-bold text-red-950 text-base md:text-base leading-tight truncate">
+                    <p className="font-bold text-red-950 text-base md:text-[1vw] leading-tight truncate">
                     Loading...
                     </p>
-                    <p className="text-sm text-red-950/80 truncate"></p>
+                    <p className="text-sm md:text-[0.9vw] text-red-950/80 truncate"></p>
                 </div>
             </div>
        );
@@ -157,21 +157,21 @@ export function MusicPlayer() {
   return (
     <div className="flex flex-col justify-between h-full w-full animate-in fade-in duration-500"> 
       <div className="flex justify-between items-start">
-        <Music className="text-red-950 w-6 h-6 animate-pulse" />
-        <div className="flex space-x-1 items-end h-6">
-          <span className="w-1 h-2 bg-red-950 animate-[bounce_1s_infinite]" />
-          <span className="w-1 h-4 bg-red-950 animate-[bounce_1.2s_infinite]" />
-          <span className="w-1 h-3 bg-red-950 animate-[bounce_0.8s_infinite]" />
+        <Music className="text-red-950 w-6 h-6 animate-pulse md:w-[1.5vw] md:h-[1.5vw]" />
+        <div className="flex space-x-1 items-end h-6 md:h-[1.5vw]">
+          <span className="w-1 h-2 bg-red-950 animate-[bounce_1s_infinite] md:w-[0.25vw] md:h-[0.5vw]" />
+          <span className="w-1 h-4 bg-red-950 animate-[bounce_1.2s_infinite] md:w-[0.25vw] md:h-[1vw]" />
+          <span className="w-1 h-3 bg-red-950 animate-[bounce_0.8s_infinite] md:w-[0.25vw] md:h-[0.75vw]" />
         </div>
       </div>
       <div>
-        <p className="text-xs uppercase tracking-wider font-bold text-red-950/60">
+        <p className="text-xs uppercase tracking-wider font-bold text-red-950/60 md:text-[0.8vw]">
           On Repeat
         </p>
-        <p className="font-bold text-red-950 text-base md:text-base leading-tight truncate" title={title}>
+        <p className="font-bold text-red-950 text-base md:text-[1vw] leading-tight truncate" title={title}>
           {title}
         </p>
-        <p className="text-sm text-red-950/80 truncate" title={artist}>{artist}</p>
+        <p className="text-sm text-red-950/80 truncate md:text-[0.9vw]" title={artist}>{artist}</p>
       </div>
     </div>
   );

@@ -53,8 +53,8 @@ export default function PortfolioSidebar() {
   const SidebarContent = () => (
     <>
       {/* Profile Section */}
-      <div className="w-full shrink-0 h-auto border-b-4 border-red-950 pb-4 bg-[#dccfac]">
-        <div className="w-full aspect-square border-b-4 border-red-950 overflow-hidden md:grayscale md:hover:grayscale-0 transition-all duration-500">
+      <div className="w-full shrink-0 h-auto border-b-4 md:border-b-[0.3vw] border-red-950 pb-4 md:pb-[1vw] bg-[#dccfac]">
+        <div className="w-full aspect-square border-b-4 md:border-b-[0.3vw] border-red-950 overflow-hidden md:grayscale md:hover:grayscale-0 transition-all duration-500">
           <Image
             src={"/daniel.png"}
             alt={"Daniel AMETSOWOU"}
@@ -63,23 +63,23 @@ export default function PortfolioSidebar() {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="px-4 mt-4">
-          <p className="text-2xl uppercase tracking-wider">Daniel</p>
-          <p className="text-xl uppercase tracking-wider">Ametsowou</p>
-          <p className="text-xs mt-2 opacity-80 font-normal">
+        <div className="px-4 mt-4 md:px-[1vw] md:mt-[1vw]">
+          <p className="text-2xl md:text-[2vw] uppercase tracking-wider">Daniel</p>
+          <p className="text-xl md:text-[1.5vw] uppercase tracking-wider">Ametsowou</p>
+          <p className="text-xs md:text-[0.8vw] mt-2 md:mt-[0.5vw] opacity-80 font-normal">
             Full Stack Developer & Entrepreneur
           </p>
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 flex flex-col justify-center px-6 space-y-4 py-4">
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-[1.5vw] space-y-4 md:space-y-[1vw] py-4">
         {navItems.map((item) => (
           <Link
             key={item.name}
             href={item.href}
              onClick={() => setIsOpen(false)}
-            className="text-xl hover:text-red-700 hover:translate-x-2 transition-transform uppercase tracking-widest"
+            className="text-xl md:text-[1.5vw] hover:text-red-700 hover:translate-x-2 transition-transform uppercase tracking-widest"
           >
             {item.name}
           </Link>
@@ -87,22 +87,22 @@ export default function PortfolioSidebar() {
       </div>
 
       {/* Footer Section: Socials */}
-      <div className="w-full shrink-0 flex flex-col px-4 pb-4">
-        <div className="mt-4">
-          <div className="flex space-x-4 justify-center">
+      <div className="w-full shrink-0 flex flex-col px-4 pb-4 md:px-[1vw] md:pb-[1vw]">
+        <div className="mt-4 md:mt-[1vw]">
+          <div className="flex space-x-4 md:space-x-[1vw] justify-center">
             {socialLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-2xl hover:scale-110 transition-transform"
+                className="text-2xl md:text-[2vw] hover:scale-110 transition-transform"
               >
                 {link.icon}
               </Link>
             ))}
           </div>
-          <div className="text-center mt-3 text-sm font-normal">
+          <div className="text-center mt-3 md:mt-[0.75vw] text-sm md:text-[0.9vw] font-normal">
             Working at{" "}
             <Link
               href={"https://quivo.agency"}
@@ -217,7 +217,7 @@ export default function PortfolioSidebar() {
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex shrink-0 relative flex-col justify-between border-r-4 border-r-red-950 w-64 h-full max-h-screen sticky top-0 bg-[#e6dcc6] text-red-950 font-bold overflow-y-auto no-scrollbar">
+      <div className="hidden md:flex shrink-0 relative flex-col justify-between border-r-4 md:border-r-[0.3vw] border-r-red-950 w-[max(250px,20vw)] h-full max-h-screen sticky top-0 bg-[#e6dcc6] text-red-950 font-bold overflow-y-auto no-scrollbar">
         <SidebarContent />
       </div>
     </>

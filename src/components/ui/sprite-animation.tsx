@@ -57,7 +57,7 @@ export default function SpriteAnimation() {
   }, [imagesLoaded, intervalTime]);
 
   return (
-    <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+    <div className="relative w-24 h-24 md:w-[8vw] md:h-[8vw] flex items-center justify-center">
       {!imagesLoaded ? (
         <span className="text-red-950/20 text-xs animate-pulse">Loading...</span>
       ) : (

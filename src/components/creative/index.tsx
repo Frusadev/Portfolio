@@ -81,15 +81,15 @@ export const DayProgressBar = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 gap-2">
-      <div className="text-xs font-bold text-red-950">DAY_PROGRESS</div>
-      <div className="w-full h-4 border-2 border-red-950 p-[2px]">
+    <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-[1.5vw] gap-2 md:gap-[0.5vw]">
+      <div className="text-xs md:text-[0.8vw] font-bold text-red-950">DAY_PROGRESS</div>
+      <div className="w-full h-4 md:h-[1vw] border-2 md:border-[0.2vw] border-red-950 p-[2px] md:p-[0.1vw]">
         <div 
             className="h-full bg-red-950 transition-all duration-1000 ease-linear"
             style={{ width: `${progress}%` }}
         />
       </div>
-      <div className="text-[10px] text-red-950/60 font-mono">{progress.toFixed(4)}%</div>
+      <div className="text-[10px] md:text-[0.7vw] text-red-950/60 font-mono">{progress.toFixed(4)}%</div>
     </div>
   );
 };
@@ -114,10 +114,10 @@ export const IrregularClock = () => {
 
     return (
         <div className="w-full h-full flex flex-col items-center justify-center">
-            <div className="font-mono text-xl md:text-3xl font-bold text-red-950">
+            <div className="font-mono text-xl md:text-[2.5vw] font-bold text-red-950">
                 {time.toLocaleTimeString()}
             </div>
-            <div className="text-[10px] text-red-950/50 mt-2">IRREGULAR_TICK</div>
+            <div className="text-[10px] md:text-[0.7vw] text-red-950/50 mt-2 md:mt-[0.5vw]">IRREGULAR_TICK</div>
         </div>
     );
 };
@@ -291,7 +291,7 @@ export const DodgingButton = () => {
                 style={{ x, y }}
                 onMouseEnter={dodge}
                 onTouchStart={dodge}
-                className="bg-red-950 text-[#e6dcc6] px-4 py-2 font-bold text-xs uppercase shadow-[4px_4px_0px_0px_rgba(69,10,10,0.5)] z-20 whitespace-nowrap"
+                className="bg-red-950 text-[#e6dcc6] px-4 py-2 md:px-[1vw] md:py-[0.5vw] font-bold text-xs md:text-[0.9vw] uppercase shadow-[4px_4px_0px_0px_rgba(69,10,10,0.5)] md:shadow-[0.3vw_0.3vw_0px_0px_rgba(69,10,10,0.5)] z-20 whitespace-nowrap"
             >
                 {text}
             </motion.button>

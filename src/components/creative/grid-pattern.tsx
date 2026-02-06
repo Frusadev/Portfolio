@@ -11,7 +11,7 @@ export const GridPattern = () => {
              <motion.div 
                  animate={{ rotate: 360 }}
                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                 className="w-16 h-16 border-2 border-dashed border-red-950 rounded-full"
+                 className="w-16 h-16 md:w-[4vw] md:h-[4vw] border-2 md:border-[0.2vw] border-dashed border-red-950 rounded-full"
              />
         </div>
     );
