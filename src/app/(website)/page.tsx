@@ -143,9 +143,9 @@ export default function Home() {
         </div>
 
         {/* Contact/Social CTA */}
-        <div className="col-span-2 md:col-span-2 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-black md:border-red-950 p-4 md:p-[2vw] flex items-center justify-between hover:bg-red-950/5 transition-colors bg-red-950 md:bg-background overflow-hidden min-h-[140px] md:min-h-0 text-[#e6dcc6] md:text-red-950">
+        <div className="col-span-2 md:col-span-2 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[2vw] flex items-center justify-between hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[140px] md:min-h-0">
           <div>
-            <h3 className="text-xl md:text-[2vw] font-bold text-[#e6dcc6] md:text-red-950">
+            <h3 className="text-xl md:text-[2vw] font-bold text-red-950">
               Let&apos;s work together
             </h3>
             <p className="opacity-80 text-sm md:text-[1vw]">
@@ -154,7 +154,7 @@ export default function Home() {
           </div>
           <Dialog>
             <DialogTrigger asChild>
-              <button className="px-3 py-2 md:px-[2vw] md:py-[1vw] bg-[#e6dcc6] md:bg-red-950 text-red-950 md:text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-[#dcd0b6] md:hover:bg-red-900 transition-colors text-sm md:text-[1.2vw]">
+              <button className="px-3 py-2 md:px-[2vw] md:py-[1vw] bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-red-900 transition-colors text-sm md:text-[1.2vw]">
                 Get in touch
               </button>
             </DialogTrigger>
@@ -193,7 +193,7 @@ export default function Home() {
         </div>
 
         {/* More filler for grid completeness if needed, or dynamic content */}
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-black md:border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-red-950 md:bg-yellow-400/20 hover:bg-yellow-400/30 transition-colors overflow-hidden relative group min-h-[180px] md:min-h-0 text-[#e6dcc6] md:text-red-950">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-red-950 md:bg-yellow-400/20 hover:bg-yellow-400/30 transition-colors overflow-hidden relative group min-h-[180px] md:min-h-0 text-[#e6dcc6] md:text-red-950">
           <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
             <span className="text-9xl md:text-[8vw]">☕</span>
           </div>
@@ -201,8 +201,8 @@ export default function Home() {
             FUELLED BY COFFEE
           </p>
         </div>
-        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-black md:border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-red-950 md:bg-blue-400/10 hover:bg-blue-400/20 transition-colors overflow-hidden min-h-[180px] md:min-h-0 text-[#e6dcc6] md:text-red-950">
-          <p className="font-bold text-[#e6dcc6] md:text-red-950 -rotate-12 text-sm md:text-[1vw]">
+        <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-blue-400/10 hover:bg-blue-400/20 transition-colors overflow-hidden min-h-[180px] md:min-h-0 text-red-950">
+          <p className="font-bold text-red-950 -rotate-12 text-sm md:text-[1vw]">
             PIXEL PERFECT
           </p>
         </div>
