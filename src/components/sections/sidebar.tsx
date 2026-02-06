@@ -22,9 +22,11 @@ interface NavItem {
 export default function PortfolioSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const isContentPage = pathname?.startsWith("/projects") || pathname?.startsWith("/blog");
+  const isContentPage =
+    pathname?.startsWith("/projects") || pathname?.startsWith("/blog");
   const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog";
-  const isProjectPage = pathname?.startsWith("/projects/") && pathname !== "/projects";
+  const isProjectPage =
+    pathname?.startsWith("/projects/") && pathname !== "/projects";
 
   const socialLinks: SocialLink[] = [
     {
@@ -47,7 +49,7 @@ export default function PortfolioSidebar() {
   const navItems: NavItem[] = [
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" }, 
+    { name: "Blog", href: "/blog" },
   ];
 
   const SidebarContent = () => (
@@ -58,14 +60,18 @@ export default function PortfolioSidebar() {
           <Image
             src={"/daniel.png"}
             alt={"Daniel AMETSOWOU"}
-            width={300}
-            height={300}
+            width={400}
+            height={400}
             className="w-full h-full object-cover"
           />
         </div>
         <div className="px-4 mt-4 md:px-[1vw] md:mt-[1vw]">
-          <p className="text-2xl md:text-[2vw] uppercase tracking-wider">Daniel</p>
-          <p className="text-xl md:text-[1.5vw] uppercase tracking-wider">Ametsowou</p>
+          <p className="text-2xl md:text-[2vw] uppercase tracking-wider">
+            Daniel
+          </p>
+          <p className="text-xl md:text-[1.5vw] uppercase tracking-wider">
+            Ametsowou
+          </p>
           <p className="text-xs md:text-[0.8vw] mt-2 md:mt-[0.5vw] opacity-80 font-normal">
             Full Stack Developer & Entrepreneur
           </p>
@@ -78,7 +84,7 @@ export default function PortfolioSidebar() {
           <Link
             key={item.name}
             href={item.href}
-             onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)}
             className="text-xl md:text-[1.5vw] hover:text-red-700 hover:translate-x-2 transition-transform uppercase tracking-widest"
           >
             {item.name}
@@ -124,7 +130,8 @@ export default function PortfolioSidebar() {
           className={cn(
             "md:hidden fixed left-4 z-[100] p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all",
             "top-4",
-            (pathname === "/blog" || pathname === "/projects") && "opacity-30 hover:opacity-100 mix-blend-multiply"
+            (pathname === "/blog" || pathname === "/projects") &&
+              "opacity-30 hover:opacity-100 mix-blend-multiply",
           )}
           onClick={() => setIsOpen(true)}
         >
