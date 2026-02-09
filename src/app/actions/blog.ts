@@ -2,7 +2,7 @@
 
 import { db } from "@/core/db/setup";
 import { posts } from "@/core/db/schemas/blog/schemas";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 import { getCurrentUser } from "./auth";
 import { revalidatePath } from "next/cache";
 import { nanoid } from "nanoid";
@@ -101,5 +101,22 @@ export async function togglePublishPost(id: string, currentState: boolean) {
   } catch (error) {
     console.error("Failed to toggle publish:", error);
     return { success: false, error: "Failed to toggle publish" };
+  }
+}
+
+export async function incrementPostViews(id: string) {
+  try {
+    const updated = await db
+      .update(posts)
+      .set({
+        views: sql`${posts.views} + 1`,
+      })
+      .where(eq(posts.id, id))
+      .returning({ views: posts.views });
+
+    return { success: true, views: updated[0]?.views ?? 0 };
+  } catch (error) {
+    console.error("Failed to increment post views:", error);
+    return { success: false, error: "Failed to increment post views" };
   }
 }

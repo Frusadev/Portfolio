@@ -21,9 +21,14 @@ export default async function EditPostPage({ params }: PageProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-black uppercase tracking-tighter text-red-950">
-        Edit Post
-      </h1>
+      <div className="space-y-3">
+        <h1 className="text-3xl font-black uppercase tracking-tighter text-red-950">
+          Edit Post
+        </h1>
+        <div className="inline-flex items-center gap-2 border-2 border-red-950 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-red-950">
+          Total Views: {post.views}
+        </div>
+      </div>
       <PostForm initialData={post} />
     </div>
   );

@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-import { getPost } from "@/app/actions/blog";
+import { getPost, incrementPostViews } from "@/app/actions/blog";
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Eye } from "lucide-react";
 import { Metadata } from "next";
 
 export const revalidate = 60; // Revalidate every minute
@@ -53,6 +53,9 @@ export default async function PostPage(props: PostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const viewResult = await incrementPostViews(post.id);
+  const views = viewResult.success ? viewResult.views : post.views;
 
   const marked = new Marked(
     markedHighlight({
@@ -102,6 +105,11 @@ export default async function PostPage(props: PostPageProps) {
                     <span>{date}</span>
                     <span className="mx-2">•</span> 
                     <span>{Math.ceil((post.content?.length || 0) / 1000)} min read</span>
+                    <span className="mx-2">•</span>
+                    <span className="inline-flex items-center gap-1">
+                        <Eye size={14} />
+                        {views} views
+                    </span>
                 </div>
             </header>
 

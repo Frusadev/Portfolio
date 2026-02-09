@@ -42,9 +42,10 @@ export function PostsTable({ posts }: { posts: any[] }) {
 
   return (
     <div className="border-4 border-red-950 bg-background overflow-hidden">
-      <div className="grid grid-cols-[1fr_auto] md:grid-cols-[2fr_1fr_1fr_auto] gap-4 p-4 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider text-sm">
+      <div className="grid grid-cols-[1fr_auto] md:grid-cols-[2fr_1fr_1fr_1fr_auto] gap-4 p-4 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider text-sm">
         <div>Title</div>
         <div className="hidden md:block">Date</div>
+        <div className="hidden md:block">Views</div>
         <div className="hidden md:block">Status</div>
         <div>Actions</div>
       </div>
@@ -53,10 +54,13 @@ export function PostsTable({ posts }: { posts: any[] }) {
         <div className="p-8 text-center opacity-50 font-mono">No posts found.</div>
       ) : (
         posts.map((post) => (
-          <div key={post.id} className="grid grid-cols-[1fr_auto] md:grid-cols-[2fr_1fr_1fr_auto] gap-4 p-4 border-b-2 border-red-950 last:border-0 items-center hover:bg-red-950/5 transition-colors">
+          <div key={post.id} className="grid grid-cols-[1fr_auto] md:grid-cols-[2fr_1fr_1fr_1fr_auto] gap-4 p-4 border-b-2 border-red-950 last:border-0 items-center hover:bg-red-950/5 transition-colors">
             <div className="font-bold truncate pr-4">{post.title}</div>
             <div className="hidden md:block text-sm font-mono opacity-70">
               {new Date(post.createdAt).toLocaleDateString()}
+            </div>
+            <div className="hidden md:block text-sm font-mono opacity-80">
+              {post.views}
             </div>
             <div className="hidden md:block">
               <span className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs uppercase font-bold border ${post.published ? 'bg-green-100 text-green-800 border-green-800' : 'bg-orange-100 text-orange-800 border-orange-800'}`}>

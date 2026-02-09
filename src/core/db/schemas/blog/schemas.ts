@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, index, integer } from "drizzle-orm/pg-core";
 import { user } from "../auth/schemas";
 
 export const posts = pgTable("posts", {
@@ -11,6 +11,7 @@ export const posts = pgTable("posts", {
   authorId: text("author_id").references(() => user.id).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => new Date()).notNull(),
+  views: integer("views").default(0).notNull(),
   coverImage: text("cover_image"),
   tags: text("tags").array(),
 }, (table) => [
