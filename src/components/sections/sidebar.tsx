@@ -244,7 +244,7 @@ export default function PortfolioSidebar() {
                 </Link>
               </div>
 
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-2 py-2">
                 {session ? (
                   <button
                     onClick={() => signOut()}
