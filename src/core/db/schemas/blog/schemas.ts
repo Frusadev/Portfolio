@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, index, integer, primaryKey } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, index, integer, primaryKey, AnyPgColumn } from "drizzle-orm/pg-core";
 import { user } from "../auth/schemas";
 import { relations } from "drizzle-orm";
 
@@ -20,16 +20,20 @@ export const posts = pgTable("posts", {
   index("posts_published_idx").on(table.published),
 ]);
 
+import { AnyPgColumn } from "drizzle-orm/pg-core";
+
 export const comments = pgTable("comments", {
   id: text("id").primaryKey(),
   postId: text("post_id").references(() => posts.id, { onDelete: "cascade" }).notNull(),
   userId: text("user_id").references(() => user.id, { onDelete: "cascade" }).notNull(),
+  parentId: text("parent_id").references((): AnyPgColumn => comments.id, { onDelete: "cascade" }),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => new Date()).notNull(),
 }, (table) => [
   index("comments_post_id_idx").on(table.postId),
   index("comments_user_id_idx").on(table.userId),
+  index("comments_parent_id_idx").on(table.parentId),
 ]);
 
 export const reactions = pgTable("reactions", {
@@ -68,7 +72,7 @@ export const postsRelations = relations(posts, ({ many }) => ({
   series: many(seriesPosts),
 }));
 
-export const commentsRelations = relations(comments, ({ one }) => ({
+export const commentsRelations = relations(comments, ({ one, many }) => ({
   post: one(posts, {
     fields: [comments.postId],
     references: [posts.id],
@@ -77,6 +81,12 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     fields: [comments.userId],
     references: [user.id],
   }),
+  parent: one(comments, {
+    fields: [comments.parentId],
+    references: [comments.id],
+    relationName: "replies",
+  }),
+  replies: many(comments, { relationName: "replies" }),
 }));
 
 export const reactionsRelations = relations(reactions, ({ one }) => ({

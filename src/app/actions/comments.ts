@@ -10,8 +10,9 @@ import { revalidatePath } from "next/cache";
 import { nanoid } from "nanoid";
 import { sendEmail } from "@/core/services/email";
 import NewCommentEmail from "@/components/emails/new-comment";
+import CommentReplyEmail from "@/components/emails/comment-reply";
 
-export async function addComment(postId: string, content: string) {
+export async function addComment(postId: string, content: string, parentId?: string) {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return { success: false, error: "Unauthorized" };
@@ -23,6 +24,7 @@ export async function addComment(postId: string, content: string) {
       id,
       postId,
       userId: currentUser.id,
+      parentId: parentId || null,
       content,
     });
 
@@ -30,22 +32,49 @@ export async function addComment(postId: string, content: string) {
     const post = await db.select().from(posts).where(eq(posts.id, postId)).limit(1).then(r => r[0]);
     
     if (post) {
-      // Find all admins
-      const admins = await db.select().from(user).where(eq(user.role, "admin"));
-      
-      // Send email to all admins
-      for (const admin of admins) {
-        await sendEmail({
-          to: admin.email,
-          subject: `New Comment on: ${post.title}`,
-          component: NewCommentEmail,
-          props: {
-            postTitle: post.title,
-            postSlug: post.slug,
-            commentContent: content,
-            authorName: currentUser.name || "A user",
-          },
-        });
+      if (parentId) {
+        // Send email to the parent comment author
+        const parentComment = await db.select({
+          userEmail: user.email,
+          userId: user.id
+        })
+        .from(comments)
+        .innerJoin(user, eq(comments.userId, user.id))
+        .where(eq(comments.id, parentId))
+        .limit(1)
+        .then(r => r[0]);
+
+        if (parentComment && parentComment.userEmail && parentComment.userId !== currentUser.id) {
+          await sendEmail({
+            to: parentComment.userEmail,
+            subject: `New reply to your comment on: ${post.title}`,
+            component: CommentReplyEmail,
+            props: {
+              postTitle: post.title,
+              postSlug: post.slug,
+              replyContent: content,
+              replierName: currentUser.name || "A user",
+            },
+          });
+        }
+      } else {
+        // Find all admins
+        const admins = await db.select().from(user).where(eq(user.role, "admin"));
+        
+        // Send email to all admins
+        for (const admin of admins) {
+          await sendEmail({
+            to: admin.email,
+            subject: `New Comment on: ${post.title}`,
+            component: NewCommentEmail,
+            props: {
+              postTitle: post.title,
+              postSlug: post.slug,
+              commentContent: content,
+              authorName: currentUser.name || "A user",
+            },
+          });
+        }
       }
     }
 
@@ -65,6 +94,7 @@ export async function getComments(postId: string) {
         id: comments.id,
         content: comments.content,
         createdAt: comments.createdAt,
+        parentId: comments.parentId,
         user: {
           id: user.id,
           name: user.name,

@@ -54,7 +54,7 @@ export default function RootLayout({
           defer
           src="https://analytics.ametsowou.me/recorder.js"
           data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
-          data-sample-rate="0.15"
+          data-sample-rate="1"
           data-mask-level="moderate"
           data-max-duration="600000"
         ></Script>

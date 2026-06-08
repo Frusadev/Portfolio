@@ -1,18 +1,167 @@
 "use client";
 
-import { useState } from "react";
-import { MdThumbUp, MdFavorite, MdCelebration, MdOutlineThumbUp, MdOutlineFavoriteBorder } from "react-icons/md";
+import { useState, useMemo } from "react";
+import { MdThumbUp, MdFavorite, MdCelebration, MdOutlineThumbUp, MdOutlineFavoriteBorder, MdReply, MdExpandMore, MdExpandLess } from "react-icons/md";
 import { addComment } from "@/app/actions/comments";
 import { toggleReaction } from "@/app/actions/reactions";
 import { toast } from "sonner";
 import { Loader2, MessageSquare } from "lucide-react";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+
+interface CommentType {
+  id: string;
+  content: string;
+  createdAt: Date;
+  parentId: string | null;
+  user: { id: string; name: string | null; image: string | null };
+}
 
 interface BlogInteractionsProps {
   postId: string;
-  initialComments: { id: string; content: string; createdAt: Date; user: { id: string; name: string | null; image: string | null } }[];
+  initialComments: CommentType[];
   initialReactions: Record<string, string[]>;
   currentUserId?: string;
+}
+
+const COLLAPSE_THRESHOLD = 150;
+
+function CommentItem({
+  comment,
+  replies,
+  postId,
+  currentUserId,
+  onReplyAdded,
+  level = 0
+}: {
+  comment: CommentType;
+  replies: CommentType[];
+  postId: string;
+  currentUserId?: string;
+  onReplyAdded: () => void;
+  level?: number;
+}) {
+  const [isReplying, setIsReplying] = useState(false);
+  const [replyContent, setReplyContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const isLong = comment.content.length > COLLAPSE_THRESHOLD;
+
+  const handleReply = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!currentUserId) {
+      toast.error("You must be logged in to reply.");
+      return;
+    }
+    if (!replyContent.trim()) return;
+
+    setIsSubmitting(true);
+    const result = await addComment(postId, replyContent, comment.id);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      toast.success("Reply added!");
+      setReplyContent("");
+      setIsReplying(false);
+      onReplyAdded();
+    } else {
+      toast.error(result.error || "Failed to add reply.");
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="p-6 border-2 border-red-950 bg-background shadow-[4px_4px_0px_0px_rgba(69,10,10,1)]">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-4">
+            {comment.user.image ? (
+              <Image src={comment.user.image} alt={comment.user.name || "User"} width={40} height={40} className="border-2 border-red-950" />
+            ) : (
+              <div className="w-10 h-10 bg-red-950 text-[#fbf5e9] flex items-center justify-center font-bold text-lg border-2 border-red-950">
+                {comment.user.name?.charAt(0) || "U"}
+              </div>
+            )}
+            <div>
+              <div className="font-bold text-red-950 uppercase tracking-wider text-sm">{comment.user.name}</div>
+              <div className="text-xs text-red-950/60 font-medium">
+                {new Date(comment.createdAt).toLocaleDateString()}
+              </div>
+            </div>
+          </div>
+          {currentUserId && (
+            <button
+              onClick={() => setIsReplying(!isReplying)}
+              className="text-red-950 hover:text-red-700 flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
+            >
+              <MdReply size={16} />
+              Reply
+            </button>
+          )}
+        </div>
+        
+        <div className={`text-red-950/80 leading-relaxed whitespace-pre-wrap prose prose-sm prose-stone prose-p:my-1 prose-a:text-red-950 prose-strong:text-red-950 max-w-none ${isLong && !isExpanded ? "line-clamp-3" : ""}`}>
+          <ReactMarkdown>{comment.content}</ReactMarkdown>
+        </div>
+        
+        {isLong && (
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="mt-2 flex items-center gap-1 text-red-950 font-bold uppercase text-xs tracking-wider hover:text-red-700 transition-colors"
+          >
+            {isExpanded ? (
+              <><MdExpandLess size={16} /> Show Less</>
+            ) : (
+              <><MdExpandMore size={16} /> Read More</>
+            )}
+          </button>
+        )}
+
+        {isReplying && (
+          <form onSubmit={handleReply} className="mt-4 pt-4 border-t-2 border-dashed border-red-950/20 space-y-4">
+            <textarea
+              value={replyContent}
+              onChange={(e) => setReplyContent(e.target.value)}
+              placeholder="Write a reply..."
+              className="w-full min-h-[80px] p-3 bg-red-950/5 border-2 border-red-950 text-red-950 placeholder:text-red-950/40 focus:outline-none focus:ring-2 focus:ring-red-950/50 resize-y font-medium text-sm"
+              required
+            />
+            <div className="flex gap-2 justify-end">
+              <button
+                type="button"
+                onClick={() => setIsReplying(false)}
+                className="px-4 py-2 text-red-950 font-bold uppercase tracking-wider text-xs hover:bg-red-950/5 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-4 py-2 bg-red-950 text-[#fbf5e9] font-bold uppercase tracking-wider text-xs hover:bg-red-900 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] disabled:opacity-50 flex items-center gap-2"
+              >
+                {isSubmitting ? <Loader2 size={14} className="animate-spin" /> : "Post Reply"}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+
+      {replies.length > 0 && (
+        <div className="pl-4 md:pl-8 border-l-2 border-dashed border-red-950/30 space-y-6">
+          {replies.map(reply => (
+            <CommentItem 
+              key={reply.id} 
+              comment={reply} 
+              replies={[]} 
+              postId={postId} 
+              currentUserId={currentUserId} 
+              onReplyAdded={onReplyAdded} 
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function BlogInteractions({
@@ -67,6 +216,25 @@ export default function BlogInteractions({
   const hasReacted = (type: string) => {
     return initialReactions[type]?.includes(currentUserId || "");
   };
+
+  const rootComments = useMemo(() => {
+    return initialComments.filter(c => !c.parentId);
+  }, [initialComments]);
+
+  const repliesByParent = useMemo(() => {
+    const map: Record<string, CommentType[]> = {};
+    initialComments.forEach(c => {
+      if (c.parentId) {
+        if (!map[c.parentId]) map[c.parentId] = [];
+        map[c.parentId].push(c);
+      }
+    });
+    // sort replies from oldest to newest
+    Object.keys(map).forEach(key => {
+      map[key].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    });
+    return map;
+  }, [initialComments]);
 
   return (
     <div className="mt-16 pt-12 border-t-4 border-red-950/20 space-y-12">
@@ -142,25 +310,19 @@ export default function BlogInteractions({
         )}
 
         <div className="space-y-6">
-          {initialComments.map((comment) => (
-            <div key={comment.id} className="p-6 border-2 border-red-950 bg-background shadow-[4px_4px_0px_0px_rgba(69,10,10,1)]">
-              <div className="flex items-center gap-4 mb-4">
-                {comment.user.image ? (
-                  <Image src={comment.user.image} alt={comment.user.name || "User"} width={40} height={40} className="border-2 border-red-950" />
-                ) : (
-                  <div className="w-10 h-10 bg-red-950 text-[#fbf5e9] flex items-center justify-center font-bold text-lg border-2 border-red-950">
-                    {comment.user.name?.charAt(0) || "U"}
-                  </div>
-                )}
-                <div>
-                  <div className="font-bold text-red-950 uppercase tracking-wider text-sm">{comment.user.name}</div>
-                  <div className="text-xs text-red-950/60 font-medium">
-                    {new Date(comment.createdAt).toLocaleDateString()}
-                  </div>
-                </div>
-              </div>
-              <p className="text-red-950/80 leading-relaxed whitespace-pre-wrap">{comment.content}</p>
-            </div>
+          {rootComments.map((comment) => (
+            <CommentItem 
+              key={comment.id}
+              comment={comment}
+              replies={repliesByParent[comment.id] || []}
+              postId={postId}
+              currentUserId={currentUserId}
+              onReplyAdded={() => {
+                // Since this uses server actions, the page state should refresh,
+                // but just in case, we can let Next.js handle it or reload.
+                // We're doing revalidatePath in the server action, so the page should automatically update.
+              }}
+            />
           ))}
           
           {initialComments.length === 0 && (

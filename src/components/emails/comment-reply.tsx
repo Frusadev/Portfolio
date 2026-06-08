@@ -9,43 +9,46 @@ import {
   Section,
 } from "@react-email/components";
 
-interface LoginEmailProps {
-  magicLink: string;
-  email?: string;
-  token?: string;
+interface CommentReplyEmailProps {
+  postTitle: string;
+  postSlug: string;
+  replyContent: string;
+  replierName: string;
 }
 
-export const LoginEmail = ({
-  magicLink = "https://example.com/verify",
-  email = "user@example.com",
-}: LoginEmailProps) => {
+export default function CommentReplyEmail({
+  postTitle = "A Post",
+  postSlug,
+  replyContent = "This is a reply!",
+  replierName = "John Doe",
+}: CommentReplyEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>Sign in to your account</Preview>
+      <Preview>New reply on your comment in &quot;{postTitle}&quot;</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Text style={heading}>Welcome Back</Text>
-          <Text style={paragraph}>Hello,</Text>
+          <Text style={heading}>Someone replied to your comment!</Text>
           <Text style={paragraph}>
-            We received a request to sign in to your account using this email
-            address: <strong>{email}</strong>.
+            <strong>{replierName}</strong> just replied to your comment on the post: 
+            <strong>{postTitle}</strong>
           </Text>
-
+          <Section style={commentSection}>
+            <Text style={commentText}>&quot;{replyContent}&quot;</Text>
+          </Section>
           <Section style={btnContainer}>
-            <Link style={button} href={magicLink}>
-              Sign in
+            <Link
+              style={button}
+              href={`https://ametsowou.me/blog/${postSlug}`}
+            >
+              View Reply
             </Link>
           </Section>
-
-          <Text style={footer}>
-            If you didn&apos;t request this, you can safely ignore this email.
-          </Text>
         </Container>
       </Body>
     </Html>
   );
-};
+}
 
 const main = {
   backgroundColor: "#fbf5e9",
@@ -73,18 +76,23 @@ const paragraph = {
   color: "#450a0a",
 };
 
-const footer = {
-  fontSize: "14px",
-  lineHeight: "24px",
+const commentSection = {
+  backgroundColor: "rgba(69, 10, 10, 0.05)",
+  borderLeft: "4px solid #450a0a",
+  padding: "16px",
+  margin: "24px 0",
+};
+
+const commentText = {
+  fontSize: "16px",
+  fontStyle: "italic",
   color: "#450a0a",
-  opacity: 0.8,
-  marginTop: "32px",
+  margin: "0",
 };
 
 const btnContainer = {
   textAlign: "center" as const,
   marginTop: "32px",
-  marginBottom: "32px",
 };
 
 const button = {
@@ -97,5 +105,3 @@ const button = {
   textTransform: "uppercase" as const,
   letterSpacing: "1px",
 };
-
-export default LoginEmail;
