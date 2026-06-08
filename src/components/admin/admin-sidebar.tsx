@@ -15,9 +15,12 @@ export function AdminSidebar() {
 
   const links = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/admin/blog", label: "Blog", icon: FileText },
+    { href: "/admin/blog", label: "Blog Posts", icon: FileText },
+    { href: "/admin/blog/series", label: "Series", icon: FolderOpen },
+    { href: "/admin/blog/comments", label: "Comments", icon: FileText },
     { href: "/admin/projects", label: "Projects", icon: FolderOpen },
     { href: "/admin/experience", label: "Experience", icon: Briefcase },
+    { href: "/admin/users", label: "Users", icon: Briefcase },
   ];
 
   const SidebarContent = () => (

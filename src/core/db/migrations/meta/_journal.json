@@ -15,6 +15,13 @@
       "when": 1767657600000,
       "tag": "0001_wealthy_silver_samurai",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780932197019,
+      "tag": "0002_funny_toad",
+      "breakpoints": true
     }
   ]
 }
