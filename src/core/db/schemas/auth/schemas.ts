@@ -35,6 +35,7 @@ export const user = pgTable(
     dodoCustomerId: text("dodo_customer_id"),
     dodoSubscriptionId: text("dodo_subscription_id"),
     planRenewsAt: timestamp("plan_renews_at"),
+    isActive: boolean("is_active").default(true).notNull(), // For deactivating accounts
   },
   (table) => [
     index("user_dodo_customer_id_idx").on(table.dodoCustomerId),

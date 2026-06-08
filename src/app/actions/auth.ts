@@ -53,6 +53,14 @@ export async function getCurrentUser() {
   return session.user;
 }
 
+export async function getOptionalUser() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) {
+    return null;
+  }
+  return session.user;
+}
+
 export async function requireAuth() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {

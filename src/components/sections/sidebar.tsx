@@ -6,7 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, LogOut } from "lucide-react";
+import { useSession, signOut } from "@/lib/auth-client";
 
 interface SocialLink {
   name: string;
@@ -20,10 +21,9 @@ interface NavItem {
 }
 
 export default function PortfolioSidebar() {
+  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const isContentPage =
-    pathname?.startsWith("/projects") || pathname?.startsWith("/blog");
   const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog";
   const isProjectPage =
     pathname?.startsWith("/projects/") && pathname !== "/projects";
@@ -116,6 +116,23 @@ export default function PortfolioSidebar() {
             >
               Quivo
             </Link>
+          </div>
+          <div className="flex justify-center mt-4">
+            {session ? (
+              <button
+                onClick={() => signOut()}
+                className="flex items-center gap-2 text-xs md:text-[0.8vw] font-bold uppercase tracking-wider text-red-950 hover:text-red-700 transition-colors"
+              >
+                <LogOut size={14} /> Sign out
+              </button>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="flex items-center gap-2 text-xs md:text-[0.8vw] font-bold uppercase tracking-wider text-red-950 hover:text-red-700 transition-colors"
+              >
+                <LogIn size={14} />Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -26,7 +26,19 @@ export default function RootLayout({
         <ThemeProvider attribute={"class"} defaultTheme="light" forcedTheme="light">
           <NextTopLoader color="#300000" />
           {children}
-          <Toaster />
+          <Toaster 
+            toastOptions={{
+              className: "bg-background text-red-950 border-4 border-red-950 rounded-none shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] font-bold uppercase tracking-wider font-sans",
+              style: {
+                backgroundColor: "#e6dcc6",
+                color: "#450a0a",
+                borderColor: "#450a0a",
+                borderWidth: "4px",
+                boxShadow: "4px 4px 0px 0px rgba(69,10,10,1)",
+                borderRadius: "0",
+              }
+            }} 
+          />
         </ThemeProvider>
       </body>
     </html>
