@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -24,7 +25,10 @@ export default function PortfolioSidebar() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog" && pathname !== "/blog/series";
+  const isBlogPost =
+    pathname?.startsWith("/blog/") &&
+    pathname !== "/blog" &&
+    pathname !== "/blog/series";
   const isProjectPage =
     pathname?.startsWith("/projects/") && pathname !== "/projects";
 
@@ -131,7 +135,8 @@ export default function PortfolioSidebar() {
                 href="/auth/login"
                 className="flex items-center gap-2 text-xs md:text-[0.8vw] font-bold uppercase tracking-wider text-red-950 hover:text-red-700 transition-colors"
               >
-                <LogIn size={14} />Login
+                <LogIn size={14} />
+                Login
               </Link>
             )}
           </div>
@@ -148,7 +153,9 @@ export default function PortfolioSidebar() {
           className={cn(
             "md:hidden fixed left-4 z-[100] p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all",
             "top-4",
-            (pathname === "/blog" || pathname === "/blog/series" || pathname === "/projects") &&
+            (pathname === "/blog" ||
+              pathname === "/blog/series" ||
+              pathname === "/projects") &&
               "opacity-30 hover:opacity-100 mix-blend-multiply",
           )}
           onClick={() => setIsOpen(true)}
@@ -235,6 +242,25 @@ export default function PortfolioSidebar() {
                 >
                   Quivo
                 </Link>
+              </div>
+
+              <div className="flex justify-center mt-4">
+                {session ? (
+                  <button
+                    onClick={() => signOut()}
+                    className="flex items-center gap-2 text-xs md:text-[0.8vw] font-bold uppercase tracking-wider text-red-950 hover:text-red-700 transition-colors"
+                  >
+                    <LogOut size={14} /> Sign out
+                  </button>
+                ) : (
+                  <Link
+                    href="/auth/login"
+                    className="flex items-center gap-2 text-xs md:text-[0.8vw] font-bold uppercase tracking-wider text-red-950 hover:text-red-700 transition-colors"
+                  >
+                    <LogIn size={14} />
+                    Login
+                  </Link>
+                )}
               </div>
             </div>
           </div>
