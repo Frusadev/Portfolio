@@ -54,13 +54,12 @@ function StatsCard({ label, value }: { label: string; value: number }) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function RecentList({
   title,
   href,
   items,
   type,
-}: { title: string; href: string; items: any[]; type: "post" | "project" }) {
+}: { title: string; href: string; items: { id: string; title?: string; name?: string; createdAt: Date }[]; type: "post" | "project" }) {
   return (
     <div className="border-4 border-red-950 bg-background h-full">
       <div className="p-4 border-b-4 border-red-950 flex justify-between items-center bg-red-950 text-[#e6dcc6]">
