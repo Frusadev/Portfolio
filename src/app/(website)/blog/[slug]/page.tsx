@@ -12,6 +12,7 @@ import { getComments } from "@/app/actions/comments";
 import { getReactions } from "@/app/actions/reactions";
 import { getOptionalUser } from "@/app/actions/auth";
 import BlogInteractions from "@/components/sections/blog-interactions";
+import CodeBlockEnhancer from "@/components/sections/code-block-enhancer";
 import "katex/dist/katex.min.css";
 import "./blog-code.css";
 
@@ -166,6 +167,8 @@ export default async function PostPage(props: PostPageProps) {
               initialReactions={reactions} 
               currentUserId={currentUser?.id} 
             />
+
+            <CodeBlockEnhancer />
         </div>
     </main>
   );

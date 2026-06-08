@@ -24,7 +24,7 @@ export default function PortfolioSidebar() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog";
+  const isBlogPost = pathname?.startsWith("/blog/") && pathname !== "/blog" && pathname !== "/blog/series";
   const isProjectPage =
     pathname?.startsWith("/projects/") && pathname !== "/projects";
 
@@ -50,6 +50,7 @@ export default function PortfolioSidebar() {
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
+    { name: "Series", href: "/blog/series" },
   ];
 
   const SidebarContent = () => (
@@ -147,7 +148,7 @@ export default function PortfolioSidebar() {
           className={cn(
             "md:hidden fixed left-4 z-[100] p-2 bg-[#e6dcc6] border-2 border-red-950 text-red-950 shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all",
             "top-4",
-            (pathname === "/blog" || pathname === "/projects") &&
+            (pathname === "/blog" || pathname === "/blog/series" || pathname === "/projects") &&
               "opacity-30 hover:opacity-100 mix-blend-multiply",
           )}
           onClick={() => setIsOpen(true)}
@@ -202,7 +203,7 @@ export default function PortfolioSidebar() {
                     border-4 border-red-950 bg-[#e6dcc6] p-4 
                     shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all
                     flex items-center justify-center text-xl uppercase tracking-widest
-                    ${i === 2 ? "col-span-2 py-8" : "col-span-1 aspect-square"}
+                    col-span-1 aspect-square
                   `}
                 >
                   {item.name}
