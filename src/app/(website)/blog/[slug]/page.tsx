@@ -8,6 +8,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
 import { Metadata } from "next";
+import { getComments } from "@/app/actions/comments";
+import { getReactions } from "@/app/actions/reactions";
+import { getOptionalUser } from "@/app/actions/auth";
+import BlogInteractions from "@/components/sections/blog-interactions";
 import "katex/dist/katex.min.css";
 import "./blog-code.css";
 
@@ -59,6 +63,12 @@ export default async function PostPage(props: PostPageProps) {
 
   const viewResult = await incrementPostViews(post.id);
   const views = viewResult.success ? viewResult.views : post.views;
+
+  const [comments, reactions, currentUser] = await Promise.all([
+    getComments(post.id),
+    getReactions(post.id),
+    getOptionalUser(),
+  ]);
 
   const marked = new Marked(
     markedHighlight({
@@ -148,6 +158,13 @@ export default async function PostPage(props: PostPageProps) {
                 prose-code:before:content-none prose-code:after:content-none
                 "
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
+            />
+
+            <BlogInteractions 
+              postId={post.id} 
+              initialComments={comments} 
+              initialReactions={reactions} 
+              currentUserId={currentUser?.id} 
             />
         </div>
     </main>
