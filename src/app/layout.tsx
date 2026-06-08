@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "sonner";
 import { metadata as sharedMetadata } from "./shared-metadata";
 import Head from "next/head";
+import Script from "next/script";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -21,21 +22,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <script
-          defer
-          src="https://analytics.ametsowou.me/script.js"
-          data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
-        ></script>
-        <script
-          defer
-          src="https://analytics.ametsowou.me/recorder.js"
-          data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
-          data-sample-rate="0.15"
-          data-mask-level="moderate"
-          data-max-duration="600000"
-        ></script>
-      </Head>
       <body className={`${quicksand.variable} font-sans antialiased light`}>
         <ThemeProvider
           attribute={"class"}
@@ -59,6 +45,19 @@ export default function RootLayout({
             }}
           />
         </ThemeProvider>
+        <Script
+          defer
+          src="https://analytics.ametsowou.me/script.js"
+          data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
+        ></Script>
+        <Script
+          defer
+          src="https://analytics.ametsowou.me/recorder.js"
+          data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
+          data-sample-rate="0.15"
+          data-mask-level="moderate"
+          data-max-duration="600000"
+        ></Script>
       </body>
     </html>
   );
