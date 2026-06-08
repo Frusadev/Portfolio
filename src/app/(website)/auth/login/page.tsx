@@ -41,24 +41,25 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-[#e6dcc6]">
+    <div className="flex min-h-full w-full min-w-full items-center justify-center p-4 bg-[#e6dcc6]">
       <div className="w-full max-w-md bg-background border-4 border-red-950 shadow-[8px_8px_0px_0px_rgba(69,10,10,1)]">
         <div className="p-8 border-b-4 border-red-950 bg-red-950 text-[#e6dcc6]">
-          <h2 className="text-3xl font-bold uppercase tracking-widest text-center">Login</h2>
-          <p className="text-center opacity-80 mt-2 text-sm font-mono">
-             Admin Access Only
-          </p>
+          <h2 className="text-3xl font-bold uppercase tracking-widest text-center">
+            Login
+          </h2>
         </div>
-        
+
         <div className="p-8 space-y-6">
           {sent ? (
             <div className="text-center space-y-6 animate-in fade-in zoom-in-95">
               <div className="bg-red-950/5 border-2 border-red-950 text-red-950 p-6">
                 <p className="font-bold text-lg mb-2">Check your email!</p>
-                <p className="opacity-80 text-sm">We&apos;ve sent a magic link to your inbox.</p>
+                <p className="opacity-80 text-sm">
+                  We&apos;ve sent a magic link to your inbox.
+                </p>
               </div>
-              <button 
-                onClick={() => setSent(false)} 
+              <button
+                onClick={() => setSent(false)}
                 className="w-full py-3 bg-transparent border-2 border-red-950 text-red-950 font-bold uppercase tracking-wider hover:bg-red-950 hover:text-[#e6dcc6] transition-colors"
               >
                 Try another email
@@ -66,9 +67,9 @@ export default function LoginPage() {
             </div>
           ) : (
             <div className="space-y-6">
-              <button 
+              <button
                 className="w-full py-3 px-4 flex items-center justify-center gap-3 bg-[#e6dcc6] border-2 border-red-950 text-red-950 font-bold uppercase tracking-wider hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] transition-all"
-                onClick={handleGithubSignIn} 
+                onClick={handleGithubSignIn}
                 disabled={loading}
               >
                 {loading ? (
@@ -92,7 +93,9 @@ export default function LoginPage() {
 
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold text-red-950 tracking-wider ml-1">Email Address</label>
+                  <label className="text-xs uppercase font-bold text-red-950 tracking-wider ml-1">
+                    Email Address
+                  </label>
                   <input
                     type="email"
                     placeholder="name@example.com"
@@ -103,10 +106,10 @@ export default function LoginPage() {
                     className="flex h-12 w-full bg-white/50 border-2 border-red-950 px-3 py-2 text-red-950 placeholder:text-red-950/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-950 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 font-bold"
                   />
                 </div>
-                <button 
-                    type="submit" 
-                    className="w-full py-3 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-red-900 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]" 
-                    disabled={loading}
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-red-900 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]"
+                  disabled={loading}
                 >
                   {loading ? (
                     <div className="flex items-center justify-center gap-2">
