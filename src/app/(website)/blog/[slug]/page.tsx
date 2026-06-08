@@ -2,11 +2,14 @@ import { notFound } from "next/navigation";
 import { getPost, incrementPostViews } from "@/app/actions/blog";
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
+import markedKatex from "marked-katex-extension";
 import hljs from "highlight.js";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
 import { Metadata } from "next";
+import "katex/dist/katex.min.css";
+import "./blog-code.css";
 
 export const revalidate = 60; // Revalidate every minute
 
@@ -59,11 +62,19 @@ export default async function PostPage(props: PostPageProps) {
 
   const marked = new Marked(
     markedHighlight({
-      langPrefix: 'hljs language-',
+      langPrefix: "hljs language-",
       highlight(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        const language = hljs.getLanguage(lang) ? lang : "plaintext";
         return hljs.highlight(code, { language }).value;
-      }
+      },
+    })
+  );
+
+  // Add LaTeX support: $...$ for inline, $$...$$ for display blocks
+  marked.use(
+    markedKatex({
+      throwOnError: false,
+      nonStandard: true,
     })
   );
 
@@ -134,7 +145,7 @@ export default async function PostPage(props: PostPageProps) {
                 prose-blockquote:border-l-4 prose-blockquote:border-red-950 prose-blockquote:bg-red-950/5 prose-blockquote:p-6 prose-blockquote:not-italic
                 prose-a:text-red-950 prose-a:underline prose-a:decoration-2 prose-a:underline-offset-2 hover:prose-a:text-red-700
                 prose-img:border-4 prose-img:border-red-950 prose-img:shadow-[4px_4px_0px_0px_rgba(69,10,10,1)]
-                prose-pre:bg-[#1e1e1e] prose-pre:border-4 prose-pre:border-red-950 prose-pre:shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] prose-pre:rounded-none
+                prose-code:before:content-none prose-code:after:content-none
                 "
                 dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
