@@ -20,8 +20,6 @@ export const posts = pgTable("posts", {
   index("posts_published_idx").on(table.published),
 ]);
 
-import { AnyPgColumn } from "drizzle-orm/pg-core";
-
 export const comments = pgTable("comments", {
   id: text("id").primaryKey(),
   postId: text("post_id").references(() => posts.id, { onDelete: "cascade" }).notNull(),
