@@ -33,6 +33,9 @@ export default function Home() {
             applications. I enjoy creating things that live on the internet,
             from simple websites to complex web applications.
           </p>
+          <p className="text-sm md:text-[1vw] text-red-900/50 md:max-w-[30vw] leading-relaxed mt-3 italic">
+            Also: future quant. Still learning the math.
+          </p>
         </div>
 
         {/* Current Status */}
@@ -42,7 +45,7 @@ export default function Home() {
           </h3>
           <p className="text-sm md:text-[1.1vw] leading-tight">
             Building <span className="font-bold">Quivo Agency</span> and
-            exploring AI agents.
+            slowly finding my way into quantitative finance.
           </p>
         </div>
 
@@ -89,24 +92,24 @@ export default function Home() {
           </ul>
         </div>
 
-        {/* Philosophy - Made smaller on mobile if needed, but span-1 is fine */}
+        {/* Philosophy */}
         <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center bg-red-950 text-[#e6dcc6] overflow-hidden min-h-[160px] md:min-h-0 hover:scale-[1.02] transition-transform duration-300">
           <p className="text-sm md:text-[1.5vw] font-bold text-center leading-tight">
             &quot;Simplicity is the ultimate sophistication.&quot;
           </p>
         </div>
 
-        {/* Sprite Animation - Kept playful */}
+        {/* Sprite Animation */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
           <SpriteAnimation />
         </div>
 
-        {/* Now Playing / Music Vibe - REORDERED: Above Game */}
+        {/* Now Playing / Music Vibe */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-between bg-red-950/5 hover:bg-red-950/10 transition-colors min-h-[180px] md:min-h-0 group">
           <MusicPlayer />
         </div>
 
-        {/* Stats / Grid Item - REORDERED: Above Game */}
+        {/* Stats */}
         <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center hover:bg-red-950 text-red-950 hover:text-[#e6dcc6] transition-colors min-h-[180px] md:min-h-0 group cursor-default">
           <Code className="w-8 h-8 md:w-[3vw] md:h-[3vw] mb-2 group-hover:scale-110 transition-transform" />
           <p className="text-3xl md:text-[2.5vw] font-black">99%</p>
@@ -115,12 +118,12 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Don't Press Game - REORDERED: Below Music/Stats */}
+        {/* Don't Press Game */}
         <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 flex flex-col justify-center items-center bg-background min-h-[260px] md:min-h-0 overflow-hidden relative">
           <DoNotPress />
         </div>
 
-        {/* Vibe Code Claim - Full Width on Mobile */}
+        {/* Vibe Code Claim */}
         <div className="col-span-2 md:col-span-2 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[2vw] flex flex-col justify-center items-start bg-[#e6dcc6] text-red-950 overflow-hidden min-h-[140px] md:min-h-0 hover:bg-[#dccfac] transition-colors">
           <h3 className="text-xl md:text-[2.2vw] font-black uppercase tracking-tighter mb-1 md:mb-[0.5vw]">
             NO VIBE CODING
@@ -138,7 +141,7 @@ export default function Home() {
             className="text-3xl md:text-[3vw] font-black uppercase tracking-widest py-4 md:py-[1vw]"
           >
             Open for Work • Full Stack Developer • UI/UX Design • React •
-            Node.js •
+            Node.js • Future Quant •
           </TextMarquee>
         </div>
 
@@ -192,7 +195,7 @@ export default function Home() {
           </Dialog>
         </div>
 
-        {/* More filler for grid completeness if needed, or dynamic content */}
+        {/* Filler */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex items-center justify-center bg-red-950 md:bg-yellow-400/20 hover:bg-yellow-400/30 transition-colors overflow-hidden relative group min-h-[180px] md:min-h-0 text-[#e6dcc6] md:text-red-950">
           <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity">
             <span className="text-9xl md:text-[8vw]">☕</span>
@@ -208,10 +211,6 @@ export default function Home() {
         </div>
 
         {/* Creative Elements */}
-        
-
-
-        {/* 2 Cols of 1x1 items */}
         <div className="col-span-1 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-red-950/5 overflow-hidden min-h-[180px] md:min-h-0">
            <IrregularClock />
         </div>
