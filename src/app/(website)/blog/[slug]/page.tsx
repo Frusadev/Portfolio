@@ -39,13 +39,6 @@ export async function generateMetadata(
     };
   }
 
-  if (!post.published) {
-    const session = await auth.api.getSession({ headers: await headers() });
-    if (!session || session.user.role !== "admin") {
-      notFound();
-    }
-  }
-
   return {
     title: `${post.title} | Daniel Ametsowou`,
     description: post.description,
@@ -71,6 +64,13 @@ export default async function PostPage(props: PostPageProps) {
 
   if (!post) {
     notFound();
+  }
+
+  if (!post.published) {
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session || session.user.role !== "admin") {
+      notFound();
+    }
   }
 
   const viewResult = await incrementPostViews(post.id);
