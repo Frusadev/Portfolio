@@ -5,7 +5,6 @@ import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "sonner";
 import { metadata as sharedMetadata } from "./shared-metadata";
-import Head from "next/head";
 import Script from "next/script";
 
 const quicksand = Quicksand({
@@ -48,15 +47,12 @@ export default function RootLayout({
         <Script
           defer
           src="https://analytics.ametsowou.me/script.js"
-          data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
+          data-website-id="a471f11b-b424-4d08-97be-7407afe56780"
         ></Script>
         <Script
           defer
           src="https://analytics.ametsowou.me/recorder.js"
-          data-website-id="6ce356b8-79b7-4342-ad4a-b80dc469d5d2"
-          data-sample-rate="1"
-          data-mask-level="moderate"
-          data-max-duration="600000"
+          data-website-id="a471f11b-b424-4d08-97be-7407afe56780"
         ></Script>
       </body>
     </html>
