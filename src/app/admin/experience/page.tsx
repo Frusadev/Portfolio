@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ExperienceTable } from "@/components/admin/experience-table";
 
+
 export const dynamic = "force-dynamic";
 
 export default async function AdminExperiencePage() {

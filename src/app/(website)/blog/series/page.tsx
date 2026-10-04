@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 
+
 export const metadata: Metadata = {
   title: "Blog Series | Daniel Ametsowou",
   description: "Explore themed series of articles on web development, design, and more.",

@@ -24,6 +24,7 @@ import { GithubActivity } from "@/components/ui/github-activity";
 import { getProjects } from "@/app/actions/portfolio";
 import { FeaturedProjects } from "@/components/ui/featured-projects";
 
+
 export default async function Home() {
   const githubData = await getGithubActivity();
   const projects = await getProjects();

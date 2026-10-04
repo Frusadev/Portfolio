@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { metadata as sharedMetadata } from "./shared-metadata";
 import Script from "next/script";
 
+
 const quicksand = Quicksand({
   subsets: ["latin"],
   variable: "--font-quicksand",

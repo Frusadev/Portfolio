@@ -1,6 +1,7 @@
 import { getPosts } from "@/app/actions/blog";
 import AutoBentoGrid, { BentoItem } from "@/components/ui/auto-bento-grid";
 
+
 export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
