@@ -21,9 +21,13 @@ import {
 import { MusicPlayer } from "@/components/music-player";
 import { getGithubActivity } from "@/app/actions/github";
 import { GithubActivity } from "@/components/ui/github-activity";
+import { getProjects } from "@/app/actions/portfolio";
+import { FeaturedProjects } from "@/components/ui/featured-projects";
 
 export default async function Home() {
   const githubData = await getGithubActivity();
+  const projects = await getProjects();
+  const featuredProjects = projects.filter((p) => p.featured);
 
   return (
     <div className="w-full min-h-full md:h-full md:inline-block md:min-w-full bg-background">
@@ -242,9 +246,9 @@ export default async function Home() {
           <MinimalWave />
         </div>
         
-        {/* 10. Column 10 - Grid Pattern (Rows 1-3) */}
-        <div className="col-span-2 md:col-span-1 md:row-span-3 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[180px] md:min-h-0">
-          <GridPattern />
+        {/* 10. Column 10 & 11 - Featured Projects (Rows 1-3) */}
+        <div className="col-span-2 md:col-span-2 md:row-span-3 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[300px] md:min-h-0">
+          <FeaturedProjects projects={featuredProjects} />
         </div>
       </div>
     </div>
