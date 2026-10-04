@@ -53,8 +53,8 @@ export default async function Home() {
           <GithubActivity data={githubData} />
         </div>
 
-        {/* 3 & 4. Columns 3-4 - Featured Projects (Rows 1-3) */}
-        <div className="col-span-2 md:col-span-2 md:row-span-3 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[400px] md:min-h-0">
+        {/* 3. Column 3 - Featured Projects (Rows 1-2) */}
+        <div className="col-span-2 md:col-span-1 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[300px] md:min-h-0">
           <FeaturedProjects projects={featuredProjects} />
         </div>
 
@@ -89,7 +89,16 @@ export default async function Home() {
           </p>
         </div>
 
-        {/* 4. Column 4 - Tech Arsenal (Rows 1-2) */}
+        {/* 4. Column 4 - Stats (Row 3) */}
+        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center hover:bg-red-950 text-red-950 hover:text-[#e6dcc6] transition-colors min-h-[180px] md:min-h-0 group cursor-default">
+          <Code className="w-8 h-8 md:w-[3vw] md:h-[3vw] mb-2 group-hover:scale-110 transition-transform" />
+          <p className="text-3xl md:text-[2.5vw] font-black">99%</p>
+          <p className="text-xs md:text-[0.7vw] font-bold uppercase tracking-widest opacity-80">
+            Typesafe
+          </p>
+        </div>
+
+        {/* 5. Column 5 - Tech Arsenal (Rows 1-2) */}
         <div className="col-span-2 row-span-1 md:col-span-1 md:row-span-2 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col hover:bg-red-950/5 transition-colors bg-background overflow-hidden min-h-[240px] md:min-h-0">
           <h3 className="text-lg md:text-[1.3vw] font-bold text-red-950 mb-2 md:mb-[1vw]">
             Tech Arsenal
@@ -117,15 +126,6 @@ export default async function Home() {
               <div className="w-1.5 h-1.5 md:w-[0.4vw] md:h-[0.4vw] bg-red-950 rounded-full" /> Docker
             </li>
           </ul>
-        </div>
-
-        {/* 4. Column 4 - Stats (Row 3) */}
-        <div className="col-span-2 md:col-span-1 md:row-span-1 border-r-4 border-b-4 md:border-r-[0.3vw] md:border-b-[0.3vw] border-red-950 p-4 md:p-[1.5vw] flex flex-col justify-center items-center hover:bg-red-950 text-red-950 hover:text-[#e6dcc6] transition-colors min-h-[180px] md:min-h-0 group cursor-default">
-          <Code className="w-8 h-8 md:w-[3vw] md:h-[3vw] mb-2 group-hover:scale-110 transition-transform" />
-          <p className="text-3xl md:text-[2.5vw] font-black">99%</p>
-          <p className="text-xs md:text-[0.7vw] font-bold uppercase tracking-widest opacity-80">
-            Typesafe
-          </p>
         </div>
 
         {/* 5. Column 5 - Sprite Animation (Row 1) */}
