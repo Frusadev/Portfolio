@@ -3,6 +3,7 @@ import { getPosts } from "@/app/actions/blog";
 import SeriesDetailsClientPage from "./client-page";
 import { notFound } from "next/navigation";
 
+
 export default async function AdminSeriesDetailsPage({
   params,
 }: {

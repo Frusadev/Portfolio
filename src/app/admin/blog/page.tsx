@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { PostsTable } from "@/components/admin/posts-table";
 
+
 export default async function AdminBlogPage() {
   const posts = await getPosts(false);
 

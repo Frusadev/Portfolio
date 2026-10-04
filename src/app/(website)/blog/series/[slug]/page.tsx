@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import { Metadata } from "next";
 
+
 export const revalidate = 60;
 
 interface SeriesPageProps {

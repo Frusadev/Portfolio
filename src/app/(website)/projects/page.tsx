@@ -1,6 +1,7 @@
 import { getProjects } from "@/app/actions/portfolio";
 import AutoBentoGrid, { BentoItem } from "@/components/ui/auto-bento-grid";
 
+
 export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {

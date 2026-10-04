@@ -18,6 +18,7 @@ import "./blog-code.css";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
+
 export const revalidate = 60; // Revalidate every minute
 
 interface PostPageProps {

@@ -4,6 +4,7 @@ import { posts } from "@/core/db/schemas/blog/schemas";
 import { eq } from "drizzle-orm";
 import { PostForm } from "@/components/admin/post-form";
 
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
