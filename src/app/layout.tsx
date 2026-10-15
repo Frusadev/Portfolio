@@ -22,26 +22,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${quicksand.variable} font-sans antialiased light`}>
+      <body className={`${quicksand.variable} font-sans antialiased dark`}>
         <ThemeProvider
           attribute={"class"}
-          defaultTheme="light"
-          forcedTheme="light"
+          defaultTheme="dark"
+          forcedTheme="dark"
         >
-          <NextTopLoader color="#300000" />
+          <NextTopLoader color="#55C7E8" showSpinner={false} />
           {children}
           <Toaster
             toastOptions={{
               className:
-                "bg-background text-red-950 border-4 border-red-950 rounded-none shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] font-bold uppercase tracking-wider font-sans",
-              style: {
-                backgroundColor: "#e6dcc6",
-                color: "#450a0a",
-                borderColor: "#450a0a",
-                borderWidth: "4px",
-                boxShadow: "4px 4px 0px 0px rgba(69,10,10,1)",
-                borderRadius: "0",
-              },
+                "bg-surface text-foreground border border-border rounded-lg shadow-lg font-sans",
             }}
           />
         </ThemeProvider>
