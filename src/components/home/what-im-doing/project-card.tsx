@@ -1,0 +1,102 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  description: string;
+  url: string | null;
+  githubUrl: string | null;
+  image: string | null;
+  logo: string | null;
+  technologies: string[] | null;
+}
+
+export function ProjectCard({ project }: { project: ProjectItem }) {
+  const primaryLink = project.url || project.githubUrl || "#";
+  const hasLink = Boolean(project.url || project.githubUrl);
+
+  return (
+    <div className="relative group flex flex-col items-center">
+      {/* Popover on Hover with Gradient Blur */}
+      <div
+        className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out backdrop-blur-xl bg-[#0f0f12]/85 shadow-2xl shadow-black/80"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse at center, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%)",
+        }}
+      >
+        <div className="flex items-center justify-between gap-2">
+          <h4 className="text-sm font-medium text-text-primary truncate">
+            {project.title}
+          </h4>
+          {hasLink && (
+            <Link
+              href={primaryLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-text-primary transition-colors p-1"
+              aria-label={`Visit ${project.title}`}
+            >
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+          )}
+        </div>
+
+        <p className="text-xs text-text-secondary leading-relaxed mt-1.5 line-clamp-3">
+          {project.description}
+        </p>
+
+        {project.technologies && project.technologies.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="text-[10px] text-text-muted bg-surface/80 px-2 py-0.5 rounded-full font-mono"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Main Trigger: Icon-Centric with Title Underneath */}
+      <Link
+        href={primaryLink}
+        target={hasLink ? "_blank" : undefined}
+        rel={hasLink ? "noopener noreferrer" : undefined}
+        className="flex flex-col items-center group/btn focus:outline-none"
+      >
+        <div className="w-16 h-16 rounded-2xl bg-surface_elevated/90 flex items-center justify-center p-3.5 transition-transform duration-300 group-hover:scale-105 group-hover:bg-surface_elevated">
+          {project.logo ? (
+            <img
+              src={project.logo}
+              alt={project.title}
+              className="w-full h-full object-contain"
+            />
+          ) : (
+            <Image
+              src="/icons/github.svg"
+              alt="GitHub project"
+              width={26}
+              height={26}
+              className="w-6 h-6 text-text-primary opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+          )}
+        </div>
+        <span className="text-xs md:text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors mt-2.5 text-center max-w-[120px] truncate">
+          {project.title}
+        </span>
+      </Link>
+    </div>
+  );
+}
+
+export default ProjectCard;

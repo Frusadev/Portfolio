@@ -20,6 +20,65 @@ export async function getProjects() {
   return await db.select().from(projects).orderBy(desc(projects.createdAt));
 }
 
+export const FALLBACK_PROJECTS = [
+  {
+    id: "project-1",
+    title: "Portfolio",
+    description: "Minimalist, personal professional website built with Next.js, GSAP, and Lenis.",
+    content: null,
+    url: "https://danielametsowou.com",
+    githubUrl: "https://github.com/danielametsowou/portfolio",
+    image: null,
+    logo: null,
+    technologies: ["Next.js", "TypeScript", "GSAP", "Tailwind"],
+    featured: true,
+    createdAt: new Date("2026-03-01"),
+    updatedAt: new Date("2026-03-01"),
+  },
+  {
+    id: "project-2",
+    title: "Quant Engine",
+    description: "High-frequency quantitative analysis & statistical modeling toolkit.",
+    content: null,
+    url: null,
+    githubUrl: "https://github.com/danielametsowou/quant-engine",
+    image: null,
+    logo: null,
+    technologies: ["Python", "Rust", "NumPy"],
+    featured: true,
+    createdAt: new Date("2026-02-15"),
+    updatedAt: new Date("2026-02-15"),
+  },
+  {
+    id: "project-3",
+    title: "ENSEA Research",
+    description: "Applied econometric simulations and statistical market research platform.",
+    content: null,
+    url: null,
+    githubUrl: "https://github.com/danielametsowou/ensea-research",
+    image: null,
+    logo: null,
+    technologies: ["R", "Python", "Economics"],
+    featured: false,
+    createdAt: new Date("2026-01-20"),
+    updatedAt: new Date("2026-01-20"),
+  },
+];
+
+export async function getLatestProjects(limit = 3) {
+  try {
+    const results = await db
+      .select()
+      .from(projects)
+      .orderBy(desc(projects.createdAt))
+      .limit(limit);
+    if (results.length > 0) return results;
+  } catch (error) {
+    console.error("Failed to fetch latest projects from database, using fallback:", error);
+  }
+  return FALLBACK_PROJECTS.slice(0, limit);
+}
+
 export async function getProject(id: string) {
   const result = await db.select().from(projects).where(eq(projects.id, id));
   return result[0];
