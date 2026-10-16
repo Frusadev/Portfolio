@@ -11,10 +11,10 @@ export interface NavItem {
 }
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-  { id: "work", label: "WORK", href: "#work" },
-  { id: "about", label: "ABOUT", href: "#about" },
-  { id: "playground", label: "PLAYGROUND", href: "#playground" },
-  { id: "contact", label: "CONTACT", href: "#contact" },
+  { id: "work", label: "Work", href: "#work" },
+  { id: "about", label: "About", href: "#about" },
+  { id: "playground", label: "Playground", href: "#playground" },
+  { id: "contact", label: "Contact", href: "#contact" },
 ];
 
 interface HeaderProps {
@@ -102,7 +102,6 @@ export function Header({
             const isHovered = hoveredId === item.id;
             const isBlurred = hoveredId !== null && !isHovered;
             const isActive = activeId === item.id;
-            const showArrow = isHovered || (hoveredId === null && isActive);
 
             return (
               <Link
@@ -111,26 +110,14 @@ export function Header({
                 onClick={(e) => handleNavClick(e, item)}
                 onMouseEnter={() => setHoveredId(item.id)}
                 className={cn(
-                  "group relative inline-flex items-center text-[11px] md:text-xs font-medium uppercase tracking-[0.16em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-secondary rounded-sm py-0.5",
-                  isBlurred && "blur-[2.5px] opacity-35 scale-[0.98]",
+                  "group relative inline-flex items-center text-[12px] md:text-[13px] font-normal tracking-normal transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-secondary rounded-sm py-0.5",
+                  isBlurred && "blur-[2.5px] opacity-30 scale-[0.98]",
                   !isBlurred && "blur-none opacity-100",
                   isActive || isHovered
                     ? "text-text-primary"
                     : "text-text-secondary hover:text-text-primary"
                 )}
               >
-                {/* Arrow indicator */}
-                <span
-                  className={cn(
-                    "inline-block font-sans text-[11px] transition-all duration-200 select-none",
-                    showArrow
-                      ? "opacity-100 translate-x-0 w-3 mr-1"
-                      : "opacity-0 -translate-x-1.5 w-0 mr-0 overflow-hidden"
-                  )}
-                  aria-hidden="true"
-                >
-                  →
-                </span>
                 <span>{item.label}</span>
               </Link>
             );
@@ -138,11 +125,11 @@ export function Header({
         </nav>
 
         {/* Top Right: Inquiries + Email */}
-        <div className="ml-auto pointer-events-auto flex items-center gap-2 md:gap-2.5 text-[11px] md:text-xs font-normal tracking-wide">
+        <div className="ml-auto pointer-events-auto flex items-center gap-2 md:gap-2.5 text-[12px] md:text-[13px] font-normal">
           <span className="text-text-secondary">For inquiries</span>
           <a
             href={`mailto:${email}`}
-            className="text-text-primary underline underline-offset-4 decoration-border hover:decoration-text-primary hover:text-accent-hover transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-secondary rounded-sm"
+            className="text-text-primary underline underline-offset-4 decoration-white/20 hover:decoration-white/80 hover:text-accent-hover transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-secondary rounded-sm"
           >
             {email}
           </a>
@@ -157,14 +144,13 @@ export function Header({
         <div
           ref={scrollContainerRef}
           onScroll={checkScroll}
-          className="flex items-center gap-5 overflow-x-auto no-scrollbar scroll-smooth px-2 py-1"
+          className="flex items-center gap-6 overflow-x-auto no-scrollbar scroll-smooth px-2 py-1"
           onMouseLeave={() => setHoveredId(null)}
         >
           {items.map((item) => {
             const isHovered = hoveredId === item.id;
             const isBlurred = hoveredId !== null && !isHovered;
             const isActive = activeId === item.id;
-            const showArrow = isHovered || (hoveredId === null && isActive);
 
             return (
               <Link
@@ -175,25 +161,14 @@ export function Header({
                 onTouchEnd={() => setHoveredId(null)}
                 onMouseEnter={() => setHoveredId(item.id)}
                 className={cn(
-                  "shrink-0 inline-flex items-center text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-300 ease-out focus-visible:outline-none",
-                  isBlurred && "blur-[2px] opacity-35 scale-[0.97]",
+                  "shrink-0 inline-flex items-center text-[11px] font-normal tracking-normal transition-all duration-300 ease-out focus-visible:outline-none",
+                  isBlurred && "blur-[2px] opacity-30 scale-[0.97]",
                   !isBlurred && "blur-none opacity-100",
                   isActive || isHovered
                     ? "text-text-primary"
                     : "text-text-secondary"
                 )}
               >
-                <span
-                  className={cn(
-                    "inline-block transition-all duration-200 select-none",
-                    showArrow
-                      ? "opacity-100 translate-x-0 w-3 mr-1"
-                      : "opacity-0 -translate-x-1 w-0 mr-0 overflow-hidden"
-                  )}
-                  aria-hidden="true"
-                >
-                  →
-                </span>
                 <span>{item.label}</span>
               </Link>
             );
@@ -203,7 +178,7 @@ export function Header({
         {/* Small subtle scroll indicator for mobile horizontal scroll */}
         {canScroll && (
           <div
-            className="w-8 h-[2px] bg-border/50 rounded-full mx-auto mt-1.5 overflow-hidden"
+            className="w-8 h-[2px] bg-white/10 rounded-full mx-auto mt-1.5 overflow-hidden"
             aria-hidden="true"
           >
             <div
