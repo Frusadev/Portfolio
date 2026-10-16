@@ -1,8 +1,10 @@
 import { Figtree } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 import "highlight.js/styles/atom-one-dark.css";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { Toaster } from "sonner";
 import { metadata as sharedMetadata } from "./shared-metadata";
 import Script from "next/script";
@@ -45,7 +47,7 @@ export default function RootLayout({
           forcedTheme="dark"
         >
           <NextTopLoader color="#55C7E8" showSpinner={false} />
-          {children}
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
           <Toaster
             toastOptions={{
               className:

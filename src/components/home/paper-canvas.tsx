@@ -23,13 +23,13 @@ interface PaperModelInstance {
   floatOffset: number;
 }
 
-// Single unified grayish paper material
+// Single unified grayish paper tone
 const UNIFIED_GRAY = 0xb4b4bc;
 
 function getPaperMaterial(wireframe = false) {
   if (wireframe) {
     return new THREE.MeshBasicMaterial({
-      color: 0x8a8a92,
+      color: 0x8e8e98,
       wireframe: true,
       transparent: true,
       opacity: 0.6,
@@ -37,8 +37,8 @@ function getPaperMaterial(wireframe = false) {
   }
   return new THREE.MeshStandardMaterial({
     color: UNIFIED_GRAY,
-    roughness: 0.68,
-    metalness: 0.12,
+    roughness: 0.65,
+    metalness: 0.1,
     side: THREE.DoubleSide,
     flatShading: true, // Gives crisp, folded paper facet aesthetic
   });
@@ -48,22 +48,22 @@ function createAlgorithmsModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
   const lineMat = new THREE.LineBasicMaterial({
-    color: 0x8a8a92,
+    color: 0x8e8e98,
     transparent: true,
-    opacity: 0.7,
+    opacity: 0.75,
   });
 
-  // 3D paper network graph
+  // 3D paper network graph nodes
   const coords: [number, number, number][] = [
-    [-11, 8, -6],
-    [10, 10, 4],
-    [-7, -9, 7],
-    [11, -7, -4],
-    [0, 1, 8],
+    [-15, 12, -8],
+    [14, 13, 7],
+    [-10, -12, 9],
+    [15, -9, -6],
+    [0, 2, 11],
   ];
 
   coords.forEach(([x, y, z]) => {
-    const geo = new THREE.IcosahedronGeometry(4, 0);
+    const geo = new THREE.IcosahedronGeometry(5.5, 0);
     const node = new THREE.Mesh(geo, mat);
     node.position.set(x, y, z);
     group.add(node);
@@ -95,24 +95,35 @@ function createInterfacesModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
 
-  // 3D folded paper screen / card with depth
-  const bodyGeo = new THREE.BoxGeometry(26, 19, 4);
-  bodyGeo.center();
-  const body = new THREE.Mesh(bodyGeo, mat);
-  group.add(body);
-
-  // Inset viewport bevel
-  const screenGeo = new THREE.BoxGeometry(22, 12, 4.8);
+  // 3D folded paper screen / laptop display
+  // Display bezel
+  const screenGeo = new THREE.BoxGeometry(36, 24, 4.5);
   screenGeo.center();
-  const screenMat = new THREE.MeshStandardMaterial({
-    color: 0x8a8a92,
-    roughness: 0.8,
+  const screen = new THREE.Mesh(screenGeo, mat);
+  screen.position.set(0, 3, -3);
+  screen.rotation.x = -0.15; // tilted slightly back like a monitor
+  group.add(screen);
+
+  // Inset display panel
+  const panelGeo = new THREE.BoxGeometry(30, 18, 5.2);
+  panelGeo.center();
+  const panelMat = new THREE.MeshStandardMaterial({
+    color: 0x9898a0,
+    roughness: 0.75,
     metalness: 0.05,
     flatShading: true,
   });
-  const screen = new THREE.Mesh(screenGeo, screenMat);
-  screen.position.set(0, -1.5, 0);
-  group.add(screen);
+  const panel = new THREE.Mesh(panelGeo, panelMat);
+  panel.position.set(0, 3, -3);
+  panel.rotation.x = -0.15;
+  group.add(panel);
+
+  // Folded paper base deck
+  const baseGeo = new THREE.BoxGeometry(36, 3.5, 18);
+  baseGeo.center();
+  const base = new THREE.Mesh(baseGeo, mat);
+  base.position.set(0, -9, 5);
+  group.add(base);
 
   return group;
 }
@@ -121,27 +132,26 @@ function createHumorModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
 
-  // Abstract neural particle cluster
-  for (let i = 0; i < 7; i++) {
-    const angle = (i / 7) * Math.PI * 2;
-    const r = 10 + (i % 2) * 3;
-    const geo = new THREE.OctahedronGeometry(3.5, 0);
+  // Dynamic abstract neural spark / laughter crystal cluster
+  const coreGeo = new THREE.IcosahedronGeometry(7, 0);
+  coreGeo.center();
+  const core = new THREE.Mesh(coreGeo, mat);
+  group.add(core);
+
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2;
+    const r = 14 + (i % 3) * 3;
+    const geo = new THREE.OctahedronGeometry(4.5, 0);
     geo.center();
     const shard = new THREE.Mesh(geo, mat);
     shard.position.set(
       Math.cos(angle) * r,
       Math.sin(angle) * r,
-      ((i % 3) - 1) * 6
+      ((i % 3) - 1) * 7
     );
-    shard.rotation.set(angle, i, angle * 0.5);
+    shard.rotation.set(angle, i * 0.7, angle * 0.5);
     group.add(shard);
   }
-
-  // Center core spark
-  const coreGeo = new THREE.IcosahedronGeometry(4.5, 0);
-  coreGeo.center();
-  const core = new THREE.Mesh(coreGeo, mat);
-  group.add(core);
 
   return group;
 }
@@ -150,43 +160,42 @@ function createMusicModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
 
-  // 3D paper eighth note with volume
+  // 3D paper eighth note with bold volume
   const noteShape = new THREE.Shape();
-  // Notehead 1
-  noteShape.absellipse(-7, -7, 5, 3.5, 0, Math.PI * 2, false, -0.3);
+  noteShape.absellipse(-8, -9, 6.5, 4.8, 0, Math.PI * 2, false, -0.35);
   const head1Geo = new THREE.ExtrudeGeometry(noteShape, {
-    depth: 3,
+    depth: 4.5,
     bevelEnabled: true,
-    bevelThickness: 0.5,
-    bevelSize: 0.5,
+    bevelThickness: 0.8,
+    bevelSize: 0.8,
   });
   head1Geo.center();
   const head1 = new THREE.Mesh(head1Geo, mat);
-  head1.position.set(-6, -6, 0);
+  head1.position.set(-8, -8, 0);
   group.add(head1);
 
   // Notehead 2
   const head2 = head1.clone();
-  head2.position.set(6, -3, 0);
+  head2.position.set(8, -4, 0);
   group.add(head2);
 
   // Stems
-  const stemGeo = new THREE.BoxGeometry(1.8, 16, 2.5);
+  const stemGeo = new THREE.BoxGeometry(2.5, 23, 3.5);
   stemGeo.center();
   const stem1 = new THREE.Mesh(stemGeo, mat);
-  stem1.position.set(-2, 1, 0);
+  stem1.position.set(-2.5, 3, 0);
   group.add(stem1);
 
   const stem2 = new THREE.Mesh(stemGeo, mat);
-  stem2.position.set(10, 4, 0);
+  stem2.position.set(13.5, 7, 0);
   group.add(stem2);
 
   // Connecting beam
-  const beamGeo = new THREE.BoxGeometry(14, 3.5, 2.5);
+  const beamGeo = new THREE.BoxGeometry(20, 5, 3.5);
   beamGeo.center();
   const beam = new THREE.Mesh(beamGeo, mat);
-  beam.position.set(4, 11, 0);
-  beam.rotation.z = 0.22;
+  beam.position.set(5.5, 17, 0);
+  beam.rotation.z = 0.2;
   group.add(beam);
 
   return group;
@@ -196,31 +205,39 @@ function createChessModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
 
-  // Origami paper knight profile with clean 3D depth
+  // Origami paper knight profile with bold, unmistakable silhouette
   const shape = new THREE.Shape();
-  shape.moveTo(-7, -11);
-  shape.lineTo(7, -11);
-  shape.lineTo(6, -7);
-  shape.lineTo(8, -1);
-  shape.lineTo(5, 5);
-  shape.lineTo(9, 11);
-  shape.lineTo(2, 12);
-  shape.lineTo(-5, 8);
-  shape.lineTo(-8, 3);
-  shape.lineTo(-5, -1);
-  shape.lineTo(-6, -7);
+  shape.moveTo(-10, -14);
+  shape.lineTo(10, -14);
+  shape.lineTo(8, -9);
+  shape.lineTo(11, -1);
+  shape.lineTo(7, 7);
+  shape.lineTo(12, 15);
+  shape.lineTo(3, 17);
+  shape.lineTo(-6, 11);
+  shape.lineTo(-11, 4);
+  shape.lineTo(-7, -1);
+  shape.lineTo(-8, -9);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
-    depth: 4,
+    depth: 5.5,
     bevelEnabled: true,
-    bevelThickness: 0.8,
-    bevelSize: 0.8,
+    bevelThickness: 1,
+    bevelSize: 1,
     bevelSegments: 1,
   });
   geo.center();
-  const mesh = new THREE.Mesh(geo, mat);
-  group.add(mesh);
+  const knight = new THREE.Mesh(geo, mat);
+  knight.position.set(0, 2, 0);
+  group.add(knight);
+
+  // Plinth base
+  const baseGeo = new THREE.BoxGeometry(24, 4.5, 10);
+  baseGeo.center();
+  const base = new THREE.Mesh(baseGeo, mat);
+  base.position.set(0, -13, 0);
+  group.add(base);
 
   return group;
 }
@@ -229,25 +246,25 @@ function createMathModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
 
-  // 3D Sigma (Σ) with clear paper depth
+  // 3D Sigma (Σ) with clear paper volume and beveled facets
   const shape = new THREE.Shape();
-  shape.moveTo(-8, 10);
-  shape.lineTo(8, 10);
-  shape.lineTo(8, 6.5);
-  shape.lineTo(-2, 6.5);
-  shape.lineTo(4, 0);
-  shape.lineTo(-2, -6.5);
-  shape.lineTo(8, -6.5);
-  shape.lineTo(8, -10);
-  shape.lineTo(-8, -10);
+  shape.moveTo(-11, 15);
+  shape.lineTo(11, 15);
+  shape.lineTo(11, 9.5);
+  shape.lineTo(-3, 9.5);
+  shape.lineTo(6, 0);
+  shape.lineTo(-3, -9.5);
+  shape.lineTo(11, -9.5);
+  shape.lineTo(11, -15);
+  shape.lineTo(-11, -15);
   shape.lineTo(0.5, 0);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
-    depth: 4,
+    depth: 5.5,
     bevelEnabled: true,
-    bevelThickness: 0.6,
-    bevelSize: 0.6,
+    bevelThickness: 0.9,
+    bevelSize: 0.9,
     bevelSegments: 1,
   });
   geo.center();
@@ -263,23 +280,23 @@ function createFinanceModel(): THREE.Group {
 
   // 3D ascending candlestick chart
   const barsData = [
-    { height: 10, offset: -8 },
-    { height: 15, offset: 0 },
-    { height: 21, offset: 8 },
+    { height: 14, offset: -11 },
+    { height: 22, offset: 0 },
+    { height: 31, offset: 11 },
   ];
 
   barsData.forEach(({ height, offset }) => {
-    const barGeo = new THREE.BoxGeometry(4.5, height, 4);
+    const barGeo = new THREE.BoxGeometry(6.5, height, 5.5);
     barGeo.center();
     const bar = new THREE.Mesh(barGeo, mat);
-    bar.position.set(offset, (height - 21) / 2 + 3, 0);
+    bar.position.set(offset, (height - 31) / 2 + 4, 0);
     group.add(bar);
 
     // Wick
-    const wickGeo = new THREE.BoxGeometry(1.2, height + 6, 1.2);
+    const wickGeo = new THREE.BoxGeometry(1.8, height + 9, 1.8);
     wickGeo.center();
     const wick = new THREE.Mesh(wickGeo, mat);
-    wick.position.set(offset, (height - 21) / 2 + 3, 0);
+    wick.position.set(offset, (height - 31) / 2 + 4, 0);
     group.add(wick);
   });
 
@@ -291,14 +308,18 @@ function createEconomyModel(): THREE.Group {
   const mat = getPaperMaterial();
   const wireMat = getPaperMaterial(true);
 
-  // 3D paper icosahedron mesh with node points
-  const icoGeo = new THREE.IcosahedronGeometry(11, 0);
+  // 3D interconnected paper icosahedron mesh with vertex node beads
+  const icoGeo = new THREE.IcosahedronGeometry(15, 0);
   icoGeo.center();
   const wire = new THREE.Mesh(icoGeo, wireMat);
   group.add(wire);
 
+  // Central core bead
+  const core = new THREE.Mesh(new THREE.OctahedronGeometry(5.5, 0), mat);
+  group.add(core);
+
   // Node beads on vertices
-  const nodeGeo = new THREE.OctahedronGeometry(2, 0);
+  const nodeGeo = new THREE.OctahedronGeometry(3.2, 0);
   nodeGeo.center();
   const posAttr = icoGeo.attributes.position;
   for (let i = 0; i < posAttr.count; i += 2) {
@@ -334,18 +355,18 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Scene & Lighting: Balanced lighting so paper facets and depth are clearly visible
+    // Scene & Lighting
     const scene = new THREE.Scene();
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.35);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.8);
-    dirLight1.position.set(30, 50, 40);
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.85);
+    dirLight1.position.set(40, 60, 50);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0xa1a1aa, 0.8);
-    dirLight2.position.set(-30, -20, 20);
+    const dirLight2 = new THREE.DirectionalLight(0x9a9aa2, 0.85);
+    dirLight2.position.set(-35, -25, 30);
     scene.add(dirLight2);
 
     // Pixel-perfect perspective camera
@@ -363,45 +384,52 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
     };
     updateCameraAndSize();
 
-    // The 8 models: using an isometric three-quarter tilt (X ~55-65 deg, Y ~25-35 deg)
-    // so paper models show full 3D silhouette, facets, and depth rather than squishing
-    const modelConfigs: { type: ModelType; domId: string; creator: () => THREE.Group }[] = [
-      { type: "algorithms", domId: "figure-algorithms", creator: createAlgorithmsModel },
-      { type: "interfaces", domId: "figure-interfaces", creator: createInterfacesModel },
-      { type: "humor", domId: "figure-humor", creator: createHumorModel },
-      { type: "music", domId: "figure-music", creator: createMusicModel },
-      { type: "chess", domId: "figure-chess", creator: createChessModel },
-      { type: "math", domId: "figure-math", creator: createMathModel },
-      { type: "finance", domId: "figure-finance", creator: createFinanceModel },
-      { type: "economy", domId: "figure-economy", creator: createEconomyModel },
+    // The 8 models: rotated on Y axis (between 50 deg and 120 deg)
+    // with baseRotX = 0 so they never collapse horizontally,
+    // plus a subtle 2D in-plane tilt on Z as if placed like 2D paper figures
+    const modelConfigs: {
+      type: ModelType;
+      domId: string;
+      creator: () => THREE.Group;
+      rotYDeg: number;
+      rotZDeg: number;
+    }[] = [
+      { type: "algorithms", domId: "figure-algorithms", creator: createAlgorithmsModel, rotYDeg: 56, rotZDeg: -4 },
+      { type: "interfaces", domId: "figure-interfaces", creator: createInterfacesModel, rotYDeg: 112, rotZDeg: 5 },
+      { type: "humor", domId: "figure-humor", creator: createHumorModel, rotYDeg: 64, rotZDeg: -6 },
+      { type: "music", domId: "figure-music", creator: createMusicModel, rotYDeg: 54, rotZDeg: 6 },
+      { type: "chess", domId: "figure-chess", creator: createChessModel, rotYDeg: 68, rotZDeg: -5 },
+      { type: "math", domId: "figure-math", creator: createMathModel, rotYDeg: 58, rotZDeg: 4 },
+      { type: "finance", domId: "figure-finance", creator: createFinanceModel, rotYDeg: 115, rotZDeg: -6 },
+      { type: "economy", domId: "figure-economy", creator: createEconomyModel, rotYDeg: 62, rotZDeg: 5 },
     ];
 
-    const models: PaperModelInstance[] = modelConfigs.map(({ type, domId, creator }, idx) => {
-      const group = creator();
+    const models: PaperModelInstance[] = modelConfigs.map(
+      ({ type, domId, creator, rotYDeg, rotZDeg }, idx) => {
+        const group = creator();
 
-      // Angle on X between 50 deg and 75 deg (in the specified 50-120 range, avoiding edge-on 90)
-      const baseRotX = (54 + (idx * 11) % 20) * (Math.PI / 180);
-      // Three-quarter Y rotation gives beautiful paper isometric visibility
-      const baseRotY = (24 + (idx * 13) % 20) * (Math.PI / 180);
-      const baseRotZ = (((idx * 17) % 24) - 12) * (Math.PI / 180);
+        const baseRotX = 0; // Strictly 0 so models stand tall and never squash edge-on horizontally
+        const baseRotY = rotYDeg * (Math.PI / 180); // Varied on Y between 50 deg and 120 deg
+        const baseRotZ = rotZDeg * (Math.PI / 180); // Natural 2D in-plane tilt
 
-      group.rotation.set(baseRotX, baseRotY, baseRotZ);
-      group.scale.set(0, 0, 0);
-      scene.add(group);
+        group.rotation.set(baseRotX, baseRotY, baseRotZ);
+        group.scale.set(0, 0, 0);
+        scene.add(group);
 
-      return {
-        type,
-        domId,
-        group,
-        baseRotX,
-        baseRotY,
-        baseRotZ,
-        floatOffset: idx * 0.8,
-      };
-    });
+        return {
+          type,
+          domId,
+          group,
+          baseRotX,
+          baseRotY,
+          baseRotZ,
+          floatOffset: idx * 0.8,
+        };
+      }
+    );
     modelsRef.current = models;
 
-    // Mouse tracking for floating tilt
+    // Mouse tracking for subtle interactive float
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       mouseRef.current = {
@@ -434,16 +462,17 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
         const targetY = -(screenY - canvasHeight / 2);
 
         // Tactile floating motion
-        const floatY = Math.sin(elapsed * 1.6 + item.floatOffset) * 2.2;
-        const floatRot = Math.sin(elapsed * 1.2 + item.floatOffset) * 0.04;
+        const floatY = Math.sin(elapsed * 1.5 + item.floatOffset) * 2.8;
+        const floatRotY = Math.sin(elapsed * 1.1 + item.floatOffset) * 0.05;
+        const floatRotZ = Math.cos(elapsed * 0.9 + item.floatOffset) * 0.02;
 
         item.group.position.x = targetX;
         item.group.position.y = targetY + floatY;
         item.group.position.z = 0;
 
-        item.group.rotation.x = item.baseRotX + floatRot;
-        item.group.rotation.y = item.baseRotY + floatRot * 0.5;
-        item.group.rotation.z = item.baseRotZ;
+        item.group.rotation.x = 0;
+        item.group.rotation.y = item.baseRotY + floatRotY;
+        item.group.rotation.z = item.baseRotZ + floatRotZ;
       });
 
       renderer.render(scene, camera);

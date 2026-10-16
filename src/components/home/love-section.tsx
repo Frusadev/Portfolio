@@ -78,7 +78,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love building and understanding complex algorithms
             <span
               id="figure-algorithms"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -87,7 +87,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love building beautiful pages
             <span
               id="figure-interfaces"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />.{" "}
           </span>
@@ -96,7 +96,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love creative humor
             <span
               id="figure-humor"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -105,7 +105,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love unusual music
             <span
               id="figure-music"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -114,7 +114,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love mathematics
             <span
               id="figure-math"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -123,7 +123,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love chess
             <span
               id="figure-chess"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -132,7 +132,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love finance
             <span
               id="figure-finance"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -141,7 +141,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love economy
             <span
               id="figure-economy"
-              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
+              className="inline-block w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle ml-2.5 mr-0.5"
               aria-hidden="true"
             />.{" "}
           </span>
