@@ -1,5 +1,6 @@
 import { HeySection } from "@/components/home/hey-section";
 import { WhoAmISection } from "@/components/home/whoami-section";
+import { LoveSection } from "@/components/home/love-section";
 
 export default function Home() {
   return (
@@ -9,6 +10,9 @@ export default function Home() {
         <HeySection />
         <WhoAmISection />
       </div>
+
+      {/* 3rd Section: Philosophy & Loves with 3D paper figures */}
+      <LoveSection />
     </main>
   );
 }
