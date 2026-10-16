@@ -20,7 +20,7 @@ export async function getProjects() {
   return await db.select().from(projects).orderBy(desc(projects.createdAt));
 }
 
-export const FALLBACK_PROJECTS = [
+const FALLBACK_PROJECTS = [
   {
     id: "project-1",
     title: "Portfolio",
