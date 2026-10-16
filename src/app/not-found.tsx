@@ -1,28 +1,24 @@
 import Link from "next/link";
-import PortfolioSidebar from "@/components/sections/sidebar";
-import HorizontalScrollContainer from "@/components/ui/horizontal-scroll-container";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-row w-full h-screen light overflow-hidden">
-      <PortfolioSidebar />
-      <HorizontalScrollContainer>
-        <div className="w-full h-full flex items-center justify-center p-8 md:min-w-[calc(100vw-270px)]">
-            <div className="border-4 border-red-950 p-12 bg-[#fbf5e9] max-w-2xl w-full text-center space-y-6 shadow-[8px_8px_0px_0px_rgba(69,10,10,1)]">
-                <h1 className="text-9xl font-bold text-red-950">404</h1>
-                <h2 className="text-3xl font-bold text-red-950 uppercase tracking-widest">Page Not Found</h2>
-                <p className="text-xl text-red-900/80">
-                    The page you are looking for does not exist or has been moved.
-                </p>
-                <Link 
-                    href="/" 
-                    className="inline-block px-8 py-3 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-red-900 hover:-translate-y-1 transition-all"
-                >
-                    Return Home
-                </Link>
-            </div>
-        </div>
-      </HorizontalScrollContainer>
-    </div>
+    <main className="min-h-screen w-full flex flex-col items-center justify-center p-8 bg-background text-foreground text-center select-none">
+      <span className="text-xs uppercase tracking-widest text-text-muted mb-3">
+        404 Error
+      </span>
+      <h1 className="text-3xl md:text-5xl font-medium tracking-tight text-text-primary mb-4">
+        Page Not Found
+      </h1>
+      <p className="text-sm md:text-base text-text-secondary max-w-md mb-8">
+        The page you are looking for does not exist or has been relocated.
+      </p>
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-text-primary border border-border px-5 py-2.5 rounded-full hover:bg-surface-elevated transition-colors"
+      >
+        <span>←</span>
+        <span>Return Home</span>
+      </Link>
+    </main>
   );
 }

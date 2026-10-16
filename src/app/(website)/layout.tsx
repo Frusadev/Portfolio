@@ -1,13 +1,14 @@
-import PortfolioSidebar from "@/components/sections/sidebar";
-import HorizontalScrollContainer from "@/components/ui/horizontal-scroll-container";
+import { Header } from "@/components/navigation/header";
 
-
-
-export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
+export default function WebsiteLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="flex flex-row w-full h-screen light overflow-hidden">
-      <PortfolioSidebar />
-      <HorizontalScrollContainer>{children}</HorizontalScrollContainer>
+    <div className="min-h-screen w-full bg-background text-foreground relative">
+      <Header />
+      {children}
     </div>
   );
 }

@@ -1,16 +1,16 @@
-import { Quicksand } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 import "highlight.js/styles/atom-one-dark.css";
 import NextTopLoader from "nextjs-toploader";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "sonner";
 import { metadata as sharedMetadata } from "./shared-metadata";
 import Script from "next/script";
 
-
-const quicksand = Quicksand({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-quicksand",
+  variable: "--font-figtree",
+  display: "swap",
 });
 
 export const metadata = sharedMetadata;
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${quicksand.variable} font-sans antialiased dark`}>
+      <body className={`${figtree.variable} font-sans antialiased dark`}>
         <ThemeProvider
           attribute={"class"}
           defaultTheme="dark"
