@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
-import { PaperCanvas } from "@/components/home/paper-canvas";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -17,7 +16,6 @@ interface LoveSectionProps {
 
 export function LoveSection({ className }: LoveSectionProps) {
   const sectionRef = React.useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = React.useState(0);
 
   useGSAP(
     () => {
@@ -29,16 +27,13 @@ export function LoveSection({ className }: LoveSectionProps) {
           start: "top 75%",
           end: "bottom 45%",
           scrub: 1,
-          onUpdate: (self) => {
-            setScrollProgress(self.progress);
-          },
         },
       });
 
       tl.fromTo(
         phrases,
         {
-          opacity: 0.2,
+          opacity: 0.18,
           filter: "blur(10px)",
           y: 12,
         },
@@ -64,9 +59,6 @@ export function LoveSection({ className }: LoveSectionProps) {
         className
       )}
     >
-      {/* Shared WebGL Paper Canvas for all 8 3D models */}
-      <PaperCanvas containerRef={sectionRef} scrollProgress={scrollProgress} />
-
       <div className="max-w-7xl w-full z-20">
         <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.65] md:leading-[1.75] text-text-primary tracking-tight">
           <span className="love-phrase inline">
@@ -75,75 +67,35 @@ export function LoveSection({ className }: LoveSectionProps) {
           </span>
 
           <span className="love-phrase inline">
-            I love building and understanding complex algorithms{" "}
-            <span
-              id="figure-algorithms"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />,{" "}
+            I love building and understanding complex algorithms,{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love building beautiful pages{" "}
-            <span
-              id="figure-interfaces"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />.{" "}
+            I love building beautiful pages.{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love creative humor{" "}
-            <span
-              id="figure-humor"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />,{" "}
+            I love creative humor,{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love unusual music{" "}
-            <span
-              id="figure-music"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />,{" "}
+            I love unusual music,{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love mathematics{" "}
-            <span
-              id="figure-math"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />,{" "}
+            I love mathematics,{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love chess{" "}
-            <span
-              id="figure-chess"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />,{" "}
+            I love chess,{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love finance{" "}
-            <span
-              id="figure-finance"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />,{" "}
+            I love finance,{" "}
           </span>
 
           <span className="love-phrase inline">
-            I love economy{" "}
-            <span
-              id="figure-economy"
-              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
-              aria-hidden="true"
-            />.{" "}
+            I love economy.{" "}
           </span>
 
           <span className="love-phrase inline text-accent-secondary">
