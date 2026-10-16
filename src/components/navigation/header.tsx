@@ -111,7 +111,7 @@ export function Header({
                 onClick={(e) => handleNavClick(e, item)}
                 onMouseEnter={() => setHoveredId(item.id)}
                 className={cn(
-                  "group relative inline-flex items-center text-sm lg:text-base font-medium uppercase tracking-wider transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-secondary rounded-sm",
+                  "group relative inline-flex items-center text-[11px] md:text-xs font-medium uppercase tracking-[0.16em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-secondary rounded-sm py-0.5",
                   isBlurred && "blur-[2.5px] opacity-35 scale-[0.98]",
                   !isBlurred && "blur-none opacity-100",
                   isActive || isHovered
@@ -122,9 +122,9 @@ export function Header({
                 {/* Arrow indicator */}
                 <span
                   className={cn(
-                    "inline-block font-sans transition-all duration-200 select-none",
+                    "inline-block font-sans text-[11px] transition-all duration-200 select-none",
                     showArrow
-                      ? "opacity-100 translate-x-0 w-3.5 mr-1.5"
+                      ? "opacity-100 translate-x-0 w-3 mr-1"
                       : "opacity-0 -translate-x-1.5 w-0 mr-0 overflow-hidden"
                   )}
                   aria-hidden="true"
@@ -138,7 +138,7 @@ export function Header({
         </nav>
 
         {/* Top Right: Inquiries + Email */}
-        <div className="ml-auto pointer-events-auto flex items-center gap-2 md:gap-3 text-xs md:text-sm font-normal">
+        <div className="ml-auto pointer-events-auto flex items-center gap-2 md:gap-2.5 text-[11px] md:text-xs font-normal tracking-wide">
           <span className="text-text-secondary">For inquiries</span>
           <a
             href={`mailto:${email}`}
@@ -157,7 +157,7 @@ export function Header({
         <div
           ref={scrollContainerRef}
           onScroll={checkScroll}
-          className="flex items-center gap-6 overflow-x-auto no-scrollbar scroll-smooth px-2 py-1"
+          className="flex items-center gap-5 overflow-x-auto no-scrollbar scroll-smooth px-2 py-1"
           onMouseLeave={() => setHoveredId(null)}
         >
           {items.map((item) => {
@@ -175,7 +175,7 @@ export function Header({
                 onTouchEnd={() => setHoveredId(null)}
                 onMouseEnter={() => setHoveredId(item.id)}
                 className={cn(
-                  "shrink-0 inline-flex items-center text-xs font-medium uppercase tracking-widest transition-all duration-300 ease-out focus-visible:outline-none",
+                  "shrink-0 inline-flex items-center text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-300 ease-out focus-visible:outline-none",
                   isBlurred && "blur-[2px] opacity-35 scale-[0.97]",
                   !isBlurred && "blur-none opacity-100",
                   isActive || isHovered
