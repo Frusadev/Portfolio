@@ -71,87 +71,79 @@ export function LoveSection({ className }: LoveSectionProps) {
         <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.65] md:leading-[1.75] text-text-primary tracking-tight">
           <span className="love-phrase inline">
             I love working on things I enjoy learning about, and I&apos;m
-            naturally drawn to creative fields—whether technical or not.{" "}
+            naturally drawn to creative fields, whether technical or not.{" "}
           </span>
 
           <span className="love-phrase inline">
             I love building and understanding complex algorithms
             <span
               id="figure-algorithms"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            ,{" "}
+            />,{" "}
           </span>
 
           <span className="love-phrase inline">
             I love building beautiful pages
             <span
               id="figure-interfaces"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            .{" "}
+            />.{" "}
           </span>
 
           <span className="love-phrase inline">
             I love creative humor
             <span
               id="figure-humor"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            ,{" "}
+            />,{" "}
           </span>
 
           <span className="love-phrase inline">
             I love unusual music
             <span
               id="figure-music"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            ,{" "}
+            />,{" "}
           </span>
 
           <span className="love-phrase inline">
             I love mathematics
             <span
               id="figure-math"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            ,{" "}
+            />,{" "}
           </span>
 
           <span className="love-phrase inline">
             I love chess
             <span
               id="figure-chess"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            ,{" "}
+            />,{" "}
           </span>
 
           <span className="love-phrase inline">
             I love finance
             <span
               id="figure-finance"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            ,{" "}
+            />,{" "}
           </span>
 
           <span className="love-phrase inline">
             I love economy
             <span
               id="figure-economy"
-              className="inline-block w-8 h-8 md:w-9 md:h-9 align-middle mx-1.5"
+              className="inline-block w-9 h-9 md:w-11 md:h-11 align-middle mx-1.5"
               aria-hidden="true"
-            />
-            .{" "}
+            />.{" "}
           </span>
 
           <span className="love-phrase inline text-accent-secondary">
