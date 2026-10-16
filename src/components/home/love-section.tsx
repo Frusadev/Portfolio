@@ -67,7 +67,7 @@ export function LoveSection({ className }: LoveSectionProps) {
       {/* Shared WebGL Paper Canvas for all 8 3D models */}
       <PaperCanvas containerRef={sectionRef} scrollProgress={scrollProgress} />
 
-      <div className="max-w-5xl w-full z-20">
+      <div className="max-w-7xl w-full z-20">
         <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.65] md:leading-[1.75] text-text-primary tracking-tight">
           <span className="love-phrase inline">
             I love working on things I enjoy learning about, and I&apos;m
@@ -78,7 +78,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love building and understanding complex algorithms{" "}
             <span
               id="figure-algorithms"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -87,7 +87,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love building beautiful pages{" "}
             <span
               id="figure-interfaces"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />.{" "}
           </span>
@@ -96,7 +96,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love creative humor{" "}
             <span
               id="figure-humor"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -105,7 +105,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love unusual music{" "}
             <span
               id="figure-music"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -114,7 +114,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love mathematics{" "}
             <span
               id="figure-math"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -123,7 +123,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love chess{" "}
             <span
               id="figure-chess"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -132,7 +132,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love finance{" "}
             <span
               id="figure-finance"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />,{" "}
           </span>
@@ -141,7 +141,7 @@ export function LoveSection({ className }: LoveSectionProps) {
             I love economy{" "}
             <span
               id="figure-economy"
-              className="inline-block w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 align-middle"
+              className="inline-block w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 align-middle"
               aria-hidden="true"
             />.{" "}
           </span>

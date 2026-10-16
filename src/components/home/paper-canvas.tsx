@@ -17,7 +17,6 @@ interface PaperModelInstance {
   type: ModelType;
   domId: string;
   group: THREE.Group;
-  floatOffset: number;
 }
 
 // Single unified grayish paper tone
@@ -52,15 +51,15 @@ function createAlgorithmsModel(): THREE.Group {
 
   // Flat 2D paper network graph with beveled nodes
   const coords: [number, number, number][] = [
-    [-11, 8, 0],
-    [10, 10, 0],
-    [-8, -9, 0],
-    [11, -7, 0],
+    [-15, 12, 0],
+    [14, 14, 0],
+    [-11, -12, 0],
+    [15, -10, 0],
     [0, 1, 0.5],
   ];
 
   coords.forEach(([x, y, z]) => {
-    const geo = new THREE.IcosahedronGeometry(4.2, 0);
+    const geo = new THREE.IcosahedronGeometry(5.8, 0);
     const node = new THREE.Mesh(geo, mat);
     node.position.set(x, y, z);
     group.add(node);
@@ -92,13 +91,13 @@ function createInterfacesModel(): THREE.Group {
   const mat = getPaperMaterial();
 
   // Flat 2D paper window / screen frame with clear beveled relief
-  const outerGeo = new THREE.BoxGeometry(28, 20, 3.2);
+  const outerGeo = new THREE.BoxGeometry(38, 27, 4.2);
   outerGeo.center();
   const outer = new THREE.Mesh(outerGeo, mat);
   group.add(outer);
 
   // Inset display panel
-  const panelGeo = new THREE.BoxGeometry(23, 13.5, 3.8);
+  const panelGeo = new THREE.BoxGeometry(31, 18, 4.8);
   panelGeo.center();
   const panelMat = new THREE.MeshStandardMaterial({
     color: 0x9a9aa2,
@@ -107,17 +106,17 @@ function createInterfacesModel(): THREE.Group {
     flatShading: true,
   });
   const panel = new THREE.Mesh(panelGeo, panelMat);
-  panel.position.set(0, -1.8, 0);
+  panel.position.set(0, -2.4, 0);
   group.add(panel);
 
   // 3 window control dots on top header
-  [-7, -3.5, 0].forEach((x) => {
+  [-9, -4.5, 0].forEach((x) => {
     const dot = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.1, 1.1, 4, 8),
+      new THREE.CylinderGeometry(1.4, 1.4, 5, 8),
       mat
     );
     dot.rotation.x = Math.PI / 2;
-    dot.position.set(x, 6.2, 0);
+    dot.position.set(x, 8.5, 0);
     group.add(dot);
   });
 
@@ -129,15 +128,15 @@ function createHumorModel(): THREE.Group {
   const mat = getPaperMaterial();
 
   // Flat 2D paper abstract spark / firing neuron starburst
-  const coreGeo = new THREE.IcosahedronGeometry(5.2, 0);
+  const coreGeo = new THREE.IcosahedronGeometry(7, 0);
   coreGeo.center();
   const core = new THREE.Mesh(coreGeo, mat);
   group.add(core);
 
   for (let i = 0; i < 8; i++) {
     const angle = (i / 8) * Math.PI * 2;
-    const r = 11 + (i % 2) * 2.5;
-    const geo = new THREE.OctahedronGeometry(3.2, 0);
+    const r = 15 + (i % 2) * 3.5;
+    const geo = new THREE.OctahedronGeometry(4.2, 0);
     geo.center();
     const shard = new THREE.Mesh(geo, mat);
     shard.position.set(Math.cos(angle) * r, Math.sin(angle) * r, 0);
@@ -154,39 +153,39 @@ function createMusicModel(): THREE.Group {
 
   // Flat 2D paper eighth note with beveled depth
   const noteShape = new THREE.Shape();
-  noteShape.absellipse(-6.5, -7, 5, 3.6, 0, Math.PI * 2, false, -0.35);
+  noteShape.absellipse(-8.5, -9, 6.6, 4.8, 0, Math.PI * 2, false, -0.35);
   const head1Geo = new THREE.ExtrudeGeometry(noteShape, {
-    depth: 3.2,
+    depth: 4.2,
     bevelEnabled: true,
-    bevelThickness: 0.8,
-    bevelSize: 0.8,
+    bevelThickness: 1,
+    bevelSize: 1,
   });
   head1Geo.center();
   const head1 = new THREE.Mesh(head1Geo, mat);
-  head1.position.set(-6, -6.5, 0);
+  head1.position.set(-8.5, -8.5, 0);
   group.add(head1);
 
   // Notehead 2
   const head2 = head1.clone();
-  head2.position.set(6, -3, 0);
+  head2.position.set(8.5, -4, 0);
   group.add(head2);
 
   // Stems
-  const stemGeo = new THREE.BoxGeometry(2, 18, 3.2);
+  const stemGeo = new THREE.BoxGeometry(2.6, 24, 4.2);
   stemGeo.center();
   const stem1 = new THREE.Mesh(stemGeo, mat);
-  stem1.position.set(-1.8, 1.5, 0);
+  stem1.position.set(-2.5, 2, 0);
   group.add(stem1);
 
   const stem2 = new THREE.Mesh(stemGeo, mat);
-  stem2.position.set(10.2, 5, 0);
+  stem2.position.set(14.5, 6.5, 0);
   group.add(stem2);
 
   // Connecting beam
-  const beamGeo = new THREE.BoxGeometry(16, 4, 3.2);
+  const beamGeo = new THREE.BoxGeometry(22, 5.2, 4.2);
   beamGeo.center();
   const beam = new THREE.Mesh(beamGeo, mat);
-  beam.position.set(4.2, 13, 0);
+  beam.position.set(6, 17.5, 0);
   beam.rotation.z = 0.2;
   group.add(beam);
 
@@ -197,39 +196,49 @@ function createChessModel(): THREE.Group {
   const group = new THREE.Group();
   const mat = getPaperMaterial();
 
-  // Flat 2D origami paper knight with clear silhouette and beveled relief
+  // Flat 2D chess pawn with clean, iconic paper relief silhouette
   const shape = new THREE.Shape();
-  shape.moveTo(-8, -11);
-  shape.lineTo(8, -11);
-  shape.lineTo(6.5, -7);
-  shape.lineTo(9, -0.5);
-  shape.lineTo(5.5, 6);
-  shape.lineTo(9.5, 12);
-  shape.lineTo(2.5, 13.5);
-  shape.lineTo(-4.5, 9);
-  shape.lineTo(-8.5, 3.5);
-  shape.lineTo(-5.5, -0.5);
-  shape.lineTo(-6.5, -7);
+  // Base
+  shape.moveTo(-13, -17);
+  shape.lineTo(13, -17);
+  shape.lineTo(13, -13.5);
+  shape.lineTo(9.5, -10.5);
+  // Waist curve up to collar
+  shape.lineTo(5.5, -2);
+  shape.lineTo(4.5, 3.5);
+  // Collar ring
+  shape.lineTo(7, 5);
+  shape.lineTo(7, 7.5);
+  shape.lineTo(3, 7.5);
+  // Head bulb dome
+  const headR = 6.2;
+  const headCY = 13.5;
+  const steps = 14;
+  for (let i = 0; i <= steps; i++) {
+    const a = -Math.PI * 0.2 + (i / steps) * (Math.PI * 1.4);
+    shape.lineTo(Math.cos(a) * headR, headCY + Math.sin(a) * headR);
+  }
+  // Left collar
+  shape.lineTo(-3, 7.5);
+  shape.lineTo(-7, 7.5);
+  shape.lineTo(-7, 5);
+  // Left waist curve down to base
+  shape.lineTo(-4.5, 3.5);
+  shape.lineTo(-5.5, -2);
+  shape.lineTo(-9.5, -10.5);
+  shape.lineTo(-13, -13.5);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
-    depth: 3.5,
+    depth: 4.5,
     bevelEnabled: true,
-    bevelThickness: 0.8,
-    bevelSize: 0.8,
+    bevelThickness: 1.0,
+    bevelSize: 1.0,
     bevelSegments: 1,
   });
   geo.center();
-  const knight = new THREE.Mesh(geo, mat);
-  knight.position.set(0, 1.5, 0);
-  group.add(knight);
-
-  // Plinth base
-  const baseGeo = new THREE.BoxGeometry(19, 3.5, 4);
-  baseGeo.center();
-  const base = new THREE.Mesh(baseGeo, mat);
-  base.position.set(0, -10.5, 0);
-  group.add(base);
+  const pawn = new THREE.Mesh(geo, mat);
+  group.add(pawn);
 
   return group;
 }
@@ -240,23 +249,23 @@ function createMathModel(): THREE.Group {
 
   // Flat 2D Sigma (Σ) with beveled relief
   const shape = new THREE.Shape();
-  shape.moveTo(-9, 12);
-  shape.lineTo(9, 12);
-  shape.lineTo(9, 7.5);
-  shape.lineTo(-2.5, 7.5);
-  shape.lineTo(4.5, 0);
-  shape.lineTo(-2.5, -7.5);
-  shape.lineTo(9, -7.5);
-  shape.lineTo(9, -12);
-  shape.lineTo(-9, -12);
+  shape.moveTo(-12, 16);
+  shape.lineTo(12, 16);
+  shape.lineTo(12, 10);
+  shape.lineTo(-3.5, 10);
+  shape.lineTo(6, 0);
+  shape.lineTo(-3.5, -10);
+  shape.lineTo(12, -10);
+  shape.lineTo(12, -16);
+  shape.lineTo(-12, -16);
   shape.lineTo(0.5, 0);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
-    depth: 3.5,
+    depth: 4.5,
     bevelEnabled: true,
-    bevelThickness: 0.8,
-    bevelSize: 0.8,
+    bevelThickness: 1.0,
+    bevelSize: 1.0,
     bevelSegments: 1,
   });
   geo.center();
@@ -272,23 +281,23 @@ function createFinanceModel(): THREE.Group {
 
   // Flat 2D ascending candlestick chart with beveled bars and wicks
   const barsData = [
-    { height: 11, offset: -8 },
-    { height: 17, offset: 0 },
-    { height: 24, offset: 8 },
+    { height: 14, offset: -11 },
+    { height: 22, offset: 0 },
+    { height: 31, offset: 11 },
   ];
 
   barsData.forEach(({ height, offset }) => {
-    const barGeo = new THREE.BoxGeometry(5, height, 3.5);
+    const barGeo = new THREE.BoxGeometry(6.5, height, 4.5);
     barGeo.center();
     const bar = new THREE.Mesh(barGeo, mat);
-    bar.position.set(offset, (height - 24) / 2 + 3, 0);
+    bar.position.set(offset, (height - 31) / 2 + 4, 0);
     group.add(bar);
 
     // Wick
-    const wickGeo = new THREE.BoxGeometry(1.4, height + 7, 1.6);
+    const wickGeo = new THREE.BoxGeometry(1.8, height + 9, 2);
     wickGeo.center();
     const wick = new THREE.Mesh(wickGeo, mat);
-    wick.position.set(offset, (height - 24) / 2 + 3, 0);
+    wick.position.set(offset, (height - 31) / 2 + 4, 0);
     group.add(wick);
   });
 
@@ -301,17 +310,17 @@ function createEconomyModel(): THREE.Group {
   const wireMat = getPaperMaterial(true);
 
   // Flat 2D interconnected paper mesh with vertex node beads
-  const icoGeo = new THREE.IcosahedronGeometry(12, 0);
+  const icoGeo = new THREE.IcosahedronGeometry(16, 0);
   icoGeo.center();
   const wire = new THREE.Mesh(icoGeo, wireMat);
   group.add(wire);
 
   // Central core bead
-  const core = new THREE.Mesh(new THREE.OctahedronGeometry(4.2, 0), mat);
+  const core = new THREE.Mesh(new THREE.OctahedronGeometry(5.5, 0), mat);
   group.add(core);
 
   // Node beads on vertices
-  const nodeGeo = new THREE.OctahedronGeometry(2.5, 0);
+  const nodeGeo = new THREE.OctahedronGeometry(3.4, 0);
   nodeGeo.center();
   const posAttr = icoGeo.attributes.position;
   for (let i = 0; i < posAttr.count; i += 2) {
@@ -349,10 +358,10 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
     // Scene & Lighting: Directional light from top-left illuminates beveled facets to highlight depth
     const scene = new THREE.Scene();
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.25);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.6);
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.7);
     dirLight1.position.set(30, 45, 50);
     scene.add(dirLight1);
 
@@ -375,7 +384,7 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
     };
     updateCameraAndSize();
 
-    // The 8 models laid flat on screen: zero rotation, front-facing 2D silhouettes with beveled relief
+    // The 8 models laid flat on screen: pawn for chess, larger dimensions, zero rotation
     const modelConfigs: {
       type: ModelType;
       domId: string;
@@ -392,7 +401,7 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
     ];
 
     const models: PaperModelInstance[] = modelConfigs.map(
-      ({ type, domId, creator }, idx) => {
+      ({ type, domId, creator }) => {
         const group = creator();
         // Strictly flat on the screen with zero rotation
         group.rotation.set(0, 0, 0);
@@ -403,19 +412,16 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
           type,
           domId,
           group,
-          floatOffset: idx * 0.8,
         };
       }
     );
     modelsRef.current = models;
 
-    // Animation loop: subtle vertical floating levitation with zero rotation
+    // Stable rendering: update positions to lock to DOM slots without floating animation
     let animId: number;
-    const clock = new THREE.Clock();
 
-    const animate = () => {
-      animId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
+    const render = () => {
+      animId = requestAnimationFrame(render);
       const containerRect = container.getBoundingClientRect();
       const canvasWidth = containerRect.width;
       const canvasHeight = containerRect.height;
@@ -428,23 +434,16 @@ export function PaperCanvas({ containerRef, scrollProgress }: PaperCanvasProps) 
         const screenX = targetRect.left + targetRect.width / 2 - containerRect.left;
         const screenY = targetRect.top + targetRect.height / 2 - containerRect.top;
 
-        const targetX = screenX - canvasWidth / 2;
-        const targetY = -(screenY - canvasHeight / 2);
-
-        // Tactile vertical floating motion
-        const floatY = Math.sin(elapsed * 1.5 + item.floatOffset) * 2;
-
-        item.group.position.x = targetX;
-        item.group.position.y = targetY + floatY;
+        // Position stably at center of inline placeholder slot, zero rotation, no floating
+        item.group.position.x = screenX - canvasWidth / 2;
+        item.group.position.y = -(screenY - canvasHeight / 2);
         item.group.position.z = 0;
-
-        // Completely flat on screen - zero rotation
         item.group.rotation.set(0, 0, 0);
       });
 
       renderer.render(scene, camera);
     };
-    animate();
+    render();
 
     const handleResize = () => {
       updateCameraAndSize();
