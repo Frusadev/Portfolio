@@ -58,12 +58,12 @@ export function WhoAmISection({ className }: WhoAmISectionProps) {
       id="whoami"
       aria-label="Who am I"
       className={cn(
-        "w-full flex items-start justify-center md:justify-end px-6 sm:px-12 md:px-16 lg:px-24 select-none pb-24 md:pb-32 pt-2 md:pt-4",
+        "w-full flex items-start justify-start md:justify-end px-6 sm:px-12 md:px-16 lg:px-24 select-none pb-12 md:pb-32 pt-2 md:pt-4",
         className
       )}
     >
-      <div className="max-w-4xl md:max-w-3xl lg:max-w-4xl w-full text-center md:text-left">
-        <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-tight text-accent-secondary leading-[1.18] flex flex-wrap justify-center md:justify-start gap-x-[0.3em] gap-y-2">
+      <div className="max-w-4xl md:max-w-3xl lg:max-w-4xl w-full text-left">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-tight text-accent-secondary leading-[1.18] flex flex-wrap justify-start gap-x-[0.3em] gap-y-2 text-left">
           {words.map((word, wordIndex) => (
             <span key={wordIndex} className="inline-flex whitespace-nowrap">
               {word.split("").map((char, charIndex) => (
