@@ -40,9 +40,10 @@ export function WhoAmISection({ className }: WhoAmISectionProps) {
           duration: 0.65,
           ease: "power3.out",
           stagger: 0.028,
+          delay: 0.5,
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 80%",
+            start: "top 95%",
             once: true,
           },
         }
@@ -57,7 +58,7 @@ export function WhoAmISection({ className }: WhoAmISectionProps) {
       id="whoami"
       aria-label="Who am I"
       className={cn(
-        "min-h-[60vh] md:min-h-[80vh] w-full flex items-center justify-start px-6 sm:px-12 md:px-16 lg:px-24 select-none py-16 md:py-24",
+        "w-full flex items-start justify-start px-6 sm:px-12 md:px-16 lg:px-24 select-none pb-24 md:pb-32 pt-2 md:pt-4",
         className
       )}
     >

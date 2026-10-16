@@ -45,7 +45,7 @@ export function HeySection({ className }: HeySectionProps) {
       id="hey"
       aria-label="Hey"
       className={cn(
-        "min-h-[80vh] md:min-h-screen w-full flex items-center justify-start px-6 sm:px-12 md:px-16 lg:px-24 select-none",
+        "w-full flex items-start justify-start pt-32 sm:pt-40 md:pt-48 lg:pt-52 pb-4 md:pb-8 px-6 sm:px-12 md:px-16 lg:px-24 select-none",
         className
       )}
     >
