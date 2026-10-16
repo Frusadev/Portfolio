@@ -105,6 +105,7 @@ When validation is warranted:
 - Keep portfolio content accurate. Never invent projects, employment history, credentials, client relationships, achievements, testimonials, or measurable results.
 - Reuse existing design patterns and components rather than creating visually inconsistent alternatives.
 - Avoid uppercase text and visible borders: Maintain a minimalist, soft, human aesthetic by avoiding all-caps/uppercase styling and visible borders across components and layouts.
+- Animation framework: Use GSAP exclusively for animations across the website (with @gsap/react and gsap); do not use Framer Motion.
 - Do not introduce unnecessary backend services, dependencies, infrastructure, or complex abstractions for a primarily presentational website.
 - Do not assume a feature, design system, framework, or architecture exists. Confirm only the relevant implementation when the task depends on it.
 

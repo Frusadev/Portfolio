@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { motion, type Variants } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { cn } from "@/lib/utils";
 
 interface HeySectionProps {
@@ -10,39 +11,37 @@ interface HeySectionProps {
 
 const text = "Hey! I'm Daniel";
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.045,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const charVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    filter: "blur(14px)",
-    x: -16,
-  },
-  visible: {
-    opacity: 1,
-    filter: "blur(0px)",
-    x: 0,
-    transition: {
-      duration: 0.65,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
-
 export function HeySection({ className }: HeySectionProps) {
+  const containerRef = React.useRef<HTMLElement>(null);
   const words = text.split(" ");
+
+  useGSAP(
+    () => {
+      const chars = gsap.utils.toArray<HTMLElement>(".hey-char");
+      gsap.fromTo(
+        chars,
+        {
+          opacity: 0,
+          filter: "blur(14px)",
+          x: -16,
+        },
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          x: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.045,
+          delay: 0.15,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
     <section
+      ref={containerRef}
       id="hey"
       aria-label="Hey"
       className={cn(
@@ -50,26 +49,21 @@ export function HeySection({ className }: HeySectionProps) {
         className
       )}
     >
-      <motion.h1
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium tracking-tight text-text-primary leading-[1.08] flex flex-wrap gap-x-[0.3em] gap-y-2"
-      >
+      <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium tracking-tight text-text-primary leading-[1.08] flex flex-wrap gap-x-[0.3em] gap-y-2">
         {words.map((word, wordIndex) => (
           <span key={wordIndex} className="inline-flex whitespace-nowrap">
             {word.split("").map((char, charIndex) => (
-              <motion.span
+              <span
                 key={charIndex}
-                variants={charVariants}
-                className="inline-block"
+                className="hey-char inline-block will-change-[filter,opacity,transform]"
+                style={{ opacity: 0, filter: "blur(14px)" }}
               >
                 {char}
-              </motion.span>
+              </span>
             ))}
           </span>
         ))}
-      </motion.h1>
+      </h1>
     </section>
   );
 }

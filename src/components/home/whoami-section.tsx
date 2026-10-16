@@ -1,8 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface WhoAmISectionProps {
   className?: string;
@@ -11,22 +17,43 @@ interface WhoAmISectionProps {
 const text = "I'm a hyperactive, imagination fueled creative.";
 
 export function WhoAmISection({ className }: WhoAmISectionProps) {
+  const containerRef = React.useRef<HTMLElement>(null);
   const words = text.split(" ");
 
-  // Count total characters to compute right-to-left delay
-  let charCounter = 0;
-  const wordCharMap = words.map((word) => {
-    const chars = word.split("").map((char) => ({
-      char,
-      index: charCounter++,
-    }));
-    return { word, chars };
-  });
+  useGSAP(
+    () => {
+      const chars = gsap.utils.toArray<HTMLElement>(".whoami-char");
+      // Reverse array so rightmost characters animate first (opposite direction)
+      const reversedChars = [...chars].reverse();
 
-  const totalChars = charCounter;
+      gsap.fromTo(
+        reversedChars,
+        {
+          opacity: 0,
+          filter: "blur(14px)",
+          x: 16,
+        },
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          x: 0,
+          duration: 0.65,
+          ease: "power3.out",
+          stagger: 0.028,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
     <section
+      ref={containerRef}
       id="whoami"
       aria-label="Who am I"
       className={cn(
@@ -36,38 +63,17 @@ export function WhoAmISection({ className }: WhoAmISectionProps) {
     >
       <div className="max-w-6xl">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-tight text-accent-secondary leading-[1.18] flex flex-wrap gap-x-[0.3em] gap-y-2">
-          {wordCharMap.map(({ chars }, wordIndex) => (
+          {words.map((word, wordIndex) => (
             <span key={wordIndex} className="inline-flex whitespace-nowrap">
-              {chars.map(({ char, index }) => {
-                // Reverse delay: rightmost characters animate first (delay closest to 0.1s)
-                const reverseIndex = totalChars - 1 - index;
-                const delay = 0.12 + reverseIndex * 0.028;
-
-                return (
-                  <motion.span
-                    key={index}
-                    initial={{
-                      opacity: 0,
-                      filter: "blur(14px)",
-                      x: 16,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      filter: "blur(0px)",
-                      x: 0,
-                    }}
-                    viewport={{ once: true, margin: "-15% 0px -15% 0px" }}
-                    transition={{
-                      duration: 0.6,
-                      ease: [0.16, 1, 0.3, 1],
-                      delay,
-                    }}
-                    className="inline-block"
-                  >
-                    {char}
-                  </motion.span>
-                );
-              })}
+              {word.split("").map((char, charIndex) => (
+                <span
+                  key={charIndex}
+                  className="whoami-char inline-block will-change-[filter,opacity,transform]"
+                  style={{ opacity: 0, filter: "blur(14px)" }}
+                >
+                  {char}
+                </span>
+              ))}
             </span>
           ))}
         </h2>
