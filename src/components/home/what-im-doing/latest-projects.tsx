@@ -3,17 +3,20 @@ import { getLatestProjects } from "@/app/actions/portfolio";
 import { ProjectCard } from "./project-card";
 
 export async function LatestProjects() {
-  const projects = await getLatestProjects(3);
+  const projects = await getLatestProjects(9);
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-2">
+    <div className="rounded-3xl bg-surface/40 p-8 sm:p-10 flex flex-col justify-between gap-8 h-full">
+      <div className="flex items-center justify-between">
         <span className="text-xs font-mono text-text-muted tracking-wide">
           Latest projects
         </span>
+        <span className="text-xs font-mono text-text-muted">
+          3 × 3 grid
+        </span>
       </div>
 
-      <div className="grid grid-cols-3 gap-8 sm:gap-12 md:gap-16 justify-items-start max-w-2xl">
+      <div className="grid grid-cols-3 gap-y-7 gap-x-4 sm:gap-x-8 sm:gap-y-9 justify-items-center">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
