@@ -17,7 +17,13 @@ async function requireAdmin() {
 
 // Projects
 export async function getProjects() {
-  return await db.select().from(projects).orderBy(desc(projects.createdAt));
+  try {
+    const results = await db.select().from(projects).orderBy(desc(projects.createdAt));
+    if (results.length > 0) return results;
+  } catch (error) {
+    console.error("Failed to fetch projects, using fallback:", error);
+  }
+  return FALLBACK_PROJECTS;
 }
 
 const FALLBACK_PROJECTS = [

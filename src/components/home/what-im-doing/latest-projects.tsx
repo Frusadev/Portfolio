@@ -7,12 +7,9 @@ export async function LatestProjects() {
 
   return (
     <div className="rounded-3xl bg-surface/40 p-8 sm:p-10 flex flex-col justify-between gap-8 h-full">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center">
         <span className="text-xs font-mono text-text-muted tracking-wide">
           Latest projects
-        </span>
-        <span className="text-xs font-mono text-text-muted">
-          3 × 3 grid
         </span>
       </div>
 

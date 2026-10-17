@@ -55,7 +55,7 @@ export function LoveSection({ className }: LoveSectionProps) {
       id="love"
       aria-label="What I love"
       className={cn(
-        "relative w-full min-h-screen flex items-center justify-start px-6 sm:px-12 md:px-16 lg:px-24 select-none py-28 md:py-40",
+        "relative w-full min-h-0 md:min-h-screen flex items-center justify-start px-6 sm:px-12 md:px-16 lg:px-24 select-none py-16 sm:py-24 md:py-36 lg:py-40",
         className
       )}
     >

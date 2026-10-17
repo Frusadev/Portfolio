@@ -125,7 +125,7 @@ export function Header({
         </nav>
 
         {/* Top Right: Inquiries + Email */}
-        <div className="ml-auto pointer-events-auto flex items-center gap-2 md:gap-2.5 text-[12px] md:text-[13px] font-normal">
+        <div className="ml-auto pointer-events-auto hidden sm:flex items-center gap-2 md:gap-2.5 text-[12px] md:text-[13px] font-normal">
           <span className="text-text-secondary">For inquiries</span>
           <a
             href={`mailto:${email}`}
@@ -136,10 +136,10 @@ export function Header({
         </div>
       </header>
 
-      {/* Mobile Bottom Navbar: Horizontal, scrollable, no bg, small font with subtle scroll indicator */}
+      {/* Mobile Bottom Navbar: Horizontal, scrollable, small font with subtle scroll indicator */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-transparent px-4 pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pointer-events-auto select-none"
+        className="fixed bottom-0 left-0 right-0 z-50 md:hidden backdrop-blur-lg bg-background/80 px-6 pt-2.5 pb-[calc(0.85rem+env(safe-area-inset-bottom))] pointer-events-auto select-none"
       >
         <div
           ref={scrollContainerRef}

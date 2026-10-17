@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="min-h-screen w-full bg-background text-foreground">
       {/* Opening Hero Block: Centered vertically relative to the screen on mobile */}
-      <div className="min-h-[100dvh] flex flex-col justify-center">
+      <div className="min-h-[75dvh] sm:min-h-[85dvh] md:min-h-[90dvh] flex flex-col justify-center pt-16 sm:pt-20 md:py-0">
         <HeySection />
         <WhoAmISection />
       </div>

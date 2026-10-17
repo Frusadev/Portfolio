@@ -76,11 +76,22 @@ export async function getLatestPosts(limit = 3) {
 export async function getPost(slug: string) {
   try {
     const result = await db.select().from(posts).where(eq(posts.slug, slug)).limit(1);
-    return result[0] || null;
+    if (result[0]) return result[0];
   } catch (error) {
-    console.error("Failed to fetch post:", error);
-    return null;
+    console.error("Failed to fetch post, checking fallback:", error);
   }
+  const fallback = FALLBACK_POSTS.find((p) => p.slug === slug);
+  if (fallback) {
+    return {
+      ...fallback,
+      content: `# ${fallback.title}\n\n${fallback.description}\n\nExploring deep concepts across quantitative modeling, systems architecture, and creative engineering.\n\nWhen we work on something we truly love, curiosity eliminates friction. We don't need external pressure to spend thousands of hours deconstructing an idea, finding its underlying invariants, and translating those mathematical patterns into software and interfaces that feel effortless to touch.`,
+      coverImage: null,
+      published: true,
+      authorId: "daniel",
+      updatedAt: fallback.createdAt,
+    };
+  }
+  return null;
 }
 
 export async function createPost(data: { title: string; description: string; content: string; slug: string; coverImage?: string; tags?: string[] }) {
