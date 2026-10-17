@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 
 export interface ProjectItem {
   id: string;
@@ -24,7 +25,7 @@ export function ProjectCard({ project }: { project: ProjectItem }) {
     <div className="relative group flex flex-col items-center">
       {/* Popover on Hover with Gradient Blur */}
       <div
-        className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out backdrop-blur-xl bg-[#0f0f12]/85 shadow-2xl shadow-black/80"
+        className="absolute bottom-full mb-3.5 left-1/2 -translate-x-1/2 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out backdrop-blur-xl bg-[#0f0f12]/85 shadow-2xl shadow-black/80"
         style={{
           maskImage:
             "radial-gradient(ellipse at center, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%)",
@@ -74,7 +75,13 @@ export function ProjectCard({ project }: { project: ProjectItem }) {
         rel={hasLink ? "noopener noreferrer" : undefined}
         className="flex flex-col items-center group/btn focus:outline-none"
       >
-        <div className="w-16 h-16 rounded-2xl bg-surface_elevated/90 flex items-center justify-center p-3.5 transition-transform duration-300 group-hover:scale-105 group-hover:bg-surface_elevated">
+        <div
+          className={`w-20 h-20 sm:w-22 sm:h-22 rounded-2xl flex items-center justify-center p-4 transition-all duration-300 group-hover:scale-105 shadow-lg shadow-black/30 ${
+            project.logo
+              ? "bg-surface_elevated/90 group-hover:bg-surface_elevated"
+              : "bg-[#EDEDED] text-[#111113] group-hover:bg-white"
+          }`}
+        >
           {project.logo ? (
             <img
               src={project.logo}
@@ -82,16 +89,10 @@ export function ProjectCard({ project }: { project: ProjectItem }) {
               className="w-full h-full object-contain"
             />
           ) : (
-            <Image
-              src="/icons/github.svg"
-              alt="GitHub project"
-              width={26}
-              height={26}
-              className="w-6 h-6 text-text-primary opacity-80 group-hover:opacity-100 transition-opacity"
-            />
+            <GitHubIcon className="w-11 h-11 sm:w-12 sm:h-12 transition-transform duration-300 group-hover:scale-105" />
           )}
         </div>
-        <span className="text-xs md:text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors mt-2.5 text-center max-w-[120px] truncate">
+        <span className="text-xs md:text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors mt-3 text-center max-w-[130px] truncate">
           {project.title}
         </span>
       </Link>

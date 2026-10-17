@@ -13,7 +13,7 @@ export async function LatestProjects() {
         </span>
       </div>
 
-      <div className="grid grid-cols-3 gap-6 sm:gap-10 md:gap-14 justify-items-start max-w-xl">
+      <div className="grid grid-cols-3 gap-8 sm:gap-12 md:gap-16 justify-items-start max-w-2xl">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
