@@ -2,6 +2,9 @@ import * as React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPost } from "@/app/actions/blog";
+import { getComments } from "@/app/actions/comments";
+import { getOptionalUser } from "@/app/actions/auth";
+import { CommentSection } from "@/components/blog/comment-section";
 import { marked } from "marked";
 
 interface BlogPostPageProps {
@@ -30,6 +33,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const [comments, currentUser] = await Promise.all([
+    getComments(post.id),
+    getOptionalUser(),
+  ]);
+
   const htmlContent = await marked.parse(post.content || "");
 
   return (
@@ -37,13 +45,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="max-w-3xl mx-auto flex flex-col gap-10">
         {/* Navigation & Metadata */}
         <div className="flex flex-col gap-4">
-          <Link
-            href="/blog"
-            className="text-xs font-mono text-text-muted hover:text-text-primary transition-colors inline-flex items-center gap-1.5"
-          >
-            ← Back to writing
-          </Link>
-
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <span className="text-xs font-mono text-text-muted">
               {new Date(post.createdAt).toLocaleDateString("en-US", {
@@ -83,8 +84,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             prose-a:text-accent-primary prose-a:underline prose-a:underline-offset-4
             prose-code:text-accent-secondary prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
             prose-pre:bg-surface_elevated/80 prose-pre:rounded-2xl
-            prose-blockquote:text-text-secondary prose-blockquote:font-normal prose-blockquote:border-l-0"
+            prose-blockquote:text-text-secondary prose-blockquote:font-normal prose-blockquote:border-l-0
+            prose-hr:border-0 prose-hr:h-[1px] prose-hr:bg-white/[0.06] prose-hr:my-10"
           dangerouslySetInnerHTML={{ __html: htmlContent }}
+        />
+
+        {/* Comments Section */}
+        <CommentSection
+          postId={post.id}
+          initialComments={comments}
+          currentUser={currentUser}
         />
 
         {/* Footer Back Link */}

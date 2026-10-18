@@ -1,9 +1,11 @@
 "use client";
 
+import * as React from "react";
 import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
-import { Loader2, Github } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -32,7 +34,7 @@ export default function LoginPage() {
         callbackURL: "/",
       });
       setSent(true);
-      toast.success("Magic link sent to your email!");
+      toast.success("Magic link sent to your email");
     } catch {
       toast.error("Failed to send magic link");
     } finally {
@@ -41,90 +43,100 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-full w-full min-w-full items-center justify-center p-4 bg-[#e6dcc6]">
-      <div className="w-full max-w-md bg-background border-4 border-red-950 shadow-[8px_8px_0px_0px_rgba(69,10,10,1)]">
-        <div className="p-8 border-b-4 border-red-950 bg-red-950 text-[#e6dcc6]">
-          <h2 className="text-3xl font-bold uppercase tracking-widest text-center">
-            Login
-          </h2>
+    <main className="min-h-screen w-full bg-background text-foreground flex items-center justify-center px-6 py-28 md:py-36 select-none">
+      <div className="w-full max-w-md flex flex-col gap-8">
+        {/* Header */}
+        <div className="flex flex-col text-center gap-2">
+          <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-text-primary">
+            Welcome back
+          </h1>
+          <p className="text-sm text-text-secondary">
+            Sign in to access admin tools or leave comments on articles.
+          </p>
         </div>
 
-        <div className="p-8 space-y-6">
+        {/* Card */}
+        <div className="rounded-3xl bg-surface/50 p-8 sm:p-10 flex flex-col gap-6 shadow-2xl">
           {sent ? (
-            <div className="text-center space-y-6 animate-in fade-in zoom-in-95">
-              <div className="bg-red-950/5 border-2 border-red-950 text-red-950 p-6">
-                <p className="font-bold text-lg mb-2">Check your email!</p>
-                <p className="opacity-80 text-sm">
-                  We&apos;ve sent a magic link to your inbox.
-                </p>
+            <div className="text-center flex flex-col items-center gap-4 py-4 animate-in fade-in duration-300">
+              <div className="w-12 h-12 rounded-full bg-surface_elevated flex items-center justify-center text-text-primary">
+                ✉️
               </div>
+              <h2 className="text-lg font-medium text-text-primary">
+                Check your inbox
+              </h2>
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                We sent a secure magic link to{" "}
+                <span className="text-text-primary font-mono">{email}</span>. Click
+                the link to sign in automatically.
+              </p>
               <button
+                type="button"
                 onClick={() => setSent(false)}
-                className="w-full py-3 bg-transparent border-2 border-red-950 text-red-950 font-bold uppercase tracking-wider hover:bg-red-950 hover:text-[#e6dcc6] transition-colors"
+                className="mt-4 text-xs font-mono text-accent-secondary hover:text-white transition-colors"
               >
-                Try another email
+                ← Use a different email
               </button>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
+              {/* GitHub Button */}
               <button
-                className="w-full py-3 px-4 flex items-center justify-center gap-3 bg-[#e6dcc6] border-2 border-red-950 text-red-950 font-bold uppercase tracking-wider hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] transition-all"
+                type="button"
                 onClick={handleGithubSignIn}
                 disabled={loading}
+                className="w-full py-3.5 px-5 flex items-center justify-center gap-3 rounded-full bg-white hover:bg-neutral-100 text-[#0a0a0a] font-medium text-sm transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-neutral-800" />
                 ) : (
-                  <Github className="h-5 w-5" />
+                  <GitHubIcon className="w-4 h-4 text-neutral-900" />
                 )}
-                <span>GitHub Login</span>
+                <span>Continue with GitHub</span>
               </button>
 
-              <div className="relative py-2">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t-2 border-red-950/20" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase tracking-widest font-bold">
-                  <span className="bg-[#e6dcc6] px-4 text-red-950/60">
-                    Or via Email
-                  </span>
-                </div>
+              {/* Soft Divider */}
+              <div className="relative flex items-center justify-center my-1">
+                <div className="w-full h-px bg-white/[0.06]" />
+                <span className="absolute bg-[#0a0a0a] px-3 text-[11px] font-mono text-text-muted">
+                  or with email
+                </span>
               </div>
 
-              <form onSubmit={handleSignIn} className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-xs uppercase font-bold text-red-950 tracking-wider ml-1">
-                    Email Address
+              {/* Magic Link Email Form */}
+              <form onSubmit={handleSignIn} className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="email"
+                    className="text-xs font-mono text-text-secondary ml-1"
+                  >
+                    email address
                   </label>
                   <input
+                    id="email"
                     type="email"
-                    placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@domain.com"
                     required
                     disabled={loading}
-                    className="flex h-12 w-full bg-white/50 border-2 border-red-950 px-3 py-2 text-red-950 placeholder:text-red-950/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-950 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 font-bold"
+                    className="w-full bg-surface_elevated/80 text-text-primary placeholder:text-text-muted text-sm rounded-2xl px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-white/20 transition-all border-0"
                   />
                 </div>
+
                 <button
                   type="submit"
-                  className="w-full py-3 bg-red-950 text-[#e6dcc6] font-bold uppercase tracking-wider hover:bg-red-900 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]"
-                  disabled={loading}
+                  disabled={loading || !email.trim()}
+                  className="w-full py-3.5 px-5 mt-2 rounded-full bg-surface_elevated hover:bg-surface_elevated/80 text-text-primary text-xs font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {loading ? (
-                    <div className="flex items-center justify-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>Sending...</span>
-                    </div>
-                  ) : (
-                    "Send Magic Link"
-                  )}
+                  {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                  <span>Send magic link</span>
                 </button>
               </form>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

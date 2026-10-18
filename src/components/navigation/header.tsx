@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export interface NavItem {
@@ -11,10 +12,9 @@ export interface NavItem {
 }
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-  { id: "work", label: "Work", href: "#work" },
-  { id: "about", label: "About", href: "#about" },
-  { id: "playground", label: "Playground", href: "#playground" },
-  { id: "contact", label: "Contact", href: "#contact" },
+  { id: "home", label: "home", href: "/" },
+  { id: "projects", label: "projects", href: "/projects" },
+  { id: "writing", label: "writing", href: "/blog" },
 ];
 
 interface HeaderProps {
@@ -25,11 +25,12 @@ interface HeaderProps {
 
 export function Header({
   items = DEFAULT_NAV_ITEMS,
-  email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@huyml.co",
+  email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "daniel@ametsowou.me",
   className,
 }: HeaderProps) {
+  const pathname = usePathname();
   const [hoveredId, setHoveredId] = React.useState<string | null>(null);
-  const [activeId, setActiveId] = React.useState<string>(items[0]?.id || "work");
+  const [activeId, setActiveId] = React.useState<string>(items[0]?.id || "home");
 
   // Mobile scroll indicator tracking
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -55,18 +56,21 @@ export function Header({
     return () => window.removeEventListener("resize", checkScroll);
   }, [checkScroll]);
 
-  // Track hash change or active section
+  // Track active item based on pathname and hash
   React.useEffect(() => {
-    const handleHash = () => {
+    if (pathname === "/") {
       const hash = window.location.hash.replace("#", "");
       if (hash && items.some((item) => item.id === hash)) {
         setActiveId(hash);
+      } else {
+        setActiveId("home");
       }
-    };
-    handleHash();
-    window.addEventListener("hashchange", handleHash);
-    return () => window.removeEventListener("hashchange", handleHash);
-  }, [items]);
+    } else if (pathname.startsWith("/projects") || pathname.startsWith("/work")) {
+      setActiveId("projects");
+    } else if (pathname.startsWith("/blog")) {
+      setActiveId("writing");
+    }
+  }, [pathname, items]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,

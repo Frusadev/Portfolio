@@ -199,6 +199,54 @@ export async function getCurrentAcademicWork() {
   return FALLBACK_ACADEMIC_WORK;
 }
 
+export async function getAcademicWorkList() {
+  await requireAdmin();
+  try {
+    return await db.select().from(academicWork).orderBy(desc(academicWork.createdAt));
+  } catch (error) {
+    console.error("Failed to fetch academic work list:", error);
+    return [FALLBACK_ACADEMIC_WORK];
+  }
+}
+
+export async function updateCurrentAcademicWork(data: {
+  title: string;
+  field: string;
+  institution: string;
+  description: string;
+  status?: string;
+}) {
+  await requireAdmin();
+  try {
+    // Set all other academic work current to false
+    await db.update(academicWork).set({ current: false });
+    // Check if any exists
+    const existing = await db.select().from(academicWork).limit(1);
+    if (existing.length > 0) {
+      await db
+        .update(academicWork)
+        .set({
+          ...data,
+          current: true,
+          updatedAt: new Date(),
+        })
+        .where(eq(academicWork.id, existing[0].id));
+    } else {
+      await db.insert(academicWork).values({
+        id: nanoid(),
+        ...data,
+        current: true,
+      });
+    }
+    revalidatePath("/");
+    revalidatePath("/admin/academic");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to update academic work:", error);
+    return { success: false, error: "Failed to update academic work" };
+  }
+}
+
 export async function getProject(id: string) {
   const result = await db.select().from(projects).where(eq(projects.id, id));
   return result[0];

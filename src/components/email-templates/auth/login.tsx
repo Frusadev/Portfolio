@@ -25,22 +25,26 @@ export const LoginEmail = ({
       <Preview>Sign in to your account</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Text style={heading}>Welcome Back</Text>
-          <Text style={paragraph}>Hello,</Text>
-          <Text style={paragraph}>
-            We received a request to sign in to your account using this email
-            address: <strong>{email}</strong>.
-          </Text>
+          <Section style={card}>
+            <Text style={tag}>Daniel Ametsowou</Text>
+            <Text style={heading}>Welcome back</Text>
+            <Text style={paragraph}>
+              A sign-in request was received for{" "}
+              <span style={highlight}>{email}</span>. Click the button below to
+              complete your sign-in.
+            </Text>
 
-          <Section style={btnContainer}>
-            <Link style={button} href={magicLink}>
-              Sign in
-            </Link>
+            <Section style={btnContainer}>
+              <Link style={button} href={magicLink}>
+                Sign in to your account
+              </Link>
+            </Section>
+
+            <Text style={footer}>
+              If you didn&apos;t request this email, you can safely ignore it.
+              This magic link expires shortly.
+            </Text>
           </Section>
-
-          <Text style={footer}>
-            If you didn&apos;t request this, you can safely ignore this email.
-          </Text>
         </Container>
       </Body>
     </Html>
@@ -48,54 +52,71 @@ export const LoginEmail = ({
 };
 
 const main = {
-  backgroundColor: "#fbf5e9",
+  backgroundColor: "#050505",
   fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+  padding: "40px 0",
 };
 
 const container = {
   margin: "0 auto",
-  padding: "20px 0 48px",
-  maxWidth: "580px",
+  maxWidth: "540px",
+  padding: "0 20px",
+};
+
+const card = {
+  backgroundColor: "#0A0A0A",
+  borderRadius: "20px",
+  padding: "40px 36px",
+};
+
+const tag = {
+  fontSize: "12px",
+  letterSpacing: "0.5px",
+  color: "#5A5A5A",
+  margin: "0 0 16px 0",
 };
 
 const heading = {
   fontSize: "24px",
-  fontWeight: "bold",
-  color: "#450a0a", // red-950
-  textAlign: "center" as const,
-  margin: "30px 0",
+  fontWeight: "500",
+  letterSpacing: "-0.5px",
+  color: "#EDEDED",
+  margin: "0 0 16px 0",
 };
 
 const paragraph = {
-  fontSize: "16px",
-  lineHeight: "26px",
-  color: "#450a0a",
-};
-
-const footer = {
   fontSize: "14px",
   lineHeight: "24px",
-  color: "#450a0a",
-  opacity: 0.8,
-  marginTop: "32px",
+  color: "#858585",
+  margin: "0 0 28px 0",
+};
+
+const highlight = {
+  color: "#EDEDED",
+  fontWeight: "500",
 };
 
 const btnContainer = {
-  textAlign: "center" as const,
-  marginTop: "32px",
-  marginBottom: "32px",
+  margin: "0 0 28px 0",
 };
 
 const button = {
-  backgroundColor: "#450a0a",
-  color: "#fbf5e9",
-  padding: "12px 24px",
+  backgroundColor: "#EDEDED",
+  color: "#050505",
+  padding: "12px 28px",
   textDecoration: "none",
-  fontWeight: "bold",
+  fontWeight: "500",
+  fontSize: "13px",
+  borderRadius: "9999px",
   display: "inline-block",
-  textTransform: "uppercase" as const,
-  letterSpacing: "1px",
+};
+
+const footer = {
+  fontSize: "12px",
+  lineHeight: "20px",
+  color: "#5A5A5A",
+  margin: "0",
 };
 
 export default LoginEmail;
