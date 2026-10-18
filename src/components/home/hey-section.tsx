@@ -63,7 +63,7 @@ export function HeySection({ className }: HeySectionProps) {
       id="hey"
       aria-label="Hey"
       className={cn(
-        "w-full flex items-start justify-start pt-4 sm:pt-8 md:pt-48 lg:pt-52 pb-2 md:pb-6 px-6 sm:px-12 md:px-16 lg:px-24 select-none",
+        "w-full flex items-start justify-start pt-24 sm:pt-32 md:pt-48 lg:pt-52 pb-2 md:pb-6 px-6 sm:px-12 md:px-16 lg:px-24 select-none",
         className
       )}
     >
@@ -72,7 +72,10 @@ export function HeySection({ className }: HeySectionProps) {
           const isDaniel = word === "Daniel";
 
           return (
-            <span key={wordIndex} className="inline-flex items-center whitespace-nowrap">
+            <span
+              key={wordIndex}
+              className={cn("inline-flex items-center whitespace-nowrap", isDaniel && "relative")}
+            >
               {word.split("").map((char, charIndex) => (
                 <span
                   key={charIndex}
@@ -85,37 +88,37 @@ export function HeySection({ className }: HeySectionProps) {
 
               {isDaniel && (
                 <span
-                  className="hey-photo-link inline-flex items-end ml-1.5 sm:ml-3 md:ml-4 select-none relative self-center"
+                  className="hey-photo-link absolute bottom-1 sm:bottom-2 md:bottom-4 right-0 w-44 h-36 sm:w-60 sm:h-48 md:w-72 md:h-60 lg:w-96 lg:h-76 xl:w-[420px] xl:h-[320px] pointer-events-none select-none z-10"
                   style={{ opacity: 0, filter: "blur(10px)" }}
                 >
-                  {/* Curvy trail of dashes */}
+                  {/* Curvy trail of dashes from end of Daniel up and to the left */}
                   <svg
-                    className="w-12 sm:w-16 md:w-24 lg:w-28 h-8 sm:h-12 md:h-16 lg:h-20 text-white/35 stroke-current overflow-visible shrink-0"
+                    className="w-full h-full text-white/40 stroke-current overflow-visible"
                     fill="none"
-                    viewBox="0 0 120 60"
+                    viewBox="0 0 200 160"
                     aria-hidden="true"
                   >
                     <path
-                      d="M 2 48 C 20 58, 32 10, 52 22 C 68 32, 78 54, 96 42 C 106 32, 112 16, 118 10"
-                      strokeWidth="1.75"
-                      strokeDasharray="3.5 4"
+                      d="M 195 155 C 218 145, 210 100, 172 118 C 140 138, 118 78, 95 98 C 82 108, 72 85, 78 72"
+                      strokeWidth="2"
+                      strokeDasharray="4 4.5"
                       strokeLinecap="round"
                       vectorEffect="non-scaling-stroke"
                     />
                   </svg>
 
-                  {/* Elevated floating photo icon with no movement */}
-                  <div className="relative self-start -translate-y-2 sm:-translate-y-3 md:-translate-y-5 lg:-translate-y-6 shrink-0">
+                  {/* Elevated floating photo icon positioned at top-left of the curve */}
+                  <div className="absolute top-0 left-0 pointer-events-auto">
                     {/* Ambient elevation glow */}
-                    <div className="absolute -inset-1.5 rounded-full bg-white/10 blur-md -z-10" />
+                    <div className="absolute -inset-2 rounded-full bg-white/10 blur-xl -z-10" />
 
-                    <div className="relative w-9 h-9 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 aspect-square rounded-full overflow-hidden shrink-0 ring-2 ring-white/25 ring-offset-2 ring-offset-background bg-surface_elevated shadow-[0_16px_36px_rgba(0,0,0,0.85)]">
+                    <div className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 xl:w-48 xl:h-48 aspect-square rounded-full overflow-hidden shrink-0 bg-surface_elevated shadow-[0_20px_50px_rgba(0,0,0,0.9),0_8px_20px_rgba(0,0,0,0.6)]">
                       <Image
                         src="/danielras.png"
                         alt="Daniel Ametsowou"
                         fill
-                        sizes="(max-width: 640px) 36px, (max-width: 768px) 48px, 80px"
-                        className="object-cover rounded-full"
+                        sizes="(max-width: 640px) 80px, (max-width: 768px) 112px, (max-width: 1024px) 144px, 192px"
+                        className="object-cover rounded-full select-none"
                         priority
                       />
                     </div>
