@@ -8,7 +8,7 @@ export async function LatestProjects() {
   const projects = await getLatestProjects(9);
 
   return (
-    <div className="rounded-3xl bg-surface/40 p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-8 h-full min-w-0 max-w-full overflow-hidden">
+    <div className="rounded-3xl bg-surface/40 p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-8 h-full min-w-0 max-w-full">
       <div className="flex items-center justify-between">
         <span className="text-xs font-mono text-text-muted tracking-wide">
           Latest projects
@@ -23,8 +23,8 @@ export async function LatestProjects() {
       </div>
 
       <div className="grid grid-cols-3 gap-y-7 gap-x-4 sm:gap-x-8 sm:gap-y-9 justify-items-center">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+        {projects.map((project, index) => (
+          <ProjectCard key={project.id} project={project} index={index} />
         ))}
       </div>
     </div>

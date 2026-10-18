@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/github-icon";
+import { cn } from "@/lib/utils";
 
 export interface ProjectItem {
   id: string;
@@ -17,15 +18,31 @@ export interface ProjectItem {
   technologies: string[] | null;
 }
 
-export function ProjectCard({ project }: { project: ProjectItem }) {
+export function ProjectCard({
+  project,
+  index = 1,
+}: {
+  project: ProjectItem;
+  index?: number;
+}) {
   const primaryLink = project.url || project.githubUrl || "#";
   const hasLink = Boolean(project.url || project.githubUrl);
+  const col = index % 3;
+  const popoverPosition =
+    col === 0
+      ? "left-0"
+      : col === 2
+      ? "right-0 left-auto"
+      : "left-1/2 -translate-x-1/2";
 
   return (
-    <div className="relative group flex flex-col items-center">
-      {/* Solid Tooltip Popover on Hover (Desktop only) */}
+    <div className="relative group flex flex-col items-center hover:z-30">
+      {/* Solid Tooltip Popover on Hover */}
       <div
-        className="hidden md:block absolute bottom-full mb-3.5 left-1/2 -translate-x-1/2 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 ease-out bg-[#141416] shadow-2xl shadow-black/90"
+        className={cn(
+          "absolute bottom-full mb-3.5 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 ease-out bg-[#141416] shadow-2xl shadow-black/90",
+          popoverPosition
+        )}
       >
         <div className="flex items-center justify-between gap-2">
           <h4 className="text-sm font-medium text-text-primary truncate">
