@@ -19,30 +19,44 @@ interface NewCommentEmailProps {
 export default function NewCommentEmail({
   postTitle = "A Post",
   postSlug,
-  commentContent = "This is a great post!",
-  authorName = "John Doe",
+  commentContent = "This is a great thought!",
+  authorName = "A reader",
 }: NewCommentEmailProps) {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_BASE_URL ||
+    process.env.APP_BASE_URL ||
+    "https://danielametsowou.com";
+
   return (
     <Html>
       <Head />
-      <Preview>New Comment on &quot;{postTitle}&quot;</Preview>
+      <Preview>New comment on &quot;{postTitle}&quot;</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Text style={heading}>New Comment Received!</Text>
-          <Text style={paragraph}>
-            <strong>{authorName}</strong> just commented on your post:
-            <strong>{postTitle}</strong>
-          </Text>
-          <Section style={commentSection}>
-            <Text style={commentText}>&quot;{commentContent}&quot;</Text>
-          </Section>
-          <Section style={btnContainer}>
-            <Link
-              style={button}
-              href={`https://ametsowou.me/admin/blog/comments`}
-            >
-              View in Admin Panel
-            </Link>
+          <Section style={card}>
+            <Text style={tag}>New discussion</Text>
+            <Text style={heading}>New comment on your post</Text>
+            <Text style={paragraph}>
+              <strong style={highlight}>{authorName}</strong> commented on{" "}
+              <strong style={highlight}>{postTitle}</strong>:
+            </Text>
+
+            <Section style={quoteBox}>
+              <Text style={quoteText}>&ldquo;{commentContent}&rdquo;</Text>
+            </Section>
+
+            <Section style={btnContainer}>
+              <Link
+                style={button}
+                href={`${baseUrl}/blog/${postSlug}`}
+              >
+                View in discussion
+              </Link>
+            </Section>
+
+            <Text style={footer}>
+              Daniel Ametsowou — Writing & Explorations
+            </Text>
           </Section>
         </Container>
       </Body>
@@ -51,57 +65,84 @@ export default function NewCommentEmail({
 }
 
 const main = {
-  backgroundColor: "#fbf5e9",
+  backgroundColor: "#050505",
   fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+  padding: "40px 0",
 };
 
 const container = {
   margin: "0 auto",
-  padding: "20px 0 48px",
-  maxWidth: "580px",
+  maxWidth: "540px",
+  padding: "0 20px",
+};
+
+const card = {
+  backgroundColor: "#0A0A0A",
+  borderRadius: "20px",
+  padding: "40px 36px",
+};
+
+const tag = {
+  fontSize: "12px",
+  letterSpacing: "0.5px",
+  color: "#5A5A5A",
+  margin: "0 0 16px 0",
 };
 
 const heading = {
-  fontSize: "24px",
-  fontWeight: "bold",
-  color: "#450a0a", // red-950
-  textAlign: "center" as const,
-  margin: "30px 0",
+  fontSize: "22px",
+  fontWeight: "500",
+  letterSpacing: "-0.5px",
+  color: "#EDEDED",
+  margin: "0 0 16px 0",
 };
 
 const paragraph = {
-  fontSize: "16px",
-  lineHeight: "26px",
-  color: "#450a0a",
+  fontSize: "14px",
+  lineHeight: "24px",
+  color: "#858585",
+  margin: "0 0 20px 0",
 };
 
-const commentSection = {
-  backgroundColor: "rgba(69, 10, 10, 0.05)",
-  borderLeft: "4px solid #450a0a",
-  padding: "16px",
-  margin: "24px 0",
+const highlight = {
+  color: "#EDEDED",
+  fontWeight: "500",
 };
 
-const commentText = {
-  fontSize: "16px",
+const quoteBox = {
+  backgroundColor: "#141416",
+  borderRadius: "14px",
+  padding: "18px 20px",
+  margin: "0 0 28px 0",
+};
+
+const quoteText = {
+  fontSize: "14px",
+  lineHeight: "22px",
+  color: "#EDEDED",
   fontStyle: "italic",
-  color: "#450a0a",
   margin: "0",
 };
 
 const btnContainer = {
-  textAlign: "center" as const,
-  marginTop: "32px",
+  margin: "0 0 28px 0",
 };
 
 const button = {
-  backgroundColor: "#450a0a",
-  color: "#fbf5e9",
-  padding: "12px 24px",
+  backgroundColor: "#EDEDED",
+  color: "#050505",
+  padding: "12px 28px",
   textDecoration: "none",
-  fontWeight: "bold",
+  fontWeight: "500",
+  fontSize: "13px",
+  borderRadius: "9999px",
   display: "inline-block",
-  textTransform: "uppercase" as const,
-  letterSpacing: "1px",
+};
+
+const footer = {
+  fontSize: "12px",
+  lineHeight: "20px",
+  color: "#5A5A5A",
+  margin: "0",
 };

@@ -1,16 +1,19 @@
-import { Quicksand } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 import "highlight.js/styles/atom-one-dark.css";
+import "katex/dist/katex.min.css";
 import NextTopLoader from "nextjs-toploader";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { Toaster } from "sonner";
 import { metadata as sharedMetadata } from "./shared-metadata";
 import Script from "next/script";
 
-
-const quicksand = Quicksand({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-quicksand",
+  variable: "--font-figtree",
+  display: "swap",
 });
 
 export const metadata = sharedMetadata;
@@ -21,27 +24,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${quicksand.variable} font-sans antialiased light`}>
+    <html
+      lang="en"
+      className={`${figtree.variable} ${figtree.className}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${figtree.className} font-sans antialiased dark`}>
         <ThemeProvider
           attribute={"class"}
-          defaultTheme="light"
-          forcedTheme="light"
+          defaultTheme="dark"
+          forcedTheme="dark"
         >
-          <NextTopLoader color="#300000" />
-          {children}
+          <NextTopLoader color="#55C7E8" showSpinner={false} />
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
           <Toaster
             toastOptions={{
               className:
-                "bg-background text-red-950 border-4 border-red-950 rounded-none shadow-[4px_4px_0px_0px_rgba(69,10,10,1)] font-bold uppercase tracking-wider font-sans",
-              style: {
-                backgroundColor: "#e6dcc6",
-                color: "#450a0a",
-                borderColor: "#450a0a",
-                borderWidth: "4px",
-                boxShadow: "4px 4px 0px 0px rgba(69,10,10,1)",
-                borderRadius: "0",
-              },
+                "bg-surface text-foreground border border-border rounded-lg shadow-lg font-sans",
             }}
           />
         </ThemeProvider>

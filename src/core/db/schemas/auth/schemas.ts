@@ -36,6 +36,8 @@ export const user = pgTable(
     dodoSubscriptionId: text("dodo_subscription_id"),
     planRenewsAt: timestamp("plan_renews_at"),
     isActive: boolean("is_active").default(true).notNull(), // For deactivating accounts
+    receiveEmails: boolean("receive_emails").default(true).notNull(), // Preference for receiving emails
+    onboarded: boolean("onboarded").default(false).notNull(), // True when user completed or skipped onboarding
   },
   (table) => [
     index("user_dodo_customer_id_idx").on(table.dodoCustomerId),

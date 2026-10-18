@@ -48,3 +48,68 @@ export async function toggleUserStatus(userId: string, currentStatus: boolean) {
     return { success: false, error: "Failed to toggle user status" };
   }
 }
+
+export async function getCurrentUserProfile() {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) return null;
+  try {
+    const res = await db.select().from(user).where(eq(user.id, currentUser.id)).limit(1);
+    if (res.length > 0) return res[0];
+  } catch (error) {
+    console.error("Failed to fetch user profile from db:", error);
+  }
+  return currentUser as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+export async function updateCurrentUserProfile(data: {
+  handle?: string;
+  name?: string;
+  receiveEmails?: boolean;
+}) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return { success: false, error: "Unauthorized" };
+  }
+
+  try {
+    await db
+      .update(user)
+      .set({
+        ...(data.handle !== undefined && { handle: data.handle }),
+        ...(data.name !== undefined && { name: data.name }),
+        ...(data.receiveEmails !== undefined && { receiveEmails: data.receiveEmails }),
+        onboarded: true,
+        updatedAt: new Date(),
+      })
+      .where(eq(user.id, currentUser.id));
+
+    revalidatePath("/onboarding");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to update profile:", error);
+    return { success: false, error: "Failed to update profile" };
+  }
+}
+
+export async function skipOnboarding() {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return { success: false, error: "Unauthorized" };
+  }
+
+  try {
+    await db
+      .update(user)
+      .set({
+        onboarded: true,
+        updatedAt: new Date(),
+      })
+      .where(eq(user.id, currentUser.id));
+
+    revalidatePath("/onboarding");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to skip onboarding:", error);
+    return { success: false, error: "Failed to skip onboarding" };
+  }
+}

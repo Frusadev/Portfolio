@@ -1,23 +1,32 @@
+import * as React from "react";
+import { getOptionalUser } from "@/app/actions/auth";
 import { notFound } from "next/navigation";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { AdminNav } from "@/components/admin/admin-nav";
 
+export const metadata = {
+  title: "Admin — Daniel Ametsowou",
+};
 
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await auth.api.getSession({ headers: await headers() });
+export default async function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const user = await getOptionalUser();
 
-  // Security by obscurity: invalid users see 404 instead of 403 or redirect
-  if (!session || session.user.role !== "admin") {
+  // Return 404 when user is not an admin
+  if (!user || user.role !== "admin") {
     notFound();
   }
 
   return (
-    <div className="min-h-screen bg-[#e6dcc6]">
-      <AdminSidebar />
-      <main className="md:ml-64 p-4 md:p-8 min-h-screen pt-20 md:pt-8 w-full md:w-auto">
-        {children}
-      </main>
+    <div className="min-h-screen bg-background text-foreground flex flex-col p-6 sm:p-10 md:p-12 select-none">
+      <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row gap-8 lg:gap-12 flex-1">
+        <AdminNav userEmail={user.email} />
+        <main className="flex-1 flex flex-col min-w-0">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
