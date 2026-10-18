@@ -2,6 +2,7 @@ import { Figtree } from "next/font/google";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 import "highlight.js/styles/atom-one-dark.css";
+import "katex/dist/katex.min.css";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";

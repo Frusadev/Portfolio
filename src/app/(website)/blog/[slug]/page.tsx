@@ -7,7 +7,7 @@ import { getReactions } from "@/app/actions/reactions";
 import { getOptionalUser } from "@/app/actions/auth";
 import { CommentSection } from "@/components/blog/comment-section";
 import { ReactionBar } from "@/components/blog/reaction-bar";
-import { marked } from "marked";
+import { markdownParser } from "@/lib/markdown";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     getReactions(post.id),
   ]);
 
-  const htmlContent = await marked.parse(post.content || "");
+  const htmlContent = (await markdownParser.parse(post.content || "")) as string;
 
   return (
     <article className="min-h-screen w-full bg-background text-foreground px-6 sm:px-8 py-28 md:py-36 select-none">

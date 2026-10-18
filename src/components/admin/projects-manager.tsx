@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { createProject, deleteProject } from "@/app/actions/portfolio";
+import { createProject, updateProject, deleteProject } from "@/app/actions/portfolio";
 import { registerFile } from "@/app/actions/files";
 import { toast } from "sonner";
-import { Plus, Trash2, Globe, Github, Loader2, Sparkles, Image as ImageIcon } from "lucide-react";
+import { Plus, Trash2, Globe, Github, Loader2, Sparkles, Image as ImageIcon, Pencil } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/github-icon";
 
 export interface ProjectData {
@@ -26,6 +26,7 @@ export function ProjectsManager({
 }) {
   const [projects, setProjects] = React.useState<ProjectData[]>(initialProjects);
   const [isCreating, setIsCreating] = React.useState(false);
+  const [editingId, setEditingId] = React.useState<string | null>(null);
   const [submitting, setSubmitting] = React.useState(false);
   const [deletingId, setDeletingId] = React.useState<string | null>(null);
 
@@ -64,7 +65,32 @@ export function ProjectsManager({
     reader.readAsDataURL(file);
   };
 
-  const handleCreate = async (e: React.FormEvent) => {
+  const resetForm = () => {
+    setTitle("");
+    setDescription("");
+    setUrl("");
+    setGithubUrl("");
+    setLogo("");
+    setTechString("");
+    setFeatured(false);
+    setEditingId(null);
+    setIsCreating(false);
+  };
+
+  const startEdit = (project: ProjectData) => {
+    setEditingId(project.id);
+    setTitle(project.title);
+    setDescription(project.description);
+    setUrl(project.url || "");
+    setGithubUrl(project.githubUrl || "");
+    setLogo(project.logo || "");
+    setTechString(project.technologies ? project.technologies.join(", ") : "");
+    setFeatured(Boolean(project.featured));
+    setIsCreating(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) {
       toast.error("Please provide a title and description");
@@ -78,7 +104,7 @@ export function ProjectsManager({
         .map((t) => t.trim())
         .filter(Boolean);
 
-      const newProjectData = {
+      const projectPayload = {
         title: title.trim(),
         description: description.trim(),
         url: url.trim() || null,
@@ -88,28 +114,33 @@ export function ProjectsManager({
         featured,
       };
 
-      const res = await createProject(newProjectData);
-      if (res.success) {
-        toast.success("Project created");
-        const added: ProjectData = {
-          id: `proj-${Date.now()}`,
-          ...newProjectData,
-        };
-        setProjects([added, ...projects]);
-        // Reset form
-        setTitle("");
-        setDescription("");
-        setUrl("");
-        setGithubUrl("");
-        setLogo("");
-        setTechString("");
-        setFeatured(false);
-        setIsCreating(false);
+      if (editingId) {
+        const res = await updateProject(editingId, projectPayload);
+        if (res.success) {
+          toast.success("Project updated");
+          setProjects((prev) =>
+            prev.map((p) => (p.id === editingId ? { ...p, ...projectPayload } : p))
+          );
+          resetForm();
+        } else {
+          toast.error("Failed to update project");
+        }
       } else {
-        toast.error("Failed to create project");
+        const res = await createProject(projectPayload);
+        if (res.success) {
+          toast.success("Project created");
+          const added: ProjectData = {
+            id: `proj-${Date.now()}`,
+            ...projectPayload,
+          };
+          setProjects([added, ...projects]);
+          resetForm();
+        } else {
+          toast.error("Failed to create project");
+        }
       }
     } catch {
-      toast.error("An error occurred while creating project");
+      toast.error("An error occurred while saving project");
     } finally {
       setSubmitting(false);
     }
@@ -145,7 +176,13 @@ export function ProjectsManager({
           </p>
         </div>
         <button
-          onClick={() => setIsCreating(!isCreating)}
+          onClick={() => {
+            if (isCreating) {
+              resetForm();
+            } else {
+              setIsCreating(true);
+            }
+          }}
           className="rounded-full bg-text-primary text-background hover:bg-white text-xs font-medium px-5 py-2.5 transition-all flex items-center gap-2 self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
@@ -153,15 +190,15 @@ export function ProjectsManager({
         </button>
       </div>
 
-      {/* Creation Drawer / Form */}
+      {/* Creation / Edit Drawer */}
       {isCreating && (
         <form
-          onSubmit={handleCreate}
+          onSubmit={handleSave}
           className="rounded-3xl bg-surface/50 p-6 sm:p-10 flex flex-col gap-6 animate-in fade-in duration-300"
         >
           <div className="flex items-center gap-2 text-xs font-mono text-accent-secondary">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Create new project</span>
+            <span>{editingId ? "Edit project" : "Create new project"}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -284,7 +321,7 @@ export function ProjectsManager({
           <div className="flex justify-end gap-3 pt-4">
             <button
               type="button"
-              onClick={() => setIsCreating(false)}
+              onClick={resetForm}
               className="text-xs font-mono text-text-muted hover:text-text-primary px-4 py-2 transition-colors"
             >
               cancel
@@ -295,7 +332,7 @@ export function ProjectsManager({
               className="rounded-full bg-text-primary text-background hover:bg-white text-xs font-medium px-6 py-2.5 transition-all disabled:opacity-40 flex items-center gap-2"
             >
               {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-              <span>save project</span>
+              <span>{editingId ? "update project" : "save project"}</span>
             </button>
           </div>
         </form>
@@ -384,6 +421,14 @@ export function ProjectsManager({
                     <Github className="w-4 h-4" />
                   </a>
                 )}
+                <button
+                  type="button"
+                  onClick={() => startEdit(project)}
+                  className="p-2 rounded-full bg-surface_elevated hover:bg-surface_elevated/80 text-text-muted hover:text-text-primary transition-colors"
+                  title="Edit project"
+                >
+                  <Pencil className="w-4 h-4" />
+                </button>
                 <button
                   type="button"
                   onClick={() => handleDelete(project.id)}

@@ -12,10 +12,12 @@ import {
   MessageSquare,
   Mail,
   ArrowUpRight,
+  PenLine,
 } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "overview", icon: LayoutDashboard },
+  { href: "/admin/articles", label: "articles", icon: PenLine },
   { href: "/admin/projects", label: "projects", icon: FolderGit2 },
   { href: "/admin/academic", label: "academic work", icon: GraduationCap },
   { href: "/admin/users", label: "users", icon: Users },

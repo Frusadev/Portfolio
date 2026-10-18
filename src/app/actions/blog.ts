@@ -21,7 +21,8 @@ const FALLBACK_POSTS = [
     id: "post-1",
     title: "On Intuition, Stochastic Processes, and Market Microstructure",
     slug: "intuition-stochastic-processes-market-microstructure",
-    description: "Reflections on bridging continuous-time mathematics with real-world liquidity dynamics and algorithmic execution.",
+    description:
+      "Reflections on bridging continuous-time mathematics with real-world liquidity dynamics and algorithmic execution.",
     createdAt: new Date("2026-03-10"),
     tags: ["Quantitative Finance", "Probability"],
     views: 420,
@@ -30,7 +31,8 @@ const FALLBACK_POSTS = [
     id: "post-2",
     title: "Designing for Stillness: The Craft of Borderless Interfaces",
     slug: "designing-for-stillness-borderless-interfaces",
-    description: "Why stripping visible borders, uppercase typography, and visual friction elevates digital experiences into calm tools.",
+    description:
+      "Why stripping visible borders, uppercase typography, and visual friction elevates digital experiences into calm tools.",
     createdAt: new Date("2026-02-24"),
     tags: ["Design", "Typography"],
     views: 890,
@@ -39,7 +41,8 @@ const FALLBACK_POSTS = [
     id: "post-3",
     title: "The Architecture of Curiosity: 1000 Hours Down the Rabbit Hole",
     slug: "the-architecture-of-curiosity",
-    description: "How obsessive hyper-focus transforms complex unfamiliar domains into deeply intuitive mental models.",
+    description:
+      "How obsessive hyper-focus transforms complex unfamiliar domains into deeply intuitive mental models.",
     createdAt: new Date("2026-01-18"),
     tags: ["Creativity", "Thinking"],
     views: 1250,
@@ -49,7 +52,11 @@ const FALLBACK_POSTS = [
 export async function getPosts(publishedOnly = true) {
   try {
     if (publishedOnly) {
-      return await db.select().from(posts).where(eq(posts.published, true)).orderBy(desc(posts.createdAt));
+      return await db
+        .select()
+        .from(posts)
+        .where(eq(posts.published, true))
+        .orderBy(desc(posts.createdAt));
     }
     return await db.select().from(posts).orderBy(desc(posts.createdAt));
   } catch (error) {
@@ -68,14 +75,21 @@ export async function getLatestPosts(limit = 3) {
       .limit(limit);
     if (results.length > 0) return results;
   } catch (error) {
-    console.error("Failed to fetch latest posts from database, using fallback:", error);
+    console.error(
+      "Failed to fetch latest posts from database, using fallback:",
+      error,
+    );
   }
   return FALLBACK_POSTS.slice(0, limit);
 }
 
 export async function getPost(slug: string) {
   try {
-    const result = await db.select().from(posts).where(eq(posts.slug, slug)).limit(1);
+    const result = await db
+      .select()
+      .from(posts)
+      .where(eq(posts.slug, slug))
+      .limit(1);
     if (result[0]) return result[0];
   } catch (error) {
     console.error("Failed to fetch post, checking fallback:", error);
@@ -94,18 +108,26 @@ export async function getPost(slug: string) {
   return null;
 }
 
-export async function createPost(data: { title: string; description: string; content: string; slug: string; coverImage?: string; tags?: string[] }) {
+export async function createPost(data: {
+  title: string;
+  description: string;
+  content: string;
+  slug: string;
+  coverImage?: string;
+  tags?: string[];
+  published?: boolean;
+}) {
   const user = await requireAdmin();
-  
+
   try {
     await db.insert(posts).values({
       id: nanoid(),
       ...data,
       authorId: user.id,
-      published: false,
+      published: data.published ?? true,
     });
     revalidatePath("/blog");
-    revalidatePath("/admin/blog");
+    revalidatePath("/admin/articles");
     return { success: true };
   } catch (error) {
     console.error("Failed to create post:", error);
@@ -113,16 +135,30 @@ export async function createPost(data: { title: string; description: string; con
   }
 }
 
-export async function updatePost(id: string, data: { title: string; description: string; content: string; slug: string; coverImage?: string; tags?: string[] }) {
+export async function updatePost(
+  id: string,
+  data: {
+    title: string;
+    description: string;
+    content: string;
+    slug: string;
+    coverImage?: string;
+    tags?: string[];
+    published?: boolean;
+  },
+) {
   await requireAdmin();
-  
+
   try {
-    await db.update(posts).set({
-      ...data,
-      updatedAt: new Date(),
-    }).where(eq(posts.id, id));
+    await db
+      .update(posts)
+      .set({
+        ...data,
+        updatedAt: new Date(),
+      })
+      .where(eq(posts.id, id));
     revalidatePath("/blog");
-    revalidatePath("/admin/blog");
+    revalidatePath("/admin/articles");
     return { success: true };
   } catch (error) {
     console.error("Failed to update post:", error);
@@ -132,7 +168,7 @@ export async function updatePost(id: string, data: { title: string; description:
 
 export async function deletePost(id: string) {
   await requireAdmin();
-  
+
   try {
     await db.delete(posts).where(eq(posts.id, id));
     revalidatePath("/blog");
@@ -146,11 +182,14 @@ export async function deletePost(id: string) {
 
 export async function togglePublishPost(id: string, currentState: boolean) {
   await requireAdmin();
-  
+
   try {
-    await db.update(posts).set({
-      published: !currentState,
-    }).where(eq(posts.id, id));
+    await db
+      .update(posts)
+      .set({
+        published: !currentState,
+      })
+      .where(eq(posts.id, id));
     revalidatePath("/blog");
     revalidatePath("/admin/blog");
     return { success: true };

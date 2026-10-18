@@ -1,6 +1,6 @@
 import * as React from "react";
 import { getOptionalUser } from "@/app/actions/auth";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { AdminNav } from "@/components/admin/admin-nav";
 
 export const metadata = {
@@ -14,9 +14,9 @@ export default async function AdminLayout({
 }) {
   const user = await getOptionalUser();
 
-  // If user is not authenticated or not admin, redirect to login
+  // Return 404 when user is not an admin
   if (!user || user.role !== "admin") {
-    redirect("/auth/login");
+    notFound();
   }
 
   return (

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { addComment } from "@/app/actions/comments";
 import { toast } from "sonner";
 import { MessageSquare, Reply, CornerDownRight, Loader2 } from "lucide-react";
+import { MarkdownContent } from "@/components/markdown/markdown-content";
 
 export interface CommentUser {
   id: string;
@@ -217,9 +218,9 @@ export function CommentSection({
                 </div>
 
                 {/* Content */}
-                <p className="text-sm text-text-secondary leading-relaxed pl-1">
-                  {comment.content}
-                </p>
+                <div className="pl-1">
+                  <MarkdownContent content={comment.content} />
+                </div>
 
                 {/* Reply Form */}
                 {replyingToId === comment.id && currentUser && (
@@ -279,9 +280,9 @@ export function CommentSection({
                             })}
                           </span>
                         </div>
-                        <p className="text-xs text-text-secondary leading-relaxed pl-6">
-                          {reply.content}
-                        </p>
+                        <div className="pl-6">
+                          <MarkdownContent content={reply.content} />
+                        </div>
                       </div>
                     ))}
                   </div>
