@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { updateCurrentUserProfile } from "@/app/actions/users";
+import { updateCurrentUserProfile, skipOnboarding } from "@/app/actions/users";
 import { toast } from "sonner";
 import { Loader2, ArrowRight, UserCheck, Mail } from "lucide-react";
 
@@ -13,6 +13,7 @@ interface OnboardingFormProps {
     name?: string | null;
     handle?: string | null;
     receiveEmails?: boolean | null;
+    onboarded?: boolean | null;
   };
 }
 
@@ -24,6 +25,16 @@ export function OnboardingForm({ user }: OnboardingFormProps) {
     user.receiveEmails ?? true
   );
   const [saving, setSaving] = React.useState(false);
+
+  const handleSkip = async () => {
+    try {
+      await skipOnboarding();
+    } catch {
+      // ignore
+    }
+    router.push("/");
+    router.refresh();
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,7 +149,7 @@ export function OnboardingForm({ user }: OnboardingFormProps) {
       <div className="flex items-center justify-between pt-2">
         <button
           type="button"
-          onClick={() => router.push("/")}
+          onClick={handleSkip}
           className="text-xs font-mono text-text-muted hover:text-text-primary transition-colors py-2"
         >
           skip for now

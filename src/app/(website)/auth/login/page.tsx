@@ -17,7 +17,7 @@ export default function LoginPage() {
     try {
       await signIn.social({
         provider: "github",
-        callbackURL: "/onboarding",
+        callbackURL: "/auth/callback",
       });
     } catch {
       toast.error("Failed to sign in with GitHub");
@@ -31,7 +31,7 @@ export default function LoginPage() {
     try {
       await signIn.magicLink({
         email,
-        callbackURL: "/onboarding",
+        callbackURL: "/auth/callback",
       });
       setSent(true);
       toast.success("Magic link sent to your email");

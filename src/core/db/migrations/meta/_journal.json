@@ -43,6 +43,13 @@
       "when": 1792282948077,
       "tag": "0005_cooing_shadow_king",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792283219229,
+      "tag": "0006_confused_shadow_king",
+      "breakpoints": true
     }
   ]
 }

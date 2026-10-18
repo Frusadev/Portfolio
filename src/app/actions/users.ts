@@ -78,6 +78,7 @@ export async function updateCurrentUserProfile(data: {
         ...(data.handle !== undefined && { handle: data.handle }),
         ...(data.name !== undefined && { name: data.name }),
         ...(data.receiveEmails !== undefined && { receiveEmails: data.receiveEmails }),
+        onboarded: true,
         updatedAt: new Date(),
       })
       .where(eq(user.id, currentUser.id));
@@ -87,5 +88,28 @@ export async function updateCurrentUserProfile(data: {
   } catch (error) {
     console.error("Failed to update profile:", error);
     return { success: false, error: "Failed to update profile" };
+  }
+}
+
+export async function skipOnboarding() {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return { success: false, error: "Unauthorized" };
+  }
+
+  try {
+    await db
+      .update(user)
+      .set({
+        onboarded: true,
+        updatedAt: new Date(),
+      })
+      .where(eq(user.id, currentUser.id));
+
+    revalidatePath("/onboarding");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to skip onboarding:", error);
+    return { success: false, error: "Failed to skip onboarding" };
   }
 }
