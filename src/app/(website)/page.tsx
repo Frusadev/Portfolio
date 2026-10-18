@@ -17,6 +17,14 @@ export default function Home() {
 
       {/* 4th Section: What I'm Doing / Interactions */}
       <WhatImDoingSection />
+
+      {/* Footer */}
+      <footer className="w-full px-6 sm:px-12 md:px-16 lg:px-24 py-16 sm:py-20 md:py-24 text-center select-none">
+        <p className="text-xs sm:text-sm font-mono text-text-muted">
+          Merci d&apos;avoir pris le temps de visiter :).
+        </p>
+      </footer>
     </main>
   );
 }
+

@@ -1,40 +1,46 @@
-import { ImageResponse } from 'next/og';
+import { ImageResponse } from "next/og";
+import fs from "fs";
+import path from "path";
 
-// Route segment config
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-// Image metadata
 export const size = {
   width: 32,
   height: 32,
 };
-export const contentType = 'image/png';
+export const contentType = "image/png";
 
-// Image generation
 export default function Icon() {
+  const filePath = path.join(process.cwd(), "public/danielras.png");
+  const imageBuffer = fs.readFileSync(filePath);
+  const base64 = `data:image/png;base64,${imageBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
-      // ImageResponse JSX element
       <div
         style={{
-          fontSize: 18,
-          background: '#450a0a',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#e6dcc6', // Beige text
-          fontWeight: 900,
-          fontFamily: 'sans-serif',
-          border: '2px solid #e6dcc6',
-          borderRadius: '4px',
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "50%",
+          overflow: "hidden",
+          background: "#050505",
         }}
       >
-        DA
+        <img
+          src={base64}
+          alt="Daniel"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "50%",
+          }}
+        />
       </div>
     ),
-    // ImageResponse options
     {
       ...size,
     }
