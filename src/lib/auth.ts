@@ -60,6 +60,12 @@ export const auth = betterAuth({
         defaultValue: "free",
         input: false,
       },
+      receiveEmails: {
+        type: "boolean",
+        required: false,
+        defaultValue: true,
+        input: true,
+      },
     },
   },
   baseURL: getEnv("BETTER_AUTH_URL"),

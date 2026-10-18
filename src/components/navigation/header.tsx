@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 export interface NavItem {
@@ -29,8 +30,21 @@ export function Header({
   className,
 }: HeaderProps) {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const [hoveredId, setHoveredId] = React.useState<string | null>(null);
   const [activeId, setActiveId] = React.useState<string>(items[0]?.id || "home");
+
+  const navItems = React.useMemo(() => {
+    const list = [...items];
+    if (session?.user) {
+      list.push({ id: "profile", label: "profile", href: "/onboarding" });
+      const userRole = (session.user as { role?: string }).role;
+      if (userRole === "admin") {
+        list.push({ id: "admin", label: "admin", href: "/admin" });
+      }
+    }
+    return list;
+  }, [items, session]);
 
   // Mobile scroll indicator tracking
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -60,7 +74,7 @@ export function Header({
   React.useEffect(() => {
     if (pathname === "/") {
       const hash = window.location.hash.replace("#", "");
-      if (hash && items.some((item) => item.id === hash)) {
+      if (hash && navItems.some((item) => item.id === hash)) {
         setActiveId(hash);
       } else {
         setActiveId("home");
@@ -69,8 +83,12 @@ export function Header({
       setActiveId("projects");
     } else if (pathname.startsWith("/blog")) {
       setActiveId("writing");
+    } else if (pathname.startsWith("/onboarding")) {
+      setActiveId("profile");
+    } else if (pathname.startsWith("/admin")) {
+      setActiveId("admin");
     }
-  }, [pathname, items]);
+  }, [pathname, navItems]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -102,7 +120,7 @@ export function Header({
           className="hidden md:flex flex-col items-start gap-1 pointer-events-auto"
           onMouseLeave={() => setHoveredId(null)}
         >
-          {items.map((item) => {
+          {navItems.map((item) => {
             const isHovered = hoveredId === item.id;
             const isBlurred = hoveredId !== null && !isHovered;
             const isActive = activeId === item.id;
@@ -151,7 +169,7 @@ export function Header({
           className="flex items-center gap-6 overflow-x-auto no-scrollbar scroll-smooth px-2 py-1"
           onMouseLeave={() => setHoveredId(null)}
         >
-          {items.map((item) => {
+          {navItems.map((item) => {
             const isHovered = hoveredId === item.id;
             const isBlurred = hoveredId !== null && !isHovered;
             const isActive = activeId === item.id;

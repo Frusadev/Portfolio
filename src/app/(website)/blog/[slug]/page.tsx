@@ -3,8 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPost } from "@/app/actions/blog";
 import { getComments } from "@/app/actions/comments";
+import { getReactions } from "@/app/actions/reactions";
 import { getOptionalUser } from "@/app/actions/auth";
 import { CommentSection } from "@/components/blog/comment-section";
+import { ReactionBar } from "@/components/blog/reaction-bar";
 import { marked } from "marked";
 
 interface BlogPostPageProps {
@@ -33,9 +35,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const [comments, currentUser] = await Promise.all([
+  const [comments, currentUser, reactions] = await Promise.all([
     getComments(post.id),
     getOptionalUser(),
+    getReactions(post.id),
   ]);
 
   const htmlContent = await marked.parse(post.content || "");
@@ -87,6 +90,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             prose-blockquote:text-text-secondary prose-blockquote:font-normal prose-blockquote:border-l-0
             prose-hr:border-0 prose-hr:h-[1px] prose-hr:bg-white/[0.06] prose-hr:my-10"
           dangerouslySetInnerHTML={{ __html: htmlContent }}
+        />
+
+        {/* Reactions Bar */}
+        <ReactionBar
+          postId={post.id}
+          initialReactions={reactions}
+          currentUserId={currentUser?.id}
         />
 
         {/* Comments Section */}
