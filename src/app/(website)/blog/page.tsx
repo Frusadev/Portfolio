@@ -5,7 +5,7 @@ import { getPosts } from "@/app/actions/blog";
 
 export const metadata = {
   title: "Blog — Daniel Ametsowou",
-  description: "Essays and notes on quantitative engineering, aesthetics, economics, and curiosity.",
+  description: "Thoughts, rabbit holes, and reflections on making things, creative obsession, and curious explorations.",
 };
 
 export default async function BlogPage() {
@@ -16,17 +16,11 @@ export default async function BlogPage() {
       <div className="max-w-7xl w-full mx-auto flex flex-col gap-16 md:gap-20">
         {/* Page Hero */}
         <div className="flex flex-col max-w-3xl">
-          <Link
-            href="/"
-            className="text-xs font-mono text-text-muted hover:text-text-primary transition-colors mb-6 inline-flex items-center gap-1.5"
-          >
-            ← Home
-          </Link>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-text-primary">
             Writing
           </h1>
           <p className="text-base sm:text-lg text-text-secondary leading-relaxed mt-4">
-            Essays, mathematical reflections, and long-form explorations on algorithms, finance, and creative architecture.
+            Thoughts, rabbit holes, and reflections on the creative process, making things outside the box, and wandering through whatever captures my curiosity.
           </p>
         </div>
 

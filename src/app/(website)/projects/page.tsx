@@ -6,7 +6,7 @@ import { GitHubIcon } from "@/components/icons/github-icon";
 
 export const metadata = {
   title: "Projects — Daniel Ametsowou",
-  description: "A showcase of engineering systems, algorithms, interfaces, and creative tools.",
+  description: "Things built, explored, and brought to life with imagination and curiosity.",
 };
 
 export default async function ProjectsPage() {
@@ -17,17 +17,11 @@ export default async function ProjectsPage() {
       <div className="max-w-7xl w-full mx-auto flex flex-col gap-16 md:gap-20">
         {/* Page Hero */}
         <div className="flex flex-col max-w-3xl">
-          <Link
-            href="/"
-            className="text-xs font-mono text-text-muted hover:text-text-primary transition-colors mb-6 inline-flex items-center gap-1.5"
-          >
-            ← Home
-          </Link>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-text-primary">
             Projects
           </h1>
           <p className="text-base sm:text-lg text-text-secondary leading-relaxed mt-4">
-            A collection of quantitative algorithms, web interfaces, and creative systems built with curiosity and technical precision.
+            Things I&apos;ve built, explored, and brought to life. Driven by wild imagination, deep curiosity, and the simple joy of creating.
           </p>
         </div>
 
