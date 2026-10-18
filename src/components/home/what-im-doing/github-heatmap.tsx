@@ -71,7 +71,7 @@ export async function GithubHeatmap() {
     displayContributions.reduce((acc, d) => acc + d.count, 0);
 
   return (
-    <div className="rounded-3xl bg-surface/40 p-8 sm:p-10 flex flex-col justify-between gap-8 h-full">
+    <div className="rounded-3xl bg-surface/40 p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-8 h-full min-w-0 max-w-full overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <Link
@@ -96,7 +96,7 @@ export async function GithubHeatmap() {
       </div>
 
       {/* Heatmap Grid */}
-      <div className="flex flex-col gap-3 overflow-x-auto pb-2 scrollbar-none">
+      <div className="flex flex-col gap-3 overflow-x-auto max-w-full pb-2 scrollbar-none">
         <div className="flex gap-1.5 sm:gap-2">
           {weeks.map((week, wIdx) => (
             <div key={wIdx} className="flex flex-col gap-1.5 sm:gap-2">

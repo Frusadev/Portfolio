@@ -95,6 +95,7 @@ export function Header({
     item: NavItem
   ) => {
     setActiveId(item.id);
+    setHoveredId(null);
     if (item.href.startsWith("#")) {
       e.preventDefault();
       const target = document.getElementById(item.id);
@@ -167,11 +168,8 @@ export function Header({
           ref={scrollContainerRef}
           onScroll={checkScroll}
           className="flex items-center gap-6 overflow-x-auto no-scrollbar scroll-smooth px-2 py-1"
-          onMouseLeave={() => setHoveredId(null)}
         >
           {navItems.map((item) => {
-            const isHovered = hoveredId === item.id;
-            const isBlurred = hoveredId !== null && !isHovered;
             const isActive = activeId === item.id;
 
             return (
@@ -179,16 +177,11 @@ export function Header({
                 key={item.id}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item)}
-                onTouchStart={() => setHoveredId(item.id)}
-                onTouchEnd={() => setHoveredId(null)}
-                onMouseEnter={() => setHoveredId(item.id)}
                 className={cn(
-                  "shrink-0 inline-flex items-center text-[11px] font-normal tracking-normal transition-all duration-300 ease-out focus-visible:outline-none",
-                  isBlurred && "blur-[2px] opacity-30 scale-[0.97]",
-                  !isBlurred && "blur-none opacity-100",
-                  isActive || isHovered
+                  "shrink-0 inline-flex items-center text-[11px] font-normal tracking-normal transition-colors duration-200 focus-visible:outline-none",
+                  isActive
                     ? "text-text-primary"
-                    : "text-text-secondary"
+                    : "text-text-secondary active:text-text-primary"
                 )}
               >
                 <span>{item.label}</span>

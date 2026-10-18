@@ -23,9 +23,9 @@ export function ProjectCard({ project }: { project: ProjectItem }) {
 
   return (
     <div className="relative group flex flex-col items-center">
-      {/* Solid Tooltip Popover on Hover */}
+      {/* Solid Tooltip Popover on Hover (Desktop only) */}
       <div
-        className="absolute bottom-full mb-3.5 left-1/2 -translate-x-1/2 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 ease-out bg-[#141416] shadow-2xl shadow-black/90"
+        className="hidden md:block absolute bottom-full mb-3.5 left-1/2 -translate-x-1/2 w-64 sm:w-72 p-4 rounded-2xl z-40 opacity-0 translate-y-1.5 scale-95 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 ease-out bg-[#141416] shadow-2xl shadow-black/90"
       >
         <div className="flex items-center justify-between gap-2">
           <h4 className="text-sm font-medium text-text-primary truncate">
