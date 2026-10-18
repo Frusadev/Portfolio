@@ -13,9 +13,9 @@ export interface NavItem {
 }
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-  { id: "home", label: "home", href: "/" },
-  { id: "projects", label: "projects", href: "/projects" },
-  { id: "writing", label: "writing", href: "/blog" },
+  { id: "home", label: "Home", href: "/" },
+  { id: "projects", label: "Projects", href: "/projects" },
+  { id: "writing", label: "Writing", href: "/blog" },
 ];
 
 interface HeaderProps {
@@ -37,10 +37,10 @@ export function Header({
   const navItems = React.useMemo(() => {
     const list = [...items];
     if (session?.user) {
-      list.push({ id: "profile", label: "profile", href: "/onboarding" });
+      list.push({ id: "profile", label: "Profile", href: "/onboarding" });
       const userRole = (session.user as { role?: string }).role;
       if (userRole === "admin") {
-        list.push({ id: "admin", label: "admin", href: "/admin" });
+        list.push({ id: "admin", label: "Admin", href: "/admin" });
       }
     }
     return list;

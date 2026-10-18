@@ -16,13 +16,13 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/admin", label: "overview", icon: LayoutDashboard },
-  { href: "/admin/articles", label: "articles", icon: PenLine },
-  { href: "/admin/projects", label: "projects", icon: FolderGit2 },
-  { href: "/admin/academic", label: "academic work", icon: GraduationCap },
-  { href: "/admin/users", label: "users", icon: Users },
-  { href: "/admin/comments", label: "comments", icon: MessageSquare },
-  { href: "/admin/emails", label: "send email", icon: Mail },
+  { href: "/admin", label: "Overview", icon: LayoutDashboard },
+  { href: "/admin/articles", label: "Articles", icon: PenLine },
+  { href: "/admin/projects", label: "Projects", icon: FolderGit2 },
+  { href: "/admin/academic", label: "Academic work", icon: GraduationCap },
+  { href: "/admin/users", label: "Users", icon: Users },
+  { href: "/admin/comments", label: "Comments", icon: MessageSquare },
+  { href: "/admin/emails", label: "Send email", icon: Mail },
 ];
 
 export function AdminNav({ userEmail }: { userEmail?: string }) {
